@@ -1,10 +1,10 @@
 "use client"
 
 import { useTheme } from "next-themes"
-import { useTransition, useEffect, useState } from "react"
-import { useLocale, useTranslations } from "next-intl"
+import { useEffect, useState } from "react"
+import { useLocale, useTranslations, useI18n } from "@/i18n/client"
+import { locales, type Locale } from "@/i18n/config"
 import { Sun, Moon, Monitor, ChevronDown, Globe } from "lucide-react"
-import { locales, type Locale } from "@/i18n/request"
 
 const languageNames: Record<Locale, string> = {
   'zh-CN': '简体中文',
@@ -77,14 +77,11 @@ export function ThemeSwitcher() {
 
 export function LanguageSwitcher() {
   const locale = useLocale()
-  const [isPending, startTransition] = useTransition()
+  const { setLocale } = useI18n()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleLocaleChange = (newLocale: Locale) => {
-    startTransition(() => {
-      document.cookie = `locale=${newLocale};path=/;max-age=31536000`
-      window.location.reload()
-    })
+    setLocale(newLocale)
     setIsOpen(false)
   }
 
@@ -93,12 +90,11 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-2 rounded-full bg-muted/50 border border-border/50 text-sm font-medium text-foreground hover:bg-muted transition-colors"
-        disabled={isPending}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
         <Globe className="w-4 h-4" />
-        <span>{languageNames[locale as Locale]}</span>
+        <span>{languageNames[locale]}</span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
