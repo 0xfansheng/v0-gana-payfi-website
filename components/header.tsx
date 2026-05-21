@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 
 const navItems = [
@@ -16,15 +17,19 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#05000F]/80 backdrop-blur-xl border-b border-[#8B1FFF]/20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0F0A1A]/80 backdrop-blur-xl border-b border-[#A855F7]/20">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#8B1FFF] via-[#FF2D92] to-[#00E1FF] flex items-center justify-center">
-            <span className="text-white font-bold text-sm">G</span>
-          </div>
+          <Image
+            src="/logo.jpg"
+            alt="GANA Logo"
+            width={36}
+            height={36}
+            className="rounded-lg"
+          />
           <span className="font-bold text-lg text-[#F5F5F7]">
-            GANA<span className="text-[#8B1FFF]"> · </span>PayFi
+            GANA<span className="text-[#A855F7]"> · </span>PayFi
           </span>
         </Link>
 
@@ -65,7 +70,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#05000F]/95 backdrop-blur-xl border-b border-[#8B1FFF]/20">
+        <div className="md:hidden bg-[#0F0A1A]/95 backdrop-blur-xl border-b border-[#A855F7]/20">
           <nav className="flex flex-col px-4 py-4 gap-4">
             {navItems.map((item) => (
               <a

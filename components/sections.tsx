@@ -19,18 +19,18 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-[#05000F]">
+      <div className="absolute inset-0 bg-[#0F0A1A]">
         <div className="absolute inset-0 grid-bg star-bg" />
         {/* Gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#8B1FFF]/20 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#00E1FF]/15 rounded-full blur-[128px]" />
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-[#FF2D92]/10 rounded-full blur-[96px]" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#A855F7]/20 rounded-full blur-[128px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C084FC]/15 rounded-full blur-[128px]" />
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-[#7C3AED]/10 rounded-full blur-[96px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
         {/* Eyebrow */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8B1FFF]/10 border border-[#8B1FFF]/30 mb-8">
-          <span className="w-2 h-2 bg-[#00E1FF] rounded-full animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/30 mb-8">
+          <span className="w-2 h-2 bg-[#C084FC] rounded-full animate-pulse" />
           <span className="text-sm text-[#F5F5F7]/80">BNB Smart Chain · Live</span>
         </div>
 
@@ -59,7 +59,7 @@ export function HeroSection() {
             href="https://gana-payment.gitbook.io/whitepaper"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full border border-[#8B1FFF]/50 text-[#F5F5F7] font-semibold text-lg hover:bg-[#8B1FFF]/10 transition-colors flex items-center gap-2"
+            className="px-8 py-4 rounded-full border border-[#A855F7]/50 text-[#F5F5F7] font-semibold text-lg hover:bg-[#A855F7]/10 transition-colors flex items-center gap-2"
           >
             阅读白皮书
             <ArrowRight className="w-5 h-5" />
@@ -107,7 +107,7 @@ export function ProductDefinition() {
           {tags.map((tag, index) => (
             <span
               key={index}
-              className="px-5 py-2.5 rounded-full bg-[#8B1FFF]/10 border border-[#8B1FFF]/30 text-[#F5F5F7] text-sm font-medium"
+              className="px-5 py-2.5 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/30 text-[#F5F5F7] text-sm font-medium"
             >
               {tag}
             </span>
@@ -123,25 +123,25 @@ const mechanisms = [
     icon: FileCheck,
     title: "链上优先",
     description: "每笔支付生成 Proof-of-Pay，记录金额、时间与地址，面向对账、争议处理和开放数据合作。",
-    color: "#8B1FFF",
+    color: "#A855F7",
   },
   {
     icon: Zap,
     title: "LP 清算支撑",
     description: "LP 流动性池提供 24/7 清算能力，目标是减少跨境支付等待，并将部分手续费回流给 LP。",
-    color: "#00E1FF",
+    color: "#C084FC",
   },
   {
     icon: Shield,
     title: "隐形合规",
     description: "通过区域白名单、持牌合作伙伴和风险筛查，把复杂合规留在平台层，降低用户和商户接入门槛。",
-    color: "#FF2D92",
+    color: "#7C3AED",
   },
 ]
 
 export function MechanismSection() {
   return (
-    <section id="mechanism" className="py-24 px-4 relative bg-[#0D071A]">
+    <section id="mechanism" className="py-24 px-4 relative bg-[#1A1228]">
       <div className="absolute inset-0 star-bg opacity-50" />
       
       <div className="max-w-7xl mx-auto relative z-10">
@@ -218,11 +218,11 @@ export function PainPointsSection() {
               key={index}
               className="glass-card glass-card-hover rounded-2xl p-6 flex gap-5"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#8B1FFF]/10 flex items-center justify-center flex-shrink-0">
-                <item.icon className="w-6 h-6 text-[#8B1FFF]" />
+              <div className="w-12 h-12 rounded-xl bg-[#A855F7]/10 flex items-center justify-center flex-shrink-0">
+                <item.icon className="w-6 h-6 text-[#A855F7]" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-[#FF2D92] mb-2">
+                <h3 className="text-lg font-semibold text-[#C084FC] mb-2">
                   {item.problem}
                 </h3>
                 <p className="text-[#F5F5F7]/70">
@@ -241,7 +241,7 @@ const scenarios = [
   {
     title: "C 端用户",
     icon: Users,
-    color: "#8B1FFF",
+    color: "#A855F7",
     items: [
       "用链上资产支付 Web2 订阅、礼品卡和云服务",
       "跨境自由职业者可使用稳定币即时结算",
@@ -251,7 +251,7 @@ const scenarios = [
   {
     title: "B 端商户",
     icon: CreditCard,
-    color: "#00E1FF",
+    color: "#C084FC",
     items: [
       "同时接入稳定币与法币通道，减少跨境费用",
       "链上付款凭证提升对账效率，降低争议率",
@@ -261,7 +261,7 @@ const scenarios = [
   {
     title: "生态伙伴",
     icon: Globe,
-    color: "#FF2D92",
+    color: "#7C3AED",
     items: [
       "钱包接入支付功能，提高用户粘性和交易频次",
       "法币出入金服务商扩大稳定币支付使用量",
@@ -272,10 +272,10 @@ const scenarios = [
 
 export function ScenariosSection() {
   return (
-    <section id="scenarios" className="py-24 px-4 relative bg-[#F7F3FF]">
+    <section id="scenarios" className="py-24 px-4 relative bg-[#A78BFA]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#05000F]">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0F0A1A]">
             三类参与者
           </h2>
         </div>
@@ -284,7 +284,7 @@ export function ScenariosSection() {
           {scenarios.map((scenario, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-[#8B1FFF]/10 hover:shadow-xl hover:border-[#8B1FFF]/20 transition-all"
+              className="bg-white rounded-2xl p-8 shadow-lg border border-[#A855F7]/10 hover:shadow-xl hover:border-[#A855F7]/20 transition-all"
             >
               <div
                 className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
@@ -292,12 +292,12 @@ export function ScenariosSection() {
               >
                 <scenario.icon className="w-7 h-7" style={{ color: scenario.color }} />
               </div>
-              <h3 className="text-xl font-semibold text-[#05000F] mb-4">
+              <h3 className="text-xl font-semibold text-[#0F0A1A] mb-4">
                 {scenario.title}
               </h3>
               <ul className="space-y-3">
                 {scenario.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-[#05000F]/70">
+                  <li key={i} className="flex items-start gap-3 text-[#0F0A1A]/70">
                     <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: scenario.color }} />
                     {item}
                   </li>
@@ -313,20 +313,20 @@ export function ScenariosSection() {
 
 const securityItems = [
   "钱包、合约与平台体系的安全审计信息聚合展示",
-  "多签审计、漏洞赏金、LP 储备线与高风险支付暂停机制",
+  "多��审计、漏洞赏金、LP 储备线与高风险支付暂停机制",
   "制裁地址筛查、区域白名单、合规伙伴和基础 KYC 说明",
 ]
 
 export function SecuritySection() {
   return (
-    <section className="py-24 px-4 relative bg-[#0D071A]">
+    <section className="py-24 px-4 relative bg-[#1A1228]">
       <div className="absolute inset-0 star-bg opacity-50" />
       
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="glass-card rounded-3xl p-8 md:p-12">
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 rounded-xl bg-[#00E1FF]/10 flex items-center justify-center">
-              <Shield className="w-7 h-7 text-[#00E1FF]" />
+            <div className="w-14 h-14 rounded-xl bg-[#C084FC]/10 flex items-center justify-center">
+              <Shield className="w-7 h-7 text-[#C084FC]" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-[#F5F5F7]">
               安全、审计与合规
@@ -336,7 +336,7 @@ export function SecuritySection() {
           <ul className="space-y-4">
             {securityItems.map((item, index) => (
               <li key={index} className="flex items-start gap-4 text-[#F5F5F7]/80">
-                <span className="w-2 h-2 rounded-full bg-[#00E1FF] mt-2 flex-shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-[#C084FC] mt-2 flex-shrink-0" />
                 {item}
               </li>
             ))}
@@ -386,17 +386,17 @@ export function RoadmapSection() {
             >
               {/* Connector line for desktop */}
               {index < roadmapItems.length - 1 && (
-                <div className="hidden md:block absolute top-10 -right-3 w-6 h-0.5 bg-gradient-to-r from-[#8B1FFF] to-[#00E1FF]" />
+                <div className="hidden md:block absolute top-10 -right-3 w-6 h-0.5 bg-gradient-to-r from-[#A855F7] to-[#C084FC]" />
               )}
               
               <div className="flex items-center gap-3 mb-4">
-                <Clock className="w-5 h-5 text-[#8B1FFF]" />
+                <Clock className="w-5 h-5 text-[#A855F7]" />
                 <span className="text-lg font-bold gradient-text">{item.period}</span>
               </div>
               <ul className="space-y-2">
                 {item.items.map((subItem, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-[#F5F5F7]/70">
-                    <span className="w-1 h-1 rounded-full bg-[#00E1FF] mt-2 flex-shrink-0" />
+                    <span className="w-1 h-1 rounded-full bg-[#C084FC] mt-2 flex-shrink-0" />
                     {subItem}
                   </li>
                 ))}
@@ -411,7 +411,7 @@ export function RoadmapSection() {
 
 export function CTASection() {
   return (
-    <section className="py-24 px-4 relative bg-gradient-to-b from-[#05000F] to-[#0D071A]">
+    <section className="py-24 px-4 relative bg-gradient-to-b from-[#0F0A1A] to-[#1A1228]">
       <div className="absolute inset-0 star-bg opacity-30" />
       
       <div className="max-w-4xl mx-auto relative z-10 text-center">
@@ -436,7 +436,7 @@ export function CTASection() {
             href="https://gana-payment.gitbook.io/whitepaper"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full border border-[#8B1FFF]/50 text-[#F5F5F7] font-semibold text-lg hover:bg-[#8B1FFF]/10 transition-colors"
+            className="px-8 py-4 rounded-full border border-[#A855F7]/50 text-[#F5F5F7] font-semibold text-lg hover:bg-[#A855F7]/10 transition-colors"
           >
             查看 Product Docs
           </a>

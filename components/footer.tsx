@@ -1,17 +1,22 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export function Footer() {
   return (
-    <footer className="py-12 px-4 border-t border-[#8B1FFF]/20 bg-[#05000F]">
+    <footer className="py-12 px-4 border-t border-[#A855F7]/20 bg-[#0F0A1A]">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#8B1FFF] via-[#FF2D92] to-[#00E1FF] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">G</span>
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt="GANA Logo"
+              width={32}
+              height={32}
+              className="rounded-lg"
+            />
             <span className="font-bold text-lg text-[#F5F5F7]">
-              GANA<span className="text-[#8B1FFF]"> · </span>PayFi
+              GANA<span className="text-[#A855F7]"> · </span>PayFi
             </span>
           </Link>
 
@@ -37,7 +42,7 @@ export function Footer() {
         </div>
 
         {/* Risk Disclaimer */}
-        <div className="border-t border-[#8B1FFF]/10 pt-8">
+        <div className="border-t border-[#A855F7]/10 pt-8">
           <p className="text-[#F5F5F7]/40 text-xs leading-relaxed text-center max-w-4xl mx-auto">
             风险提示：加密货币投资具有高风险性。本网站所提供的信息仅供参考，不构成任何投资建议。
             GANA 提供的收益相关表述均为规划目标，实际收益可能因市场状况而有所不同。

@@ -114,12 +114,12 @@ const mediaMentions = [
 ]
 
 function getCategoryColor(category: string) {
-  if (category.includes("交易所")) return "bg-[#00E1FF]/10 text-[#00E1FF] border-[#00E1FF]/30"
-  if (category.includes("媒体")) return "bg-[#FF2D92]/10 text-[#FF2D92] border-[#FF2D92]/30"
-  if (category.includes("生态") || category.includes("公链")) return "bg-[#8B1FFF]/10 text-[#8B1FFF] border-[#8B1FFF]/30"
-  if (category.includes("DEX")) return "bg-[#A168ED]/10 text-[#A168ED] border-[#A168ED]/30"
-  if (category.includes("数据")) return "bg-[#00E1FF]/10 text-[#00E1FF] border-[#00E1FF]/30"
-  return "bg-[#8B1FFF]/10 text-[#8B1FFF] border-[#8B1FFF]/30"
+  if (category.includes("交易所")) return "bg-[#C084FC]/10 text-[#C084FC] border-[#C084FC]/30"
+  if (category.includes("媒体")) return "bg-[#7C3AED]/10 text-[#7C3AED] border-[#7C3AED]/30"
+  if (category.includes("生态") || category.includes("公链")) return "bg-[#A855F7]/10 text-[#A855F7] border-[#A855F7]/30"
+  if (category.includes("DEX")) return "bg-[#E9D5FF]/10 text-[#E9D5FF] border-[#E9D5FF]/30"
+  if (category.includes("数据")) return "bg-[#C084FC]/10 text-[#C084FC] border-[#C084FC]/30"
+  return "bg-[#A855F7]/10 text-[#A855F7] border-[#A855F7]/30"
 }
 
 export function MediaMentions() {
@@ -155,7 +155,7 @@ export function MediaMentions() {
               </span>
               
               {/* Name */}
-              <h3 className="text-lg font-semibold text-[#F5F5F7] mb-2 group-hover:text-[#8B1FFF] transition-colors">
+              <h3 className="text-lg font-semibold text-[#F5F5F7] mb-2 group-hover:text-[#A855F7] transition-colors">
                 {item.name}
               </h3>
               
@@ -165,7 +165,7 @@ export function MediaMentions() {
               </p>
               
               {/* CTA */}
-              <div className="flex items-center gap-2 text-sm font-medium text-[#00E1FF] group-hover:text-[#FF2D92] transition-colors">
+              <div className="flex items-center gap-2 text-sm font-medium text-[#C084FC] group-hover:text-[#E9D5FF] transition-colors">
                 查看原文
                 <ExternalLink className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
               </div>

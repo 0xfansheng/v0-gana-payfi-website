@@ -4,56 +4,55 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* GANA Dark Theme - Purple/Cyan/Magenta */
-  --background: #05000F;
-  --background-soft: #0D071A;
+  /* GANA Purple Theme - Based on Logo */
+  --background: #0F0A1A;
+  --background-soft: #1A1228;
   --foreground: #F5F5F7;
   --foreground-muted: rgba(245, 245, 247, 0.68);
   
-  --card: rgba(13, 7, 26, 0.6);
+  --card: rgba(26, 18, 40, 0.7);
   --card-foreground: #F5F5F7;
-  --popover: #0D071A;
+  --popover: #1A1228;
   --popover-foreground: #F5F5F7;
   
-  --primary: #8B1FFF;
+  --primary: #A855F7;
   --primary-foreground: #FFFFFF;
-  --secondary: #A168ED;
+  --secondary: #C084FC;
   --secondary-foreground: #FFFFFF;
   
-  --accent: #00E1FF;
-  --accent-foreground: #05000F;
-  --magenta: #FF2D92;
+  --accent: #E9D5FF;
+  --accent-foreground: #0F0A1A;
   
-  --muted: rgba(139, 31, 255, 0.15);
+  --muted: rgba(168, 85, 247, 0.15);
   --muted-foreground: rgba(245, 245, 247, 0.68);
   
-  --destructive: #FF2D92;
+  --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
   
-  --border: rgba(139, 31, 255, 0.25);
-  --input: rgba(139, 31, 255, 0.15);
-  --ring: #8B1FFF;
+  --border: rgba(168, 85, 247, 0.3);
+  --input: rgba(168, 85, 247, 0.15);
+  --ring: #A855F7;
   
-  --chart-1: #8B1FFF;
-  --chart-2: #00E1FF;
-  --chart-3: #FF2D92;
-  --chart-4: #A168ED;
+  --chart-1: #A855F7;
+  --chart-2: #C084FC;
+  --chart-3: #E9D5FF;
+  --chart-4: #7C3AED;
   --chart-5: #F5F5F7;
   
   --radius: 0.5rem;
   
   /* Light section */
-  --light-bg: #F7F3FF;
-  --light-foreground: #05000F;
+  --light-bg: #A78BFA;
+  --light-foreground: #0F0A1A;
   
-  --sidebar: #0D071A;
+  --sidebar: #1A1228;
   --sidebar-foreground: #F5F5F7;
-  --sidebar-primary: #8B1FFF;
+  --sidebar-primary: #A855F7;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: rgba(139, 31, 255, 0.15);
+  --sidebar-accent: rgba(168, 85, 247, 0.15);
   --sidebar-accent-foreground: #F5F5F7;
-  --sidebar-border: rgba(139, 31, 255, 0.25);
-  --sidebar-ring: #8B1FFF;
+  --sidebar-border: rgba(168, 85, 247, 0.3);
+  --sidebar-ring: #A855F7;
 }
 
 @theme inline {
@@ -113,18 +112,18 @@
 
 /* GANA Custom Styles */
 .glass-card {
-  background: rgba(13, 7, 26, 0.6);
+  background: rgba(26, 18, 40, 0.7);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 31, 255, 0.25);
+  border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
 .glass-card-hover:hover {
-  border-color: rgba(139, 31, 255, 0.5);
-  box-shadow: 0 0 30px rgba(139, 31, 255, 0.15);
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #8B1FFF 0%, #FF2D92 50%, #00E1FF 100%);
+  background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -132,38 +131,38 @@
 
 .gradient-border {
   position: relative;
-  background: linear-gradient(135deg, rgba(139, 31, 255, 0.5), rgba(255, 45, 146, 0.5), rgba(0, 225, 255, 0.5));
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.6), rgba(168, 85, 247, 0.6), rgba(192, 132, 252, 0.6));
   padding: 1px;
   border-radius: 9999px;
 }
 
 .gradient-border > * {
-  background: #05000F;
+  background: #0F0A1A;
   border-radius: 9999px;
 }
 
 .gradient-btn {
-  background: linear-gradient(135deg, #8B1FFF 0%, #FF2D92 50%, #00E1FF 100%);
+  background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
   transition: all 0.3s ease;
 }
 
 .gradient-btn:hover {
-  box-shadow: 0 0 30px rgba(139, 31, 255, 0.5);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
   transform: translateY(-2px);
 }
 
 .grid-bg {
   background-image: 
-    linear-gradient(rgba(139, 31, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 31, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 .star-bg {
-  background-image: radial-gradient(2px 2px at 20px 30px, rgba(139, 31, 255, 0.3), transparent),
-    radial-gradient(2px 2px at 40px 70px, rgba(0, 225, 255, 0.2), transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(255, 45, 146, 0.3), transparent),
-    radial-gradient(2px 2px at 130px 80px, rgba(139, 31, 255, 0.2), transparent),
-    radial-gradient(1px 1px at 160px 120px, rgba(0, 225, 255, 0.3), transparent);
+  background-image: radial-gradient(2px 2px at 20px 30px, rgba(168, 85, 247, 0.4), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(192, 132, 252, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(124, 58, 237, 0.4), transparent),
+    radial-gradient(2px 2px at 130px 80px, rgba(168, 85, 247, 0.3), transparent),
+    radial-gradient(1px 1px at 160px 120px, rgba(192, 132, 252, 0.4), transparent);
   background-size: 200px 200px;
 }
