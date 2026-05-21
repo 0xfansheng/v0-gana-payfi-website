@@ -1,9 +1,16 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 export function Footer() {
+  const t = useTranslations('footer')
+  const tNav = useTranslations('nav')
+  const tHero = useTranslations('hero')
+
   return (
-    <footer className="py-12 px-4 border-t border-[#A855F7]/20 bg-[#0F0A1A]">
+    <footer className="py-12 px-4 border-t border-border bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
           {/* Logo */}
@@ -15,8 +22,8 @@ export function Footer() {
               height={32}
               className="rounded-lg"
             />
-            <span className="font-bold text-lg text-[#F5F5F7]">
-              GANA<span className="text-[#A855F7]"> · </span>PayFi
+            <span className="font-bold text-lg text-foreground">
+              GANA<span className="text-primary"> · </span>PayFi
             </span>
           </Link>
 
@@ -26,7 +33,7 @@ export function Footer() {
               href="https://www.goldgana.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#F5F5F7]/60 hover:text-[#F5F5F7] text-sm transition-colors"
+              className="text-foreground/60 hover:text-foreground text-sm transition-colors"
             >
               DAPP
             </a>
@@ -34,26 +41,24 @@ export function Footer() {
               href="https://gana-payment.gitbook.io/whitepaper"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#F5F5F7]/60 hover:text-[#F5F5F7] text-sm transition-colors"
+              className="text-foreground/60 hover:text-foreground text-sm transition-colors"
             >
-              白皮书
+              {tHero('ctaSecondary')}
             </a>
           </div>
         </div>
 
         {/* Risk Disclaimer */}
-        <div className="border-t border-[#A855F7]/10 pt-8">
-          <p className="text-[#F5F5F7]/40 text-xs leading-relaxed text-center max-w-4xl mx-auto">
-            风险提示：加密货币投资具有高风险性。本网站所提供的信息仅供参考，不构成任何投资建议。
-            GANA 提供的收益相关表述均为规划目标，实际收益可能因市场状况而有所不同。
-            请在充分了解相关风险后谨慎决策，并确保遵守您所在地区的法律法规。
+        <div className="border-t border-border/50 pt-8">
+          <p className="text-foreground/40 text-xs leading-relaxed text-center max-w-4xl mx-auto">
+            {t('disclaimer')}
           </p>
         </div>
 
         {/* Copyright */}
         <div className="text-center mt-8">
-          <p className="text-[#F5F5F7]/30 text-xs">
-            © {new Date().getFullYear()} GANA · PayFi. All rights reserved.
+          <p className="text-foreground/30 text-xs">
+            {t('copyright')}
           </p>
         </div>
       </div>

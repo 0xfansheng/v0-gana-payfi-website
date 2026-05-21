@@ -3,8 +3,61 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Light Theme (Default) */
 :root {
-  /* GANA Purple Theme - Based on Logo */
+  /* GANA Purple Theme - Light Mode */
+  --background: #FAFAFA;
+  --background-soft: #F3F0F9;
+  --foreground: #0F0A1A;
+  --foreground-muted: rgba(15, 10, 26, 0.68);
+  
+  --card: rgba(255, 255, 255, 0.9);
+  --card-foreground: #0F0A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F0A1A;
+  
+  --primary: #9333EA;
+  --primary-foreground: #FFFFFF;
+  --secondary: #A855F7;
+  --secondary-foreground: #FFFFFF;
+  
+  --accent: #7C3AED;
+  --accent-foreground: #FFFFFF;
+  
+  --muted: rgba(147, 51, 234, 0.08);
+  --muted-foreground: rgba(15, 10, 26, 0.68);
+  
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  
+  --border: rgba(147, 51, 234, 0.2);
+  --input: rgba(147, 51, 234, 0.1);
+  --ring: #9333EA;
+  
+  --chart-1: #9333EA;
+  --chart-2: #A855F7;
+  --chart-3: #C084FC;
+  --chart-4: #7C3AED;
+  --chart-5: #0F0A1A;
+  
+  --radius: 0.5rem;
+  
+  /* Section colors */
+  --section-alt: #F3F0F9;
+  --section-highlight: #EDE9FE;
+  
+  --sidebar: #F3F0F9;
+  --sidebar-foreground: #0F0A1A;
+  --sidebar-primary: #9333EA;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: rgba(147, 51, 234, 0.1);
+  --sidebar-accent-foreground: #0F0A1A;
+  --sidebar-border: rgba(147, 51, 234, 0.2);
+  --sidebar-ring: #9333EA;
+}
+
+/* Dark Theme */
+.dark {
   --background: #0F0A1A;
   --background-soft: #1A1228;
   --foreground: #F5F5F7;
@@ -39,11 +92,8 @@
   --chart-4: #7C3AED;
   --chart-5: #F5F5F7;
   
-  --radius: 0.5rem;
-  
-  /* Light section */
-  --light-bg: #A78BFA;
-  --light-foreground: #0F0A1A;
+  --section-alt: #1A1228;
+  --section-highlight: #A78BFA;
   
   --sidebar: #1A1228;
   --sidebar-foreground: #F5F5F7;
@@ -56,7 +106,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans JP', 'Noto Sans KR', system-ui, sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
   --color-background-soft: var(--background-soft);
@@ -74,7 +124,6 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-magenta: var(--magenta);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -85,8 +134,8 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --color-light-bg: var(--light-bg);
-  --color-light-foreground: var(--light-foreground);
+  --color-section-alt: var(--section-alt);
+  --color-section-highlight: var(--section-highlight);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -110,15 +159,27 @@
   }
 }
 
-/* GANA Custom Styles */
+/* GANA Custom Styles - Light Theme */
 .glass-card {
-  background: rgba(26, 18, 40, 0.7);
+  background: var(--card);
   backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+:root .glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(147, 51, 234, 0.15);
+  box-shadow: 0 4px 20px rgba(147, 51, 234, 0.05);
+}
+
+.dark .glass-card {
+  background: rgba(26, 18, 40, 0.7);
   border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: none;
 }
 
 .glass-card-hover:hover {
-  border-color: rgba(168, 85, 247, 0.6);
+  border-color: var(--primary);
   box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
 }
 
@@ -137,7 +198,7 @@
 }
 
 .gradient-border > * {
-  background: #0F0A1A;
+  background: var(--background);
   border-radius: 9999px;
 }
 
@@ -151,7 +212,12 @@
   transform: translateY(-2px);
 }
 
+/* Grid/Star backgrounds only visible in dark mode */
 .grid-bg {
+  background-image: none;
+}
+
+.dark .grid-bg {
   background-image: 
     linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
@@ -159,6 +225,10 @@
 }
 
 .star-bg {
+  background-image: none;
+}
+
+.dark .star-bg {
   background-image: radial-gradient(2px 2px at 20px 30px, rgba(168, 85, 247, 0.4), transparent),
     radial-gradient(2px 2px at 40px 70px, rgba(192, 132, 252, 0.3), transparent),
     radial-gradient(1px 1px at 90px 40px, rgba(124, 58, 237, 0.4), transparent),

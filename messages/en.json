@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "title": "GANA · PayFi - The World's First Yield-Generating Web3.0 Payment Infrastructure",
+    "description": "GANA uses stablecoins as the unit of account, LP liquidity pools for settlement, connecting Web2 merchants, Web3 wallets, and on-chain assets, transforming payments from a cost center into a value network participated by users, merchants, LPs, and ecosystem partners."
+  },
+  "nav": {
+    "product": "Product",
+    "mechanism": "Mechanism",
+    "scenarios": "Scenarios",
+    "media": "Media",
+    "roadmap": "Roadmap",
+    "enterDapp": "Enter DAPP"
+  },
+  "hero": {
+    "badge": "BNB Smart Chain · Live",
+    "title": "The World's First",
+    "titleHighlight": "Yield-Generating",
+    "titleEnd": "Web3.0 Payment Infrastructure",
+    "subtitle": "GANA uses stablecoins as the unit of account, LP liquidity pools for settlement, connecting Web2 merchants, Web3 wallets, and on-chain assets, transforming payments from a cost center into a value network participated by users, merchants, LPs, and ecosystem partners.",
+    "ctaPrimary": "Enter DAPP",
+    "ctaSecondary": "View Docs"
+  },
+  "product": {
+    "title": "Product Definition",
+    "subtitle": "What is GANA?",
+    "description": "GANA is the world's first yield-generating Web3.0 payment infrastructure. It uses stablecoins as the unit of account, LP liquidity pools for settlement, connecting Web2 merchants, Web3 wallets, and on-chain assets.",
+    "vision": "Transforming payments from a cost center into a value network participated by users, merchants, LPs, and ecosystem partners.",
+    "tags": ["Stablecoin Payments", "LP Liquidity", "On-chain Settlement", "Revenue Sharing", "Cross-border Payments", "Web3 Merchants"]
+  },
+  "mechanism": {
+    "title": "Three-Layer PayFi Mechanism",
+    "onChain": {
+      "title": "On-Chain First",
+      "description": "Each payment generates Proof-of-Pay, recording amount, time, and address for reconciliation, dispute resolution, and open data collaboration."
+    },
+    "lp": {
+      "title": "LP Settlement Support",
+      "description": "LP liquidity pools provide 24/7 settlement capability, aiming to reduce cross-border payment waiting times and return partial fees to LPs."
+    },
+    "compliance": {
+      "title": "Invisible Compliance",
+      "description": "Through regional whitelists, licensed partners, and risk screening, complex compliance is handled at the platform level, lowering entry barriers for users and merchants."
+    }
+  },
+  "painPoints": {
+    "title": "Pain Points & Solutions",
+    "items": [
+      {
+        "title": "High Fees & Hidden Costs",
+        "description": "Traditional cross-border payment fees reach 3-8%, plus exchange rate markups and multiple intermediaries. GANA reduces costs through on-chain settlement and LP pools."
+      },
+      {
+        "title": "Long Settlement Cycles",
+        "description": "International remittances typically take 3-5 business days. GANA achieves near real-time settlement with stablecoins and on-chain confirmation."
+      },
+      {
+        "title": "Compliance Complexity",
+        "description": "KYC/AML requirements vary across jurisdictions. GANA simplifies compliance through regional whitelists and licensed partners."
+      },
+      {
+        "title": "Low Capital Efficiency",
+        "description": "In traditional payment networks, funds are locked across multiple nodes. The LP model enables idle funds to generate yield."
+      }
+    ]
+  },
+  "scenarios": {
+    "title": "Three Types of Participants",
+    "user": {
+      "title": "End Users",
+      "items": [
+        "Pay for Web2 subscriptions, gift cards, and cloud services with on-chain assets",
+        "Cross-border freelancers can settle instantly with stablecoins",
+        "High-frequency users earn points, rebates, or LP equity bonuses"
+      ]
+    },
+    "merchant": {
+      "title": "Merchants",
+      "items": [
+        "Accept both stablecoins and fiat channels, reducing cross-border fees",
+        "On-chain payment receipts improve reconciliation efficiency and reduce disputes",
+        "Small cross-border merchants enter global markets with lower barriers"
+      ]
+    },
+    "partner": {
+      "title": "Ecosystem Partners",
+      "items": [
+        "Wallets integrate payment features to increase user retention and transaction frequency",
+        "Fiat on/off-ramp providers expand stablecoin payment usage",
+        "Risk control and data partners optimize models based on payment data"
+      ]
+    }
+  },
+  "security": {
+    "title": "Security, Audit & Compliance",
+    "items": [
+      "Smart contracts submitted for third-party audit (link will be updated when audit report is published)",
+      "Multi-sig wallets manage core assets to reduce single-point risks",
+      "Collaborating with licensed partners to progressively obtain required operational qualifications",
+      "User data follows minimization principles, sensitive information encrypted"
+    ]
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "phases": [
+      {
+        "period": "2025 Q2",
+        "items": ["Mainnet launch on BNB Chain", "First merchant integrations", "LP pool launch"]
+      },
+      {
+        "period": "2025 Q3",
+        "items": ["Multi-chain expansion", "Fiat on/off-ramp channels", "Merchant SDK release"]
+      },
+      {
+        "period": "2025 Q4",
+        "items": ["Mobile App", "More stablecoin support", "Enterprise API"]
+      },
+      {
+        "period": "2026+",
+        "items": ["Global compliance expansion", "Institutional products", "Ecosystem fund"]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Start Using GANA",
+    "subtitle": "Join the Web3.0 payment revolution, make every payment generate value",
+    "primary": "Enter DAPP",
+    "secondary": "Contact Us"
+  },
+  "footer": {
+    "disclaimer": "Risk Warning: Crypto asset investment carries high risk with volatile prices. The content on this website is for reference only and does not constitute investment advice. Please make cautious decisions after fully understanding the risks.",
+    "copyright": "© 2025 GANA. All rights reserved."
+  },
+  "media": {
+    "title": "Media Coverage & Ecosystem Endorsements",
+    "subtitle": "GANA has received widespread attention and support from top global media and ecosystem partners",
+    "viewMore": "View More",
+    "categories": {
+      "exchange": "Exchange",
+      "media": "Media",
+      "ecosystem": "Ecosystem",
+      "dex": "DEX",
+      "data": "Data",
+      "chain": "Chain"
+    }
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "zh-CN": "简体中文",
+    "zh-TW": "繁體中文",
+    "en": "English",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}

@@ -1,47 +1,49 @@
+"use client"
+
 import { ArrowRight, Zap, Shield, Users, Wallet, CreditCard, FileCheck, Scale, Clock, Globe } from "lucide-react"
-
-const metrics = [
-  { value: "0.1%-0.5%", label: "目标统一支付费率" },
-  { value: "24/7", label: "LP 池实时清算" },
-  { value: "30%-50%", label: "手续费回流 LP 规划" },
-  { value: "USDG", label: "稳定币支付网络规划" },
-]
-
-const tags = [
-  "Web3 Wallet Gateway",
-  "Virtual Payment Card",
-  "Proof-of-Pay",
-  "LP-supported Clearing",
-  "DAO Governance",
-]
+import { useTranslations } from "next-intl"
 
 export function HeroSection() {
+  const t = useTranslations('hero')
+  const tProduct = useTranslations('product')
+
+  const metrics = [
+    { value: "0.1%-0.5%", label: tProduct('tags.0') },
+    { value: "24/7", label: "LP Pool" },
+    { value: "30%-50%", label: "LP Revenue" },
+    { value: "USDG", label: "Stablecoin" },
+  ]
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-[#0F0A1A]">
+      <div className="absolute inset-0 bg-background">
         <div className="absolute inset-0 grid-bg star-bg" />
         {/* Gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#A855F7]/20 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C084FC]/15 rounded-full blur-[128px]" />
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-[#7C3AED]/10 rounded-full blur-[96px]" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/15 rounded-full blur-[128px]" />
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-accent/10 rounded-full blur-[96px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
         {/* Eyebrow */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/30 mb-8">
-          <span className="w-2 h-2 bg-[#C084FC] rounded-full animate-pulse" />
-          <span className="text-sm text-[#F5F5F7]/80">BNB Smart Chain · Live</span>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-8">
+          <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
+          <span className="text-sm text-foreground/80">{t('badge')}</span>
         </div>
 
         {/* H1 */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6">
-          <span className="gradient-text">GANA · PayFi</span>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <span className="text-foreground">{t('title')}</span>
+          <br />
+          <span className="gradient-text">{t('titleHighlight')}</span>
+          <br />
+          <span className="text-foreground">{t('titleEnd')}</span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg md:text-xl text-[#F5F5F7]/70 max-w-3xl mx-auto mb-8 leading-relaxed">
-          全球首个产生收益的 Web3.0 支付基础设施。以稳定币为记账单位，以 LP 流动性池支撑清算，连接 Web2 商户、Web3 钱包与链上资产。
+        <p className="text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto mb-8 leading-relaxed">
+          {t('subtitle')}
         </p>
 
         {/* CTAs */}
@@ -52,16 +54,16 @@ export function HeroSection() {
             rel="noopener noreferrer"
             className="gradient-btn px-8 py-4 rounded-full text-white font-semibold text-lg flex items-center gap-2"
           >
-            链接钱包
+            {t('ctaPrimary')}
             <Wallet className="w-5 h-5" />
           </a>
           <a
             href="https://gana-payment.gitbook.io/whitepaper"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full border border-[#A855F7]/50 text-[#F5F5F7] font-semibold text-lg hover:bg-[#A855F7]/10 transition-colors flex items-center gap-2"
+            className="px-8 py-4 rounded-full border border-primary/50 text-foreground font-semibold text-lg hover:bg-primary/10 transition-colors flex items-center gap-2"
           >
-            阅读白皮书
+            {t('ctaSecondary')}
             <ArrowRight className="w-5 h-5" />
           </a>
         </div>
@@ -76,7 +78,7 @@ export function HeroSection() {
               <div className="text-2xl md:text-3xl font-bold gradient-text mb-2">
                 {metric.value}
               </div>
-              <div className="text-xs md:text-sm text-[#F5F5F7]/60">
+              <div className="text-xs md:text-sm text-foreground/60">
                 {metric.label}
               </div>
             </div>
@@ -88,26 +90,32 @@ export function HeroSection() {
 }
 
 export function ProductDefinition() {
+  const t = useTranslations('product')
+
   return (
-    <section id="product" className="py-24 px-4 relative">
+    <section id="product" className="py-24 px-4 relative bg-section-alt">
       <div className="absolute inset-0 grid-bg opacity-30" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#F5F5F7]">
-            把支付从成本中心，<br className="md:hidden" />变成参与者共享的价值网络
+          <p className="text-primary font-medium mb-2">{t('subtitle')}</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+            {t('title')}
           </h2>
-          <p className="text-[#F5F5F7]/70 max-w-3xl mx-auto text-lg leading-relaxed">
-            GANA 不是单一钱包入口，而是跨链支付网关、虚拟卡、链上清算和生态分润的组合。用户、商户、LP 与合作方都能在同一套支付网络中获得角色和权益。
+          <p className="text-foreground/70 max-w-3xl mx-auto text-lg leading-relaxed">
+            {t('description')}
+          </p>
+          <p className="text-primary/80 max-w-2xl mx-auto mt-4 text-base italic">
+            {t('vision')}
           </p>
         </div>
 
         {/* Tags */}
         <div className="flex flex-wrap justify-center gap-3">
-          {tags.map((tag, index) => (
+          {(t.raw('tags') as string[]).map((tag: string, index: number) => (
             <span
               key={index}
-              className="px-5 py-2.5 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/30 text-[#F5F5F7] text-sm font-medium"
+              className="px-5 py-2.5 rounded-full bg-primary/10 border border-primary/30 text-foreground text-sm font-medium"
             >
               {tag}
             </span>
@@ -118,36 +126,38 @@ export function ProductDefinition() {
   )
 }
 
-const mechanisms = [
-  {
-    icon: FileCheck,
-    title: "链上优先",
-    description: "每笔支付生成 Proof-of-Pay，记录金额、时间与地址，面向对账、争议处理和开放数据合作。",
-    color: "#A855F7",
-  },
-  {
-    icon: Zap,
-    title: "LP 清算支撑",
-    description: "LP 流动性池提供 24/7 清算能力，目标是减少跨境支付等待，并将部分手续费回流给 LP。",
-    color: "#C084FC",
-  },
-  {
-    icon: Shield,
-    title: "隐形合规",
-    description: "通过区域白名单、持牌合作伙伴和风险筛查，把复杂合规留在平台层，降低用户和商户接入门槛。",
-    color: "#7C3AED",
-  },
-]
-
 export function MechanismSection() {
+  const t = useTranslations('mechanism')
+
+  const mechanisms = [
+    {
+      icon: FileCheck,
+      title: t('onChain.title'),
+      description: t('onChain.description'),
+      colorClass: "bg-primary/20 text-primary",
+    },
+    {
+      icon: Zap,
+      title: t('lp.title'),
+      description: t('lp.description'),
+      colorClass: "bg-secondary/20 text-secondary",
+    },
+    {
+      icon: Shield,
+      title: t('compliance.title'),
+      description: t('compliance.description'),
+      colorClass: "bg-accent/20 text-accent",
+    },
+  ]
+
   return (
-    <section id="mechanism" className="py-24 px-4 relative bg-[#1A1228]">
+    <section id="mechanism" className="py-24 px-4 relative bg-background-soft">
       <div className="absolute inset-0 star-bg opacity-50" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#F5F5F7]">
-            三层 PayFi 基础设施
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+            {t('title')}
           </h2>
         </div>
 
@@ -157,16 +167,13 @@ export function MechanismSection() {
               key={index}
               className="glass-card glass-card-hover rounded-2xl p-8 group"
             >
-              <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110"
-                style={{ backgroundColor: `${item.color}20` }}
-              >
-                <item.icon className="w-7 h-7" style={{ color: item.color }} />
+              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 ${item.colorClass}`}>
+                <item.icon className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-semibold text-[#F5F5F7] mb-4">
+              <h3 className="text-xl font-semibold text-foreground mb-4">
                 {item.title}
               </h3>
-              <p className="text-[#F5F5F7]/60 leading-relaxed">
+              <p className="text-foreground/60 leading-relaxed">
                 {item.description}
               </p>
             </div>
@@ -177,106 +184,85 @@ export function MechanismSection() {
   )
 }
 
-const painPoints = [
-  {
-    icon: Globe,
-    problem: "跨境高费率与慢结算",
-    solution: "稳定币记账减少汇损，LP 池实时清算，目标费率 0.1%-0.5%。",
-  },
-  {
-    icon: CreditCard,
-    problem: "Web3 资产孤岛",
-    solution: "虚拟支付卡和钱包互通协议，让链上资产进入 Web2 消费与订阅场景。",
-  },
-  {
-    icon: Scale,
-    problem: "支付利润被垄断",
-    solution: "把手续费分配给 LP、用户积分和生态激励。",
-  },
-  {
-    icon: Shield,
-    problem: "合规门槛过高",
-    solution: "通过持牌合作与风险策略帮助中小商户接入全球支付。",
-  },
-]
-
 export function PainPointsSection() {
+  const t = useTranslations('painPoints')
+
+  const painPoints = [
+    { icon: Globe },
+    { icon: CreditCard },
+    { icon: Scale },
+    { icon: Shield },
+  ]
+
   return (
-    <section className="py-24 px-4 relative">
+    <section className="py-24 px-4 relative bg-background">
       <div className="absolute inset-0 grid-bg opacity-30" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#F5F5F7]">
-            痛点与解决方案
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+            {t('title')}
           </h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {painPoints.map((item, index) => (
-            <div
-              key={index}
-              className="glass-card glass-card-hover rounded-2xl p-6 flex gap-5"
-            >
-              <div className="w-12 h-12 rounded-xl bg-[#A855F7]/10 flex items-center justify-center flex-shrink-0">
-                <item.icon className="w-6 h-6 text-[#A855F7]" />
+          {(t.raw('items') as Array<{title: string, description: string}>).map((item, index) => {
+            const Icon = painPoints[index]?.icon || Globe
+            return (
+              <div
+                key={index}
+                className="glass-card glass-card-hover rounded-2xl p-6 flex gap-5"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-secondary mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-foreground/70">
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-[#C084FC] mb-2">
-                  {item.problem}
-                </h3>
-                <p className="text-[#F5F5F7]/70">
-                  {item.solution}
-                </p>
-              </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
   )
 }
 
-const scenarios = [
-  {
-    title: "C 端用户",
-    icon: Users,
-    color: "#A855F7",
-    items: [
-      "用链上资产支付 Web2 订阅、礼品卡和云服务",
-      "跨境自由职业者可使用稳定币即时结算",
-      "高频支付用户获得积分、返利或 LP 权益加成",
-    ],
-  },
-  {
-    title: "B 端商户",
-    icon: CreditCard,
-    color: "#C084FC",
-    items: [
-      "同时接入稳定币与法币通道，减少跨境费用",
-      "链上付款凭证提升对账效率，降低争议率",
-      "小型跨境商户以更低门槛进入全球市场",
-    ],
-  },
-  {
-    title: "生态伙伴",
-    icon: Globe,
-    color: "#7C3AED",
-    items: [
-      "钱包接入支付功能，提高用户粘性和交易频次",
-      "法币出入金服务商扩大稳定币支付使用量",
-      "风控与数据合作方基于支付数据优化模型",
-    ],
-  },
-]
-
 export function ScenariosSection() {
+  const t = useTranslations('scenarios')
+
+  const scenarios = [
+    {
+      key: 'user',
+      icon: Users,
+      colorClass: "bg-primary/15 text-primary",
+      bulletClass: "bg-primary",
+    },
+    {
+      key: 'merchant',
+      icon: CreditCard,
+      colorClass: "bg-secondary/15 text-secondary",
+      bulletClass: "bg-secondary",
+    },
+    {
+      key: 'partner',
+      icon: Globe,
+      colorClass: "bg-accent/15 text-accent",
+      bulletClass: "bg-accent",
+    },
+  ]
+
   return (
-    <section id="scenarios" className="py-24 px-4 relative bg-[#A78BFA]">
+    <section id="scenarios" className="py-24 px-4 relative bg-section-highlight">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0F0A1A]">
-            三类参与者
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground dark:text-background">
+            {t('title')}
           </h2>
         </div>
 
@@ -284,21 +270,18 @@ export function ScenariosSection() {
           {scenarios.map((scenario, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-[#A855F7]/10 hover:shadow-xl hover:border-[#A855F7]/20 transition-all"
+              className="bg-card rounded-2xl p-8 shadow-lg border border-primary/10 hover:shadow-xl hover:border-primary/20 transition-all"
             >
-              <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
-                style={{ backgroundColor: `${scenario.color}15` }}
-              >
-                <scenario.icon className="w-7 h-7" style={{ color: scenario.color }} />
+              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${scenario.colorClass}`}>
+                <scenario.icon className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-semibold text-[#0F0A1A] mb-4">
-                {scenario.title}
+              <h3 className="text-xl font-semibold text-card-foreground mb-4">
+                {t(`${scenario.key}.title`)}
               </h3>
               <ul className="space-y-3">
-                {scenario.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-[#0F0A1A]/70">
-                    <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: scenario.color }} />
+                {(t.raw(`${scenario.key}.items`) as string[]).map((item: string, i: number) => (
+                  <li key={i} className="flex items-start gap-3 text-card-foreground/70">
+                    <span className={`w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 ${scenario.bulletClass}`} />
                     {item}
                   </li>
                 ))}
@@ -311,32 +294,28 @@ export function ScenariosSection() {
   )
 }
 
-const securityItems = [
-  "钱包、合约与平台体系的安全审计信息聚合展示",
-  "多��审计、漏洞赏金、LP 储备线与高风险支付暂停机制",
-  "制裁地址筛查、区域白名单、合规伙伴和基础 KYC 说明",
-]
-
 export function SecuritySection() {
+  const t = useTranslations('security')
+
   return (
-    <section className="py-24 px-4 relative bg-[#1A1228]">
+    <section className="py-24 px-4 relative bg-background-soft">
       <div className="absolute inset-0 star-bg opacity-50" />
       
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="glass-card rounded-3xl p-8 md:p-12">
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-14 h-14 rounded-xl bg-[#C084FC]/10 flex items-center justify-center">
-              <Shield className="w-7 h-7 text-[#C084FC]" />
+            <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center">
+              <Shield className="w-7 h-7 text-secondary" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#F5F5F7]">
-              安全、审计与合规
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              {t('title')}
             </h2>
           </div>
           
           <ul className="space-y-4">
-            {securityItems.map((item, index) => (
-              <li key={index} className="flex items-start gap-4 text-[#F5F5F7]/80">
-                <span className="w-2 h-2 rounded-full bg-[#C084FC] mt-2 flex-shrink-0" />
+            {(t.raw('items') as string[]).map((item: string, index: number) => (
+              <li key={index} className="flex items-start gap-4 text-foreground/80">
+                <span className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0" />
                 {item}
               </li>
             ))}
@@ -347,56 +326,39 @@ export function SecuritySection() {
   )
 }
 
-const roadmapItems = [
-  {
-    period: "2025 Q2-Q4",
-    items: ["白皮书发布", "核心团队组建", "支付清算合约", "LP 合约", "审计与初始流动性部署"],
-  },
-  {
-    period: "2025",
-    items: ["接入主流 Web3 钱包", "拓展 Web2 商户", "虚拟卡上线", "区域持牌伙伴"],
-  },
-  {
-    period: "2026",
-    items: ["多链钱包互通", "USDG 规划", "法币出入金", "实体卡", "API 集成"],
-  },
-  {
-    period: "2027+",
-    items: ["开放生态 API", "DAO 自治", "主要市场合规覆盖", "跨机构支付网络"],
-  },
-]
-
 export function RoadmapSection() {
+  const t = useTranslations('roadmap')
+
   return (
-    <section id="roadmap" className="py-24 px-4 relative">
+    <section id="roadmap" className="py-24 px-4 relative bg-background">
       <div className="absolute inset-0 grid-bg star-bg opacity-50" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#F5F5F7]">
-            发展路线图
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+            {t('title')}
           </h2>
         </div>
 
         <div className="grid md:grid-cols-4 gap-6">
-          {roadmapItems.map((item, index) => (
+          {(t.raw('phases') as Array<{period: string, items: string[]}>).map((item, index, arr) => (
             <div
               key={index}
               className="glass-card glass-card-hover rounded-2xl p-6 relative"
             >
               {/* Connector line for desktop */}
-              {index < roadmapItems.length - 1 && (
-                <div className="hidden md:block absolute top-10 -right-3 w-6 h-0.5 bg-gradient-to-r from-[#A855F7] to-[#C084FC]" />
+              {index < arr.length - 1 && (
+                <div className="hidden md:block absolute top-10 -right-3 w-6 h-0.5 bg-gradient-to-r from-primary to-secondary" />
               )}
               
               <div className="flex items-center gap-3 mb-4">
-                <Clock className="w-5 h-5 text-[#A855F7]" />
+                <Clock className="w-5 h-5 text-primary" />
                 <span className="text-lg font-bold gradient-text">{item.period}</span>
               </div>
               <ul className="space-y-2">
-                {item.items.map((subItem, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-[#F5F5F7]/70">
-                    <span className="w-1 h-1 rounded-full bg-[#C084FC] mt-2 flex-shrink-0" />
+                {item.items.map((subItem: string, i: number) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                    <span className="w-1 h-1 rounded-full bg-secondary mt-2 flex-shrink-0" />
                     {subItem}
                   </li>
                 ))}
@@ -410,16 +372,18 @@ export function RoadmapSection() {
 }
 
 export function CTASection() {
+  const t = useTranslations('cta')
+
   return (
-    <section className="py-24 px-4 relative bg-gradient-to-b from-[#0F0A1A] to-[#1A1228]">
+    <section className="py-24 px-4 relative bg-gradient-to-b from-background to-background-soft">
       <div className="absolute inset-0 star-bg opacity-30" />
       
       <div className="max-w-4xl mx-auto relative z-10 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#F5F5F7]">
-          让官网成为 DAPP 之前的信任入口
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+          {t('title')}
         </h2>
-        <p className="text-[#F5F5F7]/70 mb-10 max-w-2xl mx-auto">
-          首页的目标不是解释所有技术细节，而是让用户在 30 秒内理解 GANA 是什么、为什么可信、能为谁创造价值，并清晰地进入 DAPP 或阅读白皮书。
+        <p className="text-foreground/70 mb-10 max-w-2xl mx-auto">
+          {t('subtitle')}
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -429,16 +393,14 @@ export function CTASection() {
             rel="noopener noreferrer"
             className="gradient-btn px-8 py-4 rounded-full text-white font-semibold text-lg flex items-center gap-2"
           >
-            进入 GANA DAPP
+            {t('primary')}
             <ArrowRight className="w-5 h-5" />
           </a>
           <a
-            href="https://gana-payment.gitbook.io/whitepaper"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 rounded-full border border-[#A855F7]/50 text-[#F5F5F7] font-semibold text-lg hover:bg-[#A855F7]/10 transition-colors"
+            href="mailto:contact@goldgana.com"
+            className="px-8 py-4 rounded-full border border-primary/50 text-foreground font-semibold text-lg hover:bg-primary/10 transition-colors"
           >
-            查看 Product Docs
+            {t('secondary')}
           </a>
         </div>
       </div>

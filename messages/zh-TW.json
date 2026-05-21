@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "title": "GANA · PayFi - 全球首個產生收益的 Web3.0 支付基礎設施",
+    "description": "GANA 以穩定幣為記賬單位，以 LP 流動性池支撐清算，連接 Web2 商戶、Web3 錢包與鏈上資產，讓支付從成本中心變成可被用戶、商戶、LP 與生態夥伴共同參與的價值網絡。"
+  },
+  "nav": {
+    "product": "產品",
+    "mechanism": "機制",
+    "scenarios": "場景",
+    "media": "媒體",
+    "roadmap": "路線圖",
+    "enterDapp": "進入 DAPP"
+  },
+  "hero": {
+    "badge": "BNB Smart Chain · Live",
+    "title": "全球首個",
+    "titleHighlight": "產生收益",
+    "titleEnd": "的 Web3.0 支付基礎設施",
+    "subtitle": "GANA 以穩定幣為記賬單位，以 LP 流動性池支撐清算，連接 Web2 商戶、Web3 錢包與鏈上資產，讓支付從成本中心變成可被用戶、商戶、LP 與生態夥伴共同參與的價值網絡。",
+    "ctaPrimary": "進入 DAPP",
+    "ctaSecondary": "查看文檔"
+  },
+  "product": {
+    "title": "產品定義",
+    "subtitle": "GANA 是什麼？",
+    "description": "GANA 是全球首個產生收益的 Web3.0 支付基礎設施。它以穩定幣為記賬單位，以 LP 流動性池支撐清算，連接 Web2 商戶、Web3 錢包與鏈上資產。",
+    "vision": "讓支付從成本中心變成可被用戶、商戶、LP 與生態夥伴共同參與的價值網絡。",
+    "tags": ["穩定幣支付", "LP 流動性", "鏈上清算", "收益共享", "跨境支付", "Web3 商戶"]
+  },
+  "mechanism": {
+    "title": "三層 PayFi 機制",
+    "onChain": {
+      "title": "鏈上優先",
+      "description": "每筆支付生成 Proof-of-Pay，記錄金額、時間與地址，面向對賬、爭議處理和開放數據合作。"
+    },
+    "lp": {
+      "title": "LP 清算支撐",
+      "description": "LP 流動性池提供 24/7 清算能力，目標是減少跨境支付等待，並將部分手續費回流給 LP。"
+    },
+    "compliance": {
+      "title": "隱形合規",
+      "description": "通過區域白名單、持牌合作夥伴和風險篩查，把複雜合規留在平台層，降低用戶和商戶接入門檻。"
+    }
+  },
+  "painPoints": {
+    "title": "痛點與解決方案",
+    "items": [
+      {
+        "title": "高費率與隱藏成本",
+        "description": "傳統跨境支付費率高達 3-8%，還有匯率加價和多層中間商。GANA 通過鏈上清算和 LP 池降低費用。"
+      },
+      {
+        "title": "結算週期長",
+        "description": "國際匯款通常需要 3-5 個工作日。GANA 借助穩定幣和鏈上確認實現近實時結算。"
+      },
+      {
+        "title": "合規複雜性",
+        "description": "不同司法管轄區的 KYC/AML 要求各異。GANA 通過區域白名單和持牌合作夥伴簡化合規。"
+      },
+      {
+        "title": "資金效率低",
+        "description": "傳統支付網絡中資金被鎖定在多個環節。LP 模式讓閒置資金產生收益。"
+      }
+    ]
+  },
+  "scenarios": {
+    "title": "三類參與者",
+    "user": {
+      "title": "C 端用戶",
+      "items": [
+        "用鏈上資產支付 Web2 訂閱、禮品卡和雲服務",
+        "跨境自由職業者可使用穩定幣即時結算",
+        "高頻支付用戶獲得積分、返利或 LP 權益加成"
+      ]
+    },
+    "merchant": {
+      "title": "B 端商戶",
+      "items": [
+        "同時接入穩定幣與法幣通道，減少跨境費用",
+        "鏈上付款憑證提升對賬效率，降低爭議率",
+        "小型跨境商戶以更低門檻進入全球市場"
+      ]
+    },
+    "partner": {
+      "title": "生態夥伴",
+      "items": [
+        "錢包接入支付功能，提高用戶粘性和交易頻次",
+        "法幣出入金服務商擴大穩定幣支付使用量",
+        "風控與數據合作方基於支付數據優化模型"
+      ]
+    }
+  },
+  "security": {
+    "title": "安全、審計與合規",
+    "items": [
+      "智能合約已提交第三方審計（審計報告公開後將在此更新鏈接）",
+      "採用多簽錢包管理核心資產，降低單點風險",
+      "與持牌合作夥伴協作，逐步獲取所需運營資質",
+      "用戶數據遵循最小化原則，敏感信息加密存儲"
+    ]
+  },
+  "roadmap": {
+    "title": "路線圖",
+    "phases": [
+      {
+        "period": "2025 Q2",
+        "items": ["主網上線 BNB Chain", "首批商戶接入", "LP 池啟動"]
+      },
+      {
+        "period": "2025 Q3",
+        "items": ["多鏈擴展", "法幣出入金通道", "商戶 SDK 發布"]
+      },
+      {
+        "period": "2025 Q4",
+        "items": ["移動端 App", "更多穩定幣支持", "企業級 API"]
+      },
+      {
+        "period": "2026+",
+        "items": ["全球合規拓展", "機構級產品", "生態基金"]
+      }
+    ]
+  },
+  "cta": {
+    "title": "開始使用 GANA",
+    "subtitle": "加入 Web3.0 支付革命，讓每一筆支付都產生價值",
+    "primary": "進入 DAPP",
+    "secondary": "聯繫我們"
+  },
+  "footer": {
+    "disclaimer": "風險提示：加密資產投資存在高風險，價格波動劇烈。本網站內容僅供參考，不構成投資建議。請在充分了解風險後謹慎決策。",
+    "copyright": "© 2025 GANA. All rights reserved."
+  },
+  "media": {
+    "title": "媒體宣發與生態背書",
+    "subtitle": "GANA 已獲得全球頂級媒體和生態夥伴的廣泛關注與支持",
+    "viewMore": "查看更多",
+    "categories": {
+      "exchange": "交易所",
+      "media": "媒體",
+      "ecosystem": "生態",
+      "dex": "DEX",
+      "data": "數據",
+      "chain": "公鏈"
+    }
+  },
+  "theme": {
+    "light": "淺色",
+    "dark": "深色",
+    "system": "系統"
+  },
+  "language": {
+    "zh-CN": "简体中文",
+    "zh-TW": "繁體中文",
+    "en": "English",
+    "ja": "日本語",
+    "ko": "한국어"
+  }
+}
