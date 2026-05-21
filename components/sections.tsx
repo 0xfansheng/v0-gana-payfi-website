@@ -1,7 +1,7 @@
 "use client"
 
 import { ArrowRight, Zap, Shield, Users, Wallet, CreditCard, FileCheck, Scale, Clock, Globe } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/i18n/client"
 
 export function HeroSection() {
   const t = useTranslations('hero')

@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/i18n/client"
 import { ThemeSwitcher, LanguageSwitcher } from "./theme-language-switcher"
 
 export function Header() {

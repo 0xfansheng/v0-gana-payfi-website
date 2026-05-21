@@ -1,7 +1,7 @@
 "use client"
 
 import { ExternalLink } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "@/i18n/client"
 
 const mediaMentions = [
   {
@@ -229,10 +229,7 @@ function getCategoryColor(categoryKey: string) {
 
 export function MediaMentions() {
   const t = useTranslations('media')
-  const locale = t('title').includes('媒体') ? 'zh-CN' : 
-                 t('title').includes('媒體') ? 'zh-TW' :
-                 t('title').includes('メディア') ? 'ja' :
-                 t('title').includes('미디어') ? 'ko' : 'en'
+  const locale = useLocale()
 
   const getLabel = (labelKey: string) => {
     return labelTranslations[locale]?.[labelKey] || labelTranslations['en'][labelKey] || labelKey
