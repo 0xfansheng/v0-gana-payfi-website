@@ -4,7 +4,7 @@ import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import { useLocale, useTranslations, useI18n } from "@/i18n/client"
 import { locales, type Locale } from "@/i18n/config"
-import { Sun, Moon, Monitor, ChevronDown, Globe } from "lucide-react"
+import { Sun, Moon, ChevronDown, Globe } from "lucide-react"
 
 const languageNames: Record<Locale, string> = {
   'zh-CN': '简体中文',
@@ -26,7 +26,6 @@ export function ThemeSwitcher() {
   if (!mounted) {
     return (
       <div className="flex items-center gap-1 p-1 rounded-full bg-muted/50">
-        <div className="w-8 h-8" />
         <div className="w-8 h-8" />
         <div className="w-8 h-8" />
       </div>
@@ -58,18 +57,6 @@ export function ThemeSwitcher() {
         aria-label={t('dark')}
       >
         <Moon className="w-4 h-4" />
-      </button>
-      <button
-        onClick={() => setTheme("system")}
-        className={`p-2 rounded-full transition-colors ${
-          theme === "system"
-            ? "bg-primary text-primary-foreground"
-            : "text-foreground/60 hover:text-foreground"
-        }`}
-        title={t('system')}
-        aria-label={t('system')}
-      >
-        <Monitor className="w-4 h-4" />
       </button>
     </div>
   )
