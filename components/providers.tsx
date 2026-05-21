@@ -1,16 +1,14 @@
 "use client"
 
 import { ThemeProvider as NextThemesProvider } from "next-themes"
-import { NextIntlClientProvider } from "next-intl"
+import { I18nProvider } from "@/i18n/client"
 import { type ReactNode } from "react"
 
 interface ProvidersProps {
   children: ReactNode
-  locale: string
-  messages: Record<string, unknown>
 }
 
-export function Providers({ children, locale, messages }: ProvidersProps) {
+export function Providers({ children }: ProvidersProps) {
   return (
     <NextThemesProvider
       attribute="class"
@@ -18,9 +16,9 @@ export function Providers({ children, locale, messages }: ProvidersProps) {
       enableSystem
       disableTransitionOnChange
     >
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <I18nProvider>
         {children}
-      </NextIntlClientProvider>
+      </I18nProvider>
     </NextThemesProvider>
   )
 }

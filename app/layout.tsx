@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP, Noto_Sans_KR } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import { Providers } from '@/components/providers'
 import './globals.css'
 
@@ -22,58 +21,42 @@ const notoSansKR = Noto_Sans_KR({
   weight: ["400", "500", "600", "700"]
 })
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('meta')
-  
-  return {
-    title: t('title'),
-    description: t('description'),
-    generator: 'v0.app',
-    icons: {
-      icon: [
-        {
-          url: '/icon-light-32x32.png',
-          media: '(prefers-color-scheme: light)',
-        },
-        {
-          url: '/icon-dark-32x32.png',
-          media: '(prefers-color-scheme: dark)',
-        },
-        {
-          url: '/icon.svg',
-          type: 'image/svg+xml',
-        },
-      ],
-      apple: '/apple-icon.png',
-    },
-  }
+export const metadata: Metadata = {
+  title: 'GANA · PayFi - Web3.0 Payment Infrastructure',
+  description: 'GANA uses stablecoins as the accounting unit and LP liquidity pools to support clearing, connecting Web2 merchants, Web3 wallets and on-chain assets.',
+  generator: 'v0.app',
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: '/apple-icon.png',
+  },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const locale = await getLocale()
-  const messages = await getMessages()
-  
-  // Determine lang attribute
-  const langMap: Record<string, string> = {
-    'zh-CN': 'zh-Hans',
-    'zh-TW': 'zh-Hant',
-    'en': 'en',
-    'ja': 'ja',
-    'ko': 'ko'
-  }
-  
   return (
     <html 
-      lang={langMap[locale] || 'zh-Hans'} 
+      lang="zh-Hans" 
       className={`${inter.variable} ${notoSansJP.variable} ${notoSansKR.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans antialiased bg-background text-foreground">
-        <Providers locale={locale} messages={messages}>
+        <Providers>
           {children}
         </Providers>
         {process.env.NODE_ENV === 'production' && <Analytics />}
