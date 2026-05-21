@@ -4,10 +4,16 @@ import Link from "next/link"
 import Image from "next/image"
 import { useTranslations } from "@/i18n/client"
 
+const footerSocialLinks = [
+  { label: "X", href: "https://x.com/GANA_PayFi" },
+  { label: "Telegram", href: "https://t.me/ganapayment" },
+  { label: "Instagram", href: "https://www.instagram.com/ganapayment/" },
+  { label: "Insight", href: "https://x.com/GANA_Insight" },
+]
+
 export function Footer() {
   const t = useTranslations('footer')
   const tNav = useTranslations('nav')
-  const tHero = useTranslations('hero')
 
   return (
     <footer className="py-12 px-4 border-t border-border bg-background">
@@ -38,14 +44,26 @@ export function Footer() {
               DAPP
             </a>
             <a
-              href="https://gana-payment.gitbook.io/whitepaper"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#resources"
               className="text-foreground/60 hover:text-foreground text-sm transition-colors"
             >
-              {tHero('ctaSecondary')}
+              {tNav('resources')}
             </a>
           </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+          {footerSocialLinks.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/50 hover:text-primary text-sm transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
 
         {/* Risk Disclaimer */}

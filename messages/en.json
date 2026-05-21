@@ -9,7 +9,8 @@
     "scenarios": "Scenarios",
     "media": "Media",
     "roadmap": "Roadmap",
-    "enterDapp": "Enter DAPP"
+    "enterDapp": "Enter DAPP",
+    "resources": "Resources"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -25,7 +26,14 @@
     "subtitle": "What is GANA?",
     "description": "GANA is the world's first yield-generating Web3.0 payment infrastructure. It uses stablecoins as the unit of account, LP liquidity pools for settlement, connecting Web2 merchants, Web3 wallets, and on-chain assets.",
     "vision": "Transforming payments from a cost center into a value network participated by users, merchants, LPs, and ecosystem partners.",
-    "tags": ["Stablecoin Payments", "LP Liquidity", "On-chain Settlement", "Revenue Sharing", "Cross-border Payments", "Web3 Merchants"]
+    "tags": [
+      "Stablecoin Payments",
+      "LP Liquidity",
+      "On-chain Settlement",
+      "Revenue Sharing",
+      "Cross-border Payments",
+      "Web3 Merchants"
+    ]
   },
   "mechanism": {
     "title": "Three-Layer PayFi Mechanism",
@@ -104,19 +112,35 @@
     "phases": [
       {
         "period": "2025 Q2",
-        "items": ["Mainnet launch on BNB Chain", "First merchant integrations", "LP pool launch"]
+        "items": [
+          "Mainnet launch on BNB Chain",
+          "First merchant integrations",
+          "LP pool launch"
+        ]
       },
       {
         "period": "2025 Q3",
-        "items": ["Multi-chain expansion", "Fiat on/off-ramp channels", "Merchant SDK release"]
+        "items": [
+          "Multi-chain expansion",
+          "Fiat on/off-ramp channels",
+          "Merchant SDK release"
+        ]
       },
       {
         "period": "2025 Q4",
-        "items": ["Mobile App", "More stablecoin support", "Enterprise API"]
+        "items": [
+          "Mobile App",
+          "More stablecoin support",
+          "Enterprise API"
+        ]
       },
       {
         "period": "2026+",
-        "items": ["Global compliance expansion", "Institutional products", "Ecosystem fund"]
+        "items": [
+          "Global compliance expansion",
+          "Institutional products",
+          "Ecosystem fund"
+        ]
       }
     ]
   },
@@ -154,5 +178,26 @@
     "en": "English",
     "ja": "日本語",
     "ko": "한국어"
+  },
+  "resources": {
+    "eyebrow": "GANA global community is live",
+    "title": "Resource Pack & Global Community",
+    "subtitle": "GANA is building a distributed financial network centered on decentralized payments and liquidity incentives. Multilingual documentation is now live.",
+    "announcementKicker": "Global Community",
+    "announcementTitle": "GANA global community is now live",
+    "announcementCopy": "Through smart contracts and stablecoin payment protocols, GANA is building a secure, efficient, and low-fee payment system.",
+    "announcementPoints": [
+      "Decentralized payments",
+      "Liquidity incentives",
+      "Stablecoin payment protocol"
+    ],
+    "videoTitle": "GANA introduction video",
+    "videoDescription": "A front-end ready brand video for the homepage, introduction pages, and resource center.",
+    "docsTitle": "Multilingual documentation",
+    "docsDescription": "Notion documentation collection",
+    "socialTitle": "Official community",
+    "deckTitle": "Website resource pack",
+    "pagesLabel": "pages",
+    "downloadPdf": "Download PDF"
   }
 }

@@ -9,7 +9,8 @@
     "scenarios": "場景",
     "media": "媒體",
     "roadmap": "路線圖",
-    "enterDapp": "進入 DAPP"
+    "enterDapp": "進入 DAPP",
+    "resources": "資料"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -25,7 +26,14 @@
     "subtitle": "GANA 是什麼？",
     "description": "GANA 是全球首個產生收益的 Web3.0 支付基礎設施。它以穩定幣為記賬單位，以 LP 流動性池支撐清算，連接 Web2 商戶、Web3 錢包與鏈上資產。",
     "vision": "讓支付從成本中心變成可被用戶、商戶、LP 與生態夥伴共同參與的價值網絡。",
-    "tags": ["穩定幣支付", "LP 流動性", "鏈上清算", "收益共享", "跨境支付", "Web3 商戶"]
+    "tags": [
+      "穩定幣支付",
+      "LP 流動性",
+      "鏈上清算",
+      "收益共享",
+      "跨境支付",
+      "Web3 商戶"
+    ]
   },
   "mechanism": {
     "title": "三層 PayFi 機制",
@@ -104,19 +112,35 @@
     "phases": [
       {
         "period": "2025 Q2",
-        "items": ["主網上線 BNB Chain", "首批商戶接入", "LP 池啟動"]
+        "items": [
+          "主網上線 BNB Chain",
+          "首批商戶接入",
+          "LP 池啟動"
+        ]
       },
       {
         "period": "2025 Q3",
-        "items": ["多鏈擴展", "法幣出入金通道", "商戶 SDK 發布"]
+        "items": [
+          "多鏈擴展",
+          "法幣出入金通道",
+          "商戶 SDK 發布"
+        ]
       },
       {
         "period": "2025 Q4",
-        "items": ["移動端 App", "更多穩定幣支持", "企業級 API"]
+        "items": [
+          "移動端 App",
+          "更多穩定幣支持",
+          "企業級 API"
+        ]
       },
       {
         "period": "2026+",
-        "items": ["全球合規拓展", "機構級產品", "生態基金"]
+        "items": [
+          "全球合規拓展",
+          "機構級產品",
+          "生態基金"
+        ]
       }
     ]
   },
@@ -154,5 +178,26 @@
     "en": "English",
     "ja": "日本語",
     "ko": "한국어"
+  },
+  "resources": {
+    "eyebrow": "GANA 全球社群同步上線",
+    "title": "資料包與全球社群",
+    "subtitle": "GANA 致力於打造全球首個以去中心化支付與流動性激勵為核心的分佈式金融網絡。多語言資料集現已上線，誠邀查閱。",
+    "announcementKicker": "Global Community",
+    "announcementTitle": "GANA 全球社群同步上線！",
+    "announcementCopy": "透過智能合約以及穩定幣支付協議，GANA 正在構建安全、高效、低費率的支付體系。",
+    "announcementPoints": [
+      "去中心化支付",
+      "流動性激勵",
+      "穩定幣支付協議"
+    ],
+    "videoTitle": "GANA 介紹影片",
+    "videoDescription": "適合官網首屏、品牌介紹頁或資料中心使用的前端影片資源。",
+    "docsTitle": "多語言資料集",
+    "docsDescription": "Notion 文件集合",
+    "socialTitle": "官方社群",
+    "deckTitle": "官網資料包",
+    "pagesLabel": "頁",
+    "downloadPdf": "下載 PDF"
   }
 }

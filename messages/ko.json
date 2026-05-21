@@ -9,7 +9,8 @@
     "scenarios": "시나리오",
     "media": "미디어",
     "roadmap": "로드맵",
-    "enterDapp": "DAPP 입장"
+    "enterDapp": "DAPP 입장",
+    "resources": "자료"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -25,7 +26,14 @@
     "subtitle": "GANA란?",
     "description": "GANA는 세계 최초의 수익 창출 Web3.0 결제 인프라입니다. 스테이블코인을 기장 단위로 사용하고, LP 유동성 풀로 정산을 지원하며, Web2 가맹점, Web3 지갑 및 온체인 자산을 연결합니다.",
     "vision": "결제를 비용 센터에서 사용자, 가맹점, LP 및 생태계 파트너가 참여하는 가치 네트워크로 변환합니다.",
-    "tags": ["스테이블코인 결제", "LP 유동성", "온체인 정산", "수익 공유", "크로스보더 결제", "Web3 가맹점"]
+    "tags": [
+      "스테이블코인 결제",
+      "LP 유동성",
+      "온체인 정산",
+      "수익 공유",
+      "크로스보더 결제",
+      "Web3 가맹점"
+    ]
   },
   "mechanism": {
     "title": "3계층 PayFi 메커니즘",
@@ -104,19 +112,35 @@
     "phases": [
       {
         "period": "2025 Q2",
-        "items": ["BNB Chain 메인넷 런칭", "초기 가맹점 통합", "LP 풀 런칭"]
+        "items": [
+          "BNB Chain 메인넷 런칭",
+          "초기 가맹점 통합",
+          "LP 풀 런칭"
+        ]
       },
       {
         "period": "2025 Q3",
-        "items": ["멀티체인 확장", "법정화폐 온/오프램프 채널", "가맹점 SDK 출시"]
+        "items": [
+          "멀티체인 확장",
+          "법정화폐 온/오프램프 채널",
+          "가맹점 SDK 출시"
+        ]
       },
       {
         "period": "2025 Q4",
-        "items": ["모바일 앱", "더 많은 스테이블코인 지원", "엔터프라이즈 API"]
+        "items": [
+          "모바일 앱",
+          "더 많은 스테이블코인 지원",
+          "엔터프라이즈 API"
+        ]
       },
       {
         "period": "2026+",
-        "items": ["글로벌 컴플라이언스 확장", "기관 제품", "생태계 펀드"]
+        "items": [
+          "글로벌 컴플라이언스 확장",
+          "기관 제품",
+          "생태계 펀드"
+        ]
       }
     ]
   },
@@ -154,5 +178,26 @@
     "en": "English",
     "ja": "日本語",
     "ko": "한국어"
+  },
+  "resources": {
+    "eyebrow": "GANA 글로벌 커뮤니티 공개",
+    "title": "자료 패키지와 글로벌 커뮤니티",
+    "subtitle": "GANA는 탈중앙화 결제와 유동성 인센티브를 중심으로 한 분산형 금융 네트워크를 구축하고 있습니다. 다국어 자료 모음이 공개되었습니다.",
+    "announcementKicker": "Global Community",
+    "announcementTitle": "GANA 글로벌 커뮤니티 동시 오픈",
+    "announcementCopy": "스마트 계약과 스테이블코인 결제 프로토콜을 통해 안전하고 효율적이며 낮은 수수료의 결제 시스템을 구축합니다.",
+    "announcementPoints": [
+      "탈중앙화 결제",
+      "유동성 인센티브",
+      "스테이블코인 결제 프로토콜"
+    ],
+    "videoTitle": "GANA 소개 영상",
+    "videoDescription": "홈페이지, 브랜드 소개 페이지, 자료 센터에서 사용할 수 있는 프런트엔드용 영상 자료입니다.",
+    "docsTitle": "다국어 자료 모음",
+    "docsDescription": "Notion 문서 모음",
+    "socialTitle": "공식 커뮤니티",
+    "deckTitle": "웹사이트 자료 패키지",
+    "pagesLabel": "페이지",
+    "downloadPdf": "PDF 다운로드"
   }
 }

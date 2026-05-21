@@ -1,7 +1,71 @@
 "use client"
 
-import { ArrowRight, Zap, Shield, Users, Wallet, CreditCard, FileCheck, Scale, Clock, Globe } from "lucide-react"
+import {
+  ArrowRight,
+  BookOpen,
+  CreditCard,
+  Download,
+  ExternalLink,
+  FileCheck,
+  FileText,
+  Globe,
+  Instagram,
+  MessageCircle,
+  Scale,
+  Send,
+  Shield,
+  Users,
+  Video,
+  Wallet,
+  Zap,
+  Clock,
+} from "lucide-react"
 import { useTranslations } from "@/i18n/client"
+
+const socialLinks = [
+  { name: "X", handle: "@GANA_PayFi", href: "https://x.com/GANA_PayFi", icon: ExternalLink },
+  { name: "Telegram", handle: "GANA Payment", href: "https://t.me/ganapayment", icon: Send },
+  { name: "Instagram", handle: "@ganapayment", href: "https://www.instagram.com/ganapayment/", icon: Instagram },
+  { name: "X Insight", handle: "@GANA_Insight", href: "https://x.com/GANA_Insight", icon: MessageCircle },
+]
+
+const documentationLinks = [
+  {
+    language: "中文資料集",
+    href: "https://www.notion.so/GANA-297197584a42809fa598c241be6f9c92?source=copy_link",
+  },
+  {
+    language: "English Documentation Collection",
+    href: "https://www.notion.so/GANA-Resource-Collection-29c197584a428084be90f7b5534b7443?source=copy_link",
+  },
+  {
+    language: "한국어 자료 모음",
+    href: "https://www.notion.so/GANA-2a3197584a42808a8cadd55cc44a0d98?source=copy_link",
+  },
+  {
+    language: "日本語資料集",
+    href: "https://www.notion.so/GANA-2a0197584a428060b8bdebd9855e24de?source=copy_link",
+  },
+  {
+    language: "Tập tài liệu tiếng Việt",
+    href: "https://www.notion.so/GANA-T-ng-h-p-t-i-li-u-2a3197584a4280468856c75b456e677c?source=copy_link",
+  },
+]
+
+const deckResources = [
+  {
+    title: "GANA 宣傳介紹 PPT",
+    pages: 21,
+    cover: "/gana-assets/website-ppts/gana-promotion/cover.webp",
+    pdf: "/gana-assets/website-ppts/gana-promotion/pdf/gana-promotion.pdf",
+  },
+  {
+    title: "GANA 制度介紹 PPT",
+    pages: 18,
+    cover: "/gana-assets/website-ppts/gana-system/cover.webp",
+    pdf: "/gana-assets/website-ppts/gana-system/pdf/gana-system.pdf",
+  },
+]
 
 export function HeroSection() {
   const t = useTranslations('hero')
@@ -11,18 +75,26 @@ export function HeroSection() {
     { value: "0.1%-0.5%", label: tProduct('tags.0') },
     { value: "24/7", label: "LP Pool" },
     { value: "30%-50%", label: "LP Revenue" },
-    { value: "USDG", label: "Stablecoin" },
+    { value: "USDT", label: "Stablecoin" },
   ]
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-background">
-        <div className="absolute inset-0 grid-bg star-bg" />
-        {/* Gradient orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/15 rounded-full blur-[128px]" />
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-accent/10 rounded-full blur-[96px]" />
+        <video
+          className="absolute inset-0 h-full w-full object-cover opacity-35"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/gana-assets/website-video/poster.jpg"
+        >
+          <source src="/gana-assets/website-video/hero-video-720p.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/70" />
+        <div className="absolute inset-0 grid-bg star-bg opacity-60" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
@@ -120,6 +192,160 @@ export function ProductDefinition() {
               {tag}
             </span>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function ResourcesSection() {
+  const t = useTranslations('resources')
+
+  return (
+    <section id="resources" className="py-24 px-4 relative bg-background">
+      <div className="absolute inset-0 grid-bg opacity-30" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-14">
+          <p className="text-primary font-medium mb-2">{t('eyebrow')}</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-5 text-foreground">
+            {t('title')}
+          </h2>
+          <p className="text-foreground/70 max-w-3xl mx-auto text-lg leading-relaxed">
+            {t('subtitle')}
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 mb-10">
+          <div className="glass-card rounded-2xl p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center">
+                <Globe className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-primary font-medium">{t('announcementKicker')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('announcementTitle')}</h3>
+              </div>
+            </div>
+            <p className="text-foreground/70 leading-relaxed mb-6">
+              {t('announcementCopy')}
+            </p>
+            <ul className="grid sm:grid-cols-3 gap-3">
+              {(t.raw('announcementPoints') as string[]).map((point, index) => (
+                <li
+                  key={index}
+                  className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-foreground/75"
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="glass-card rounded-2xl overflow-hidden">
+            <video
+              className="aspect-video w-full bg-black object-cover"
+              controls
+              preload="metadata"
+              poster="/gana-assets/website-video/poster.jpg"
+            >
+              <source src="/gana-assets/website-video/hero-video-720p.mp4" type="video/mp4" />
+            </video>
+            <div className="p-6">
+              <div className="flex items-center gap-3 mb-2">
+                <Video className="w-5 h-5 text-secondary" />
+                <h3 className="text-lg font-semibold text-foreground">{t('videoTitle')}</h3>
+              </div>
+              <p className="text-sm text-foreground/60">{t('videoDescription')}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6 mb-10">
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <BookOpen className="w-6 h-6 text-primary" />
+              <h3 className="text-2xl font-bold text-foreground">{t('docsTitle')}</h3>
+            </div>
+            <div className="grid gap-3">
+              {documentationLinks.map((doc) => (
+                <a
+                  key={doc.href}
+                  href={doc.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group glass-card glass-card-hover rounded-xl p-4 flex items-center justify-between gap-4"
+                >
+                  <div>
+                    <p className="font-semibold text-foreground">{doc.language}</p>
+                    <p className="text-sm text-foreground/55">{t('docsDescription')}</p>
+                  </div>
+                  <ExternalLink className="w-5 h-5 text-secondary group-hover:text-primary transition-colors flex-shrink-0" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <Users className="w-6 h-6 text-primary" />
+              <h3 className="text-2xl font-bold text-foreground">{t('socialTitle')}</h3>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {socialLinks.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group glass-card glass-card-hover rounded-xl p-5"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
+                    <item.icon className="w-5 h-5 text-secondary group-hover:text-primary transition-colors" />
+                  </div>
+                  <p className="text-lg font-semibold text-foreground">{item.name}</p>
+                  <p className="text-sm text-foreground/60">{item.handle}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center gap-3 mb-5">
+            <FileText className="w-6 h-6 text-primary" />
+            <h3 className="text-2xl font-bold text-foreground">{t('deckTitle')}</h3>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {deckResources.map((deck) => (
+              <a
+                key={deck.pdf}
+                href={deck.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group glass-card glass-card-hover rounded-2xl overflow-hidden"
+              >
+                <img
+                  src={deck.cover}
+                  alt={deck.title}
+                  className="aspect-video w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="p-5 flex items-center justify-between gap-4">
+                  <div>
+                    <h4 className="text-lg font-semibold text-foreground">{deck.title}</h4>
+                    <p className="text-sm text-foreground/60">
+                      {deck.pages} {t('pagesLabel')}
+                    </p>
+                  </div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-sm font-medium text-secondary group-hover:text-primary transition-colors">
+                    {t('downloadPdf')}
+                    <Download className="w-4 h-4" />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

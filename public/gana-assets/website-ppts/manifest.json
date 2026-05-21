@@ -1,0 +1,26 @@
+{
+  "decks": [
+    {
+      "title": "GANA \u5ba3\u50b3\u4ecb\u7d39 PPT",
+      "slug": "gana-promotion",
+      "pageCount": 21,
+      "manifest": "gana-promotion/manifest.json",
+      "cover": "gana-promotion/cover.webp",
+      "pdf": "gana-promotion/pdf/gana-promotion.pdf",
+      "pdfSizeMB": 16.34,
+      "slidesTotalMB": 2.06,
+      "thumbsTotalMB": 0.25
+    },
+    {
+      "title": "GANA \u5236\u5ea6\u4ecb\u7d39 PPT",
+      "slug": "gana-system",
+      "pageCount": 18,
+      "manifest": "gana-system/manifest.json",
+      "cover": "gana-system/cover.webp",
+      "pdf": "gana-system/pdf/gana-system.pdf",
+      "pdfSizeMB": 11.54,
+      "slidesTotalMB": 1.33,
+      "thumbsTotalMB": 0.18
+    }
+  ]
+}

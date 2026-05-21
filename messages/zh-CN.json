@@ -9,7 +9,8 @@
     "scenarios": "场景",
     "media": "媒体",
     "roadmap": "路线图",
-    "enterDapp": "进入 DAPP"
+    "enterDapp": "进入 DAPP",
+    "resources": "资料"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -25,7 +26,14 @@
     "subtitle": "GANA 是什么？",
     "description": "GANA 是全球首个产生收益的 Web3.0 支付基础设施。它以 USDT 为记账单位，以 LP 流动性池支撑清算，连接 Web2 商户、Web3 钱包与链上资产。",
     "vision": "让支付从成本中心变成可被用户、商户、LP 与生态伙伴共同参与的价值网络。",
-    "tags": ["USDT 支付", "LP 流动性", "链上清算", "收益共享", "跨境支付", "Web3 商户"]
+    "tags": [
+      "USDT 支付",
+      "LP 流动性",
+      "链上清算",
+      "收益共享",
+      "跨境支付",
+      "Web3 商户"
+    ]
   },
   "mechanism": {
     "title": "三层 PayFi 机制",
@@ -104,19 +112,35 @@
     "phases": [
       {
         "period": "2025 Q2",
-        "items": ["主网上线 BNB Chain", "首批商户接入", "LP 池启动"]
+        "items": [
+          "主网上线 BNB Chain",
+          "首批商户接入",
+          "LP 池启动"
+        ]
       },
       {
         "period": "2025 Q3",
-        "items": ["多链扩展", "法币出入金通道", "商户 SDK 发布"]
+        "items": [
+          "多链扩展",
+          "法币出入金通道",
+          "商户 SDK 发布"
+        ]
       },
       {
         "period": "2025 Q4",
-        "items": ["移动端 App", "更多币种支持", "企业级 API"]
+        "items": [
+          "移动端 App",
+          "更多币种支持",
+          "企业级 API"
+        ]
       },
       {
         "period": "2026+",
-        "items": ["全球合规拓展", "机构级产品", "生态基金"]
+        "items": [
+          "全球合规拓展",
+          "机构级产品",
+          "生态基金"
+        ]
       }
     ]
   },
@@ -154,5 +178,26 @@
     "en": "English",
     "ja": "日本語",
     "ko": "한국어"
+  },
+  "resources": {
+    "eyebrow": "GANA 全球社群同步上线",
+    "title": "资料包与全球社群",
+    "subtitle": "GANA 致力于打造全球首个以去中心化支付与流动性激励为核心的分布式金融网络。多语言资料集现已上线，诚邀查阅。",
+    "announcementKicker": "Global Community",
+    "announcementTitle": "GANA 全球社群同步上线！",
+    "announcementCopy": "通过智能合约以及稳定币支付协议，GANA 正在构建安全、高效、低费率的支付体系。",
+    "announcementPoints": [
+      "去中心化支付",
+      "流动性激励",
+      "稳定币支付协议"
+    ],
+    "videoTitle": "GANA 介绍视频",
+    "videoDescription": "适合官网首屏、品牌介绍页或资料中心使用的前端视频资源。",
+    "docsTitle": "多语言资料集",
+    "docsDescription": "Notion 文档集合",
+    "socialTitle": "官方社群",
+    "deckTitle": "官网资料包",
+    "pagesLabel": "页",
+    "downloadPdf": "下载 PDF"
   }
 }
