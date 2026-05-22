@@ -11,7 +11,7 @@
     "roadmap": "로드맵",
     "enterDapp": "DAPP 입장",
     "resources": "자료",
-    "imBeta": "IM 베타"
+    "imBeta": "커뮤니티 특전"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -202,11 +202,11 @@
     "downloadPdf": "PDF 다운로드"
   },
   "imBeta": {
-    "eyebrow": "IM 출시 예정",
-    "title": "GANA IM 출시 예정",
-    "subtitle": "베타 예약 기능을 준비 중입니다. 잠시만 기다려 주세요. 예약이 열리면 이메일 인증 후 해당 이메일로 IM 베타 링크를 보내드립니다.",
-    "formKicker": "IM 베타 예약",
-    "formTitle": "곧 공개됩니다",
+    "eyebrow": "GANA 커뮤니티 특전",
+    "title": "미스터리 생태계 예약 등록",
+    "subtitle": "GANA 커뮤니티 특전으로 첫 번째 사용자 자격 예약 등록을 곧 오픈합니다. 오픈 후 이메일 인증을 완료한 주소로 우선 안내를 보내드립니다.",
+    "formKicker": "커뮤니티 특전 예약",
+    "formTitle": "첫 번째 사용자 자격 예약 등록",
     "emailLabel": "예약 이메일",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "이메일 인증 코드",
@@ -217,21 +217,21 @@
     "submitCta": "인증하고 예약",
     "verifyingCta": "인증 중...",
     "verifiedCta": "인증 완료",
-    "serviceNote": "Dynamic Email OTP가 연결되었습니다. IM 베타가 준비되면 인증된 이메일 주소로 초대 링크를 보내드립니다.",
-    "privacyNote": "인증된 이메일은 베타 알림, 초대 링크 발송, 접근 확인에만 사용됩니다.",
+    "serviceNote": "Dynamic Email OTP가 연결되었습니다. 첫 번째 사용자 자격이 열리면 인증된 이메일 주소로 안내와 초대 링크를 보내드립니다.",
+    "privacyNote": "인증된 이메일은 자격 안내, 초대 링크 발송, 예약 확인에만 사용됩니다.",
     "codeSentStatus": "이메일 코드가 전송되었습니다. 받은 코드를 입력해 예약을 완료하세요.",
-    "verifiedStatus": "이메일 인증이 완료되었습니다. 접근이 열리면 이 이메일로 IM 베타 링크를 보내드립니다.",
+    "verifiedStatus": "이메일 인증이 완료되었습니다. 첫 번째 사용자 자격이 열리면 이 이메일로 안내와 초대 링크를 보내드립니다.",
     "missingEmailStatus": "유효한 이메일 주소를 먼저 입력하세요.",
     "missingCodeStatus": "이메일 인증 코드를 먼저 입력하세요.",
     "errorStatus": "인증에 실패했습니다. 이메일 주소, 코드 또는 Dynamic 이메일 설정을 확인한 뒤 다시 시도하세요.",
     "points": [
-      "베타 예약 기능 곧 공개",
-      "오픈 후 이메일 인증 가능",
-      "IM 베타 링크는 인증된 이메일로 발송"
+      "미스터리 생태계 예약 등록 곧 공개",
+      "GANA 커뮤니티 특전 우선 오픈",
+      "첫 번째 사용자 자격 안내는 인증된 이메일로 발송"
     ],
-    "comingSoonKicker": "예약 기능 곧 공개",
-    "comingSoonTitle": "IM 출시 예정",
-    "comingSoonDescription": "GANA IM 베타 예약 기능은 마지막 준비 중입니다. 준비가 완료되면 이곳에서 이메일 인증 예약 입구를 열 예정입니다.",
-    "comingSoonNote": "이메일 OTP 기능은 유지되어 있으며, 베타 예약이 열릴 때 활성화해 인증된 이메일로 초대 링크를 보낼 수 있습니다."
+    "comingSoonKicker": "예약 등록 곧 공개",
+    "comingSoonTitle": "미스터리 생태계 예약 등록",
+    "comingSoonDescription": "GANA 커뮤니티 특전으로 첫 번째 사용자 자격 예약 등록을 곧 오픈합니다. 준비가 완료되면 이곳에서 이메일 인증 예약 입구를 열 예정입니다.",
+    "comingSoonNote": "이메일 OTP 기능은 유지되어 있으며, 예약이 열릴 때 활성화해 인증된 이메일로 자격 안내를 보낼 수 있습니다."
   }
 }

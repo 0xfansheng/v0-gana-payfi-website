@@ -11,7 +11,7 @@
     "roadmap": "路线图",
     "enterDapp": "进入 DAPP",
     "resources": "资料",
-    "imBeta": "IM 内测"
+    "imBeta": "社区特权"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -202,11 +202,11 @@
     "downloadPdf": "下载 PDF"
   },
   "imBeta": {
-    "eyebrow": "IM 即将上线",
-    "title": "GANA IM 即将上线",
-    "subtitle": "测试版预约功能正在准备中，敬请期待。预约开放后，可通过邮箱完成验证并接收 IM 测试版链接。",
-    "formKicker": "IM 测试版预约",
-    "formTitle": "敬请期待",
+    "eyebrow": "GANA社区特权",
+    "title": "神秘生态开放预约注册",
+    "subtitle": "GANA社区特权，面向首批用户资格开放预约注册。开放后可通过邮箱完成验证，并优先接收资格通知。",
+    "formKicker": "社区特权预约",
+    "formTitle": "首批用户资格开放预约注册",
     "emailLabel": "预约邮箱",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "邮箱验证码",
@@ -214,24 +214,24 @@
     "sendCodeCta": "发送邮箱验证码",
     "resendCodeCta": "重新发送验证码",
     "sendingCta": "发送中...",
-    "submitCta": "验证并预约内测",
+    "submitCta": "验证并预约资格",
     "verifyingCta": "验证中...",
     "verifiedCta": "已完成验证",
-    "serviceNote": "已接入 Dynamic Email OTP。IM 内测准备好后，邀请链接会发送到完成验证的邮箱。",
-    "privacyNote": "仅会使用已验证邮箱发送内测通知、邀请链接和资格确认。",
+    "serviceNote": "已接入 Dynamic Email OTP。首批用户资格开放后，通知与邀请链接会发送到完成验证的邮箱。",
+    "privacyNote": "仅会使用已验证邮箱发送资格通知、邀请链接和预约确认。",
     "codeSentStatus": "邮箱验证码已发送，请输入邮件中的验证码完成预约。",
-    "verifiedStatus": "邮箱验证已完成。内测开放时，我们会把 IM 内测链接发送到该邮箱。",
+    "verifiedStatus": "邮箱验证已完成。首批用户资格开放时，我们会把通知与邀请链接发送到该邮箱。",
     "missingEmailStatus": "请先输入有效邮箱地址。",
     "missingCodeStatus": "请先输入邮箱验证码。",
     "errorStatus": "验证失败，请检查邮箱、验证码或 Dynamic 邮箱配置后重试。",
     "points": [
-      "测试版预约功能即将开放",
-      "开放后可通过邮箱完成验证",
-      "IM 测试版链接将发送至验证邮箱"
+      "神秘生态开放预约注册",
+      "GANA社区特权优先开放",
+      "首批用户资格通知将发送至验证邮箱"
     ],
-    "comingSoonKicker": "预约功能即将开放",
-    "comingSoonTitle": "IM 即将上线",
-    "comingSoonDescription": "GANA IM 测试版预约功能正在最后准备中，敬请期待。开放后我们会在这里开启邮箱验证预约入口。",
-    "comingSoonNote": "邮箱验证码功能已保留，测试版预约开放时即可启用，并通过验证邮箱发送内测链接。"
+    "comingSoonKicker": "预约注册即将开放",
+    "comingSoonTitle": "神秘生态开放预约注册",
+    "comingSoonDescription": "GANA社区特权面向首批用户资格开放预约注册，敬请期待。开放后我们会在这里开启邮箱验证预约入口。",
+    "comingSoonNote": "邮箱验证码功能已保留，预约开放时即可启用，并通过验证邮箱发送资格通知。"
   }
 }

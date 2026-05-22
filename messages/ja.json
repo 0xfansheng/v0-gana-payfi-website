@@ -11,7 +11,7 @@
     "roadmap": "ロードマップ",
     "enterDapp": "DAPP を開く",
     "resources": "資料",
-    "imBeta": "IM ベータ"
+    "imBeta": "コミュニティ特典"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -202,11 +202,11 @@
     "downloadPdf": "PDF をダウンロード"
   },
   "imBeta": {
-    "eyebrow": "IM 近日公開",
-    "title": "GANA IM 近日公開",
-    "subtitle": "ベータ予約機能を準備中です。しばらくお待ちください。予約開始後、メール認証を完了したユーザーへ IM ベータリンクを送信します。",
-    "formKicker": "IM ベータ予約",
-    "formTitle": "近日公開",
+    "eyebrow": "GANAコミュニティ特典",
+    "title": "謎のエコシステム予約登録",
+    "subtitle": "GANAコミュニティ特典として、初期ユーザー資格の予約登録を開始予定です。開始後、メール認証済みの方へ優先通知をお送りします。",
+    "formKicker": "コミュニティ特典予約",
+    "formTitle": "初期ユーザー資格の予約登録",
     "emailLabel": "予約メールアドレス",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "メール認証コード",
@@ -217,21 +217,21 @@
     "submitCta": "認証して予約",
     "verifyingCta": "認証中...",
     "verifiedCta": "認証済み",
-    "serviceNote": "Dynamic Email OTP を接続済みです。IM ベータの準備ができたら、招待リンクを認証済みメールアドレスへ送信します。",
-    "privacyNote": "認証済みメールアドレスは、ベータ通知、招待リンク送付、アクセス確認にのみ使用されます。",
+    "serviceNote": "Dynamic Email OTP を接続済みです。初期ユーザー資格が開放されると、通知と招待リンクを認証済みメールアドレスへ送信します。",
+    "privacyNote": "認証済みメールアドレスは、資格通知、招待リンク送付、予約確認にのみ使用されます。",
     "codeSentStatus": "メールコードを送信しました。受信したコードを入力して予約を完了してください。",
-    "verifiedStatus": "メール認証が完了しました。アクセス開始時に IM ベータリンクをこのメールアドレスへ送信します。",
+    "verifiedStatus": "メール認証が完了しました。初期ユーザー資格の開放時に、通知と招待リンクをこのメールアドレスへ送信します。",
     "missingEmailStatus": "有効なメールアドレスを入力してください。",
     "missingCodeStatus": "メール認証コードを入力してください。",
     "errorStatus": "認証に失敗しました。メールアドレス、コード、または Dynamic のメール設定を確認して再試行してください。",
     "points": [
-      "ベータ予約機能を近日公開",
-      "開始後はメール認証が利用可能",
-      "IMベータリンクは認証済みメールへ送信"
+      "謎のエコシステム予約登録を開始予定",
+      "GANAコミュニティ特典を優先開放",
+      "初期ユーザー資格通知は認証済みメールへ送信"
     ],
-    "comingSoonKicker": "予約機能を近日公開",
-    "comingSoonTitle": "IM 近日公開",
-    "comingSoonDescription": "GANA IM ベータ予約機能は最終準備中です。予約開始後、この場所でメール認証予約入口を公開します。",
-    "comingSoonNote": "メールOTP機能は保持されています。ベータ予約開始時に有効化し、認証済みメールへ招待リンクを送信できます。"
+    "comingSoonKicker": "予約登録を近日公開",
+    "comingSoonTitle": "謎のエコシステム予約登録",
+    "comingSoonDescription": "GANAコミュニティ特典として、初期ユーザー資格の予約登録を開始予定です。準備が整い次第、メール認証予約入口をここに公開します。",
+    "comingSoonNote": "メールOTP機能は保持されています。予約開始時に有効化し、認証済みメールへ資格通知を送信できます。"
   }
 }

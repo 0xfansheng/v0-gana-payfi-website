@@ -11,7 +11,7 @@
     "roadmap": "Roadmap",
     "enterDapp": "Enter DAPP",
     "resources": "Resources",
-    "imBeta": "IM Beta"
+    "imBeta": "Community Access"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -202,11 +202,11 @@
     "downloadPdf": "Download PDF"
   },
   "imBeta": {
-    "eyebrow": "IM Coming Soon",
-    "title": "GANA IM Is Coming Soon",
-    "subtitle": "The beta reservation feature is being prepared. Stay tuned. Once reservations open, users will verify by email and receive the IM beta link in that inbox.",
-    "formKicker": "IM Beta Reservation",
-    "formTitle": "Coming Soon",
+    "eyebrow": "GANA Community Privilege",
+    "title": "Mystery Ecosystem Reservations",
+    "subtitle": "GANA community privileges are opening reservation registration for first-wave user eligibility. Once open, verified inboxes will receive priority access updates.",
+    "formKicker": "Community Privilege Reservation",
+    "formTitle": "First-Wave User Eligibility Reservation",
     "emailLabel": "Reservation email",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "Email verification code",
@@ -217,21 +217,21 @@
     "submitCta": "Verify and reserve",
     "verifyingCta": "Verifying...",
     "verifiedCta": "Verified",
-    "serviceNote": "Powered by Dynamic Email OTP. After the IM beta is ready, the invite link will be sent to the verified email address.",
-    "privacyNote": "Only your verified email will be used for beta notices, invite delivery, and access confirmation.",
+    "serviceNote": "Powered by Dynamic Email OTP. Once first-wave eligibility opens, updates and invite links will be sent to verified email addresses.",
+    "privacyNote": "Only your verified email will be used for eligibility notices, invite delivery, and reservation confirmation.",
     "codeSentStatus": "Email code sent. Enter the code from your inbox to finish the reservation.",
-    "verifiedStatus": "Email verification completed. We will send the IM beta link to this inbox when access opens.",
+    "verifiedStatus": "Email verification completed. We will send updates and invite links to this inbox when first-wave eligibility opens.",
     "missingEmailStatus": "Enter a valid email address first.",
     "missingCodeStatus": "Enter the email verification code first.",
     "errorStatus": "Verification failed. Check the email address, code, or Dynamic email settings and try again.",
     "points": [
-      "Beta reservation is opening soon",
-      "Email verification will be available when open",
-      "IM beta links will be sent to verified inboxes"
+      "Mystery ecosystem reservations are opening",
+      "GANA community privileges open first",
+      "First-wave eligibility updates go to verified inboxes"
     ],
-    "comingSoonKicker": "Reservation Opening Soon",
-    "comingSoonTitle": "IM Is Coming Soon",
-    "comingSoonDescription": "The GANA IM beta reservation feature is in final preparation. Stay tuned. The email verification reservation entry will open here when ready.",
-    "comingSoonNote": "The email OTP flow is preserved and can be enabled when beta reservations open, with invite links sent to verified inboxes."
+    "comingSoonKicker": "Reservation Registration Opening Soon",
+    "comingSoonTitle": "Mystery Ecosystem Reservations",
+    "comingSoonDescription": "GANA community privileges are opening reservation registration for first-wave user eligibility. The email verification reservation entry will open here when ready.",
+    "comingSoonNote": "The email OTP flow is preserved and can be enabled when reservations open, with eligibility updates sent to verified inboxes."
   }
 }

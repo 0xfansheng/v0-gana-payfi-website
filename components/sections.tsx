@@ -348,20 +348,20 @@ export function ImBetaSection() {
   }
 
   return (
-    <section id="im-beta" className="im-beta-section-bg py-24 px-4 relative overflow-hidden">
+    <section id="im-beta" className="im-beta-section-bg py-16 sm:py-20 lg:py-24 px-3 sm:px-4 relative overflow-hidden">
       <div className="absolute inset-0 grid-bg star-bg opacity-50" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-stretch">
-          <div className="im-beta-copy-panel rounded-3xl p-6 md:p-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-secondary/35 bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary mb-6">
+        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-5 lg:gap-8 items-stretch">
+          <div className="im-beta-copy-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8">
+            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-secondary/35 bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary mb-5 sm:mb-6">
               <Bell className="w-4 h-4" />
               {t('eyebrow')}
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-5 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 sm:mb-5 leading-tight">
               {t('title')}
             </h2>
-            <p className="text-lg text-foreground/70 leading-relaxed mb-8">
+            <p className="text-base sm:text-lg text-foreground/70 leading-relaxed mb-6 sm:mb-8">
               {t('subtitle')}
             </p>
 
@@ -369,25 +369,25 @@ export function ImBetaSection() {
               {points.map((point, index) => (
                 <div
                   key={point}
-                  className="im-beta-point flex items-center gap-3 rounded-2xl px-4 py-3"
+                  className="im-beta-point flex items-start gap-3 rounded-2xl px-4 py-3"
                 >
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary font-semibold">
                     {index + 1}
                   </span>
-                  <span className="text-sm md:text-base text-foreground/78">{point}</span>
+                  <span className="pt-1 text-sm md:text-base text-foreground/78 leading-relaxed">{point}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="im-beta-form-panel rounded-3xl p-6 md:p-8">
-            <div className="flex items-start gap-4 mb-7">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">
-                <Mail className="w-6 h-6" />
+          <div className="im-beta-form-panel rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8">
+            <div className="flex items-start gap-3 sm:gap-4 mb-6 sm:mb-7">
+              <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">
+                <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-medium text-primary mb-1">{t('formKicker')}</p>
-                <h3 className="text-2xl font-bold text-foreground">{t('formTitle')}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground leading-tight">{t('formTitle')}</h3>
               </div>
             </div>
 
@@ -404,13 +404,13 @@ export function ImBetaSection() {
                         placeholder={t('emailPlaceholder')}
                         autoComplete="email"
                         disabled={isBusy || hasVerifiedSession}
-                        className="min-h-12 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
+                        className="min-h-12 min-w-0 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
                       />
                       <button
                         type="button"
                         onClick={handleSendEmail}
                         disabled={!sdkHasLoaded || isBusy || hasVerifiedSession}
-                        className="min-h-12 rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
+                        className="min-h-12 w-full rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
                       >
                         {status === "sending" ? (
                           <span className="inline-flex items-center gap-2">
@@ -473,13 +473,13 @@ export function ImBetaSection() {
                 </div>
               </>
             ) : (
-              <div className="grid min-h-[300px] content-center gap-6">
+              <div className="grid min-h-[260px] sm:min-h-[300px] content-center gap-5 sm:gap-6">
                 <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
                   <Clock className="h-4 w-4" />
                   {t('comingSoonKicker')}
                 </div>
                 <div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
                     {t('comingSoonTitle')}
                   </h3>
                   <p className="text-base md:text-lg leading-relaxed text-foreground/70">
