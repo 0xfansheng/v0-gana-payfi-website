@@ -1,5 +1,6 @@
 "use client"
 
+import { useRef, useState } from "react"
 import {
   ArrowRight,
   BookOpen,
@@ -16,6 +17,8 @@ import {
   Shield,
   Users,
   Video,
+  Volume2,
+  VolumeX,
   Wallet,
   Zap,
   Clock,
@@ -67,6 +70,55 @@ const deckResources = [
   },
 ]
 
+function HeroBackgroundVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [soundEnabled, setSoundEnabled] = useState(false)
+
+  const toggleSound = () => {
+    const video = videoRef.current
+    if (!video) return
+
+    if (soundEnabled) {
+      video.muted = true
+      setSoundEnabled(false)
+      return
+    }
+
+    video.muted = false
+    video.volume = 0.75
+    setSoundEnabled(true)
+    void video.play().catch(() => {
+      video.muted = true
+      setSoundEnabled(false)
+    })
+  }
+
+  return (
+    <>
+      <video
+        ref={videoRef}
+        className="absolute inset-0 h-full w-full object-cover opacity-45"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/gana-assets/website-video/hero-cyberpunk-poster.jpg"
+      >
+        <source src="/gana-assets/website-video/hero-cyberpunk.mp4" type="video/mp4" />
+      </video>
+      <button
+        type="button"
+        onClick={toggleSound}
+        aria-label={soundEnabled ? "Mute background audio" : "Play background audio"}
+        className="absolute bottom-6 right-6 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-primary/35 bg-background/55 text-foreground shadow-lg backdrop-blur-md transition-colors hover:bg-primary/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+      >
+        {soundEnabled ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+      </button>
+    </>
+  )
+}
+
 export function HeroSection() {
   const t = useTranslations('hero')
   const tProduct = useTranslations('product')
@@ -82,17 +134,7 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-background">
-        <video
-          className="absolute inset-0 h-full w-full object-cover opacity-35"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/gana-assets/website-video/poster.jpg"
-        >
-          <source src="/gana-assets/website-video/hero-video-720p.mp4" type="video/mp4" />
-        </video>
+        <HeroBackgroundVideo />
         <div className="absolute inset-0 bg-background/70" />
         <div className="absolute inset-0 grid-bg star-bg opacity-60" />
       </div>
@@ -247,9 +289,9 @@ export function ResourcesSection() {
               className="aspect-video w-full bg-black object-cover"
               controls
               preload="metadata"
-              poster="/gana-assets/website-video/poster.jpg"
+              poster="/gana-assets/website-video/hero-cyberpunk-poster.jpg"
             >
-              <source src="/gana-assets/website-video/hero-video-720p.mp4" type="video/mp4" />
+              <source src="/gana-assets/website-video/hero-cyberpunk.mp4" type="video/mp4" />
             </video>
             <div className="p-6">
               <div className="flex items-center gap-3 mb-2">
