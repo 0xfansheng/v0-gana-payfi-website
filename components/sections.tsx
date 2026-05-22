@@ -14,8 +14,9 @@ import {
   Globe,
   Instagram,
   KeyRound,
-  Mail,
+  Loader2,
   MessageCircle,
+  Phone,
   Scale,
   Send,
   Shield,
@@ -27,6 +28,7 @@ import {
   Zap,
   Clock,
 } from "lucide-react"
+import { useConnectWithOtp, useDynamicContext } from "@dynamic-labs/sdk-react-core"
 import { useTranslations } from "@/i18n/client"
 
 const socialLinks = [
@@ -100,6 +102,15 @@ const videoResources = [
     poster: "/gana-assets/website-video/gallery/gana-video-05.jpg",
     src: "/gana-assets/website-video/gallery/gana-video-05.mp4",
   },
+]
+
+const phoneCountryOptions = [
+  { label: "China +86", iso2: "CN", dialCode: "86" },
+  { label: "Hong Kong +852", iso2: "HK", dialCode: "852" },
+  { label: "Taiwan +886", iso2: "TW", dialCode: "886" },
+  { label: "Singapore +65", iso2: "SG", dialCode: "65" },
+  { label: "Thailand +66", iso2: "TH", dialCode: "66" },
+  { label: "United States +1", iso2: "US", dialCode: "1" },
 ]
 
 function HeroBackgroundVideo() {
@@ -272,10 +283,88 @@ export function ProductDefinition() {
   )
 }
 
+type SmsVerificationStatus = "idle" | "sending" | "codeSent" | "verifying" | "verified" | "error"
+
 export function ImBetaSection() {
   const t = useTranslations('imBeta')
-  const [email, setEmail] = useState("")
+  const { connectWithSms, verifyOneTimePassword } = useConnectWithOtp()
+  const { sdkHasLoaded, user } = useDynamicContext()
+  const [selectedCountryIso2, setSelectedCountryIso2] = useState(phoneCountryOptions[0].iso2)
+  const [phone, setPhone] = useState("")
+  const [otp, setOtp] = useState("")
+  const [otpRequested, setOtpRequested] = useState(false)
+  const [status, setStatus] = useState<SmsVerificationStatus>("idle")
+  const [statusMessage, setStatusMessage] = useState("")
   const points = t.raw('points') as string[]
+  const selectedCountry =
+    phoneCountryOptions.find((country) => country.iso2 === selectedCountryIso2) || phoneCountryOptions[0]
+  const normalizedPhone = phone.replace(/\D/g, "")
+  const normalizedOtp = otp.replace(/\D/g, "")
+  const isBusy = status === "sending" || status === "verifying"
+  const hasVerifiedSession = Boolean(user) || status === "verified"
+
+  const handleCountryChange = (iso2: string) => {
+    setSelectedCountryIso2(iso2)
+    setOtpRequested(false)
+    setStatus("idle")
+    setStatusMessage("")
+  }
+
+  const handlePhoneChange = (value: string) => {
+    setPhone(value)
+    setOtpRequested(false)
+    setStatus("idle")
+    setStatusMessage("")
+  }
+
+  const handleOtpChange = (value: string) => {
+    setOtp(value.replace(/\D/g, "").slice(0, 8))
+  }
+
+  const handleSendSms = async () => {
+    if (!normalizedPhone) {
+      setStatus("error")
+      setStatusMessage(t('missingPhoneStatus'))
+      return
+    }
+
+    setStatus("sending")
+    setStatusMessage("")
+
+    try {
+      await connectWithSms({
+        phone: normalizedPhone,
+        iso2: selectedCountry.iso2,
+        dialCode: selectedCountry.dialCode,
+      })
+      setOtpRequested(true)
+      setStatus("codeSent")
+      setStatusMessage(t('codeSentStatus'))
+    } catch {
+      setStatus("error")
+      setStatusMessage(t('errorStatus'))
+    }
+  }
+
+  const handleVerifyOtp = async () => {
+    if (!normalizedOtp) {
+      setStatus("error")
+      setStatusMessage(t('missingCodeStatus'))
+      return
+    }
+
+    setStatus("verifying")
+    setStatusMessage("")
+
+    try {
+      await verifyOneTimePassword(normalizedOtp)
+      setStatus("verified")
+      setStatusMessage(t('verifiedStatus'))
+    } catch {
+      setStatus("error")
+      setStatusMessage(t('errorStatus'))
+    }
+  }
 
   return (
     <section id="im-beta" className="im-beta-section-bg py-24 px-4 relative overflow-hidden">
@@ -313,7 +402,7 @@ export function ImBetaSection() {
           <div className="im-beta-form-panel rounded-3xl p-6 md:p-8">
             <div className="flex items-start gap-4 mb-7">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">
-                <Mail className="w-6 h-6" />
+                <Phone className="w-6 h-6" />
               </div>
               <div>
                 <p className="text-sm font-medium text-primary mb-1">{t('formKicker')}</p>
@@ -323,21 +412,45 @@ export function ImBetaSection() {
 
             <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
               <label className="grid gap-2">
-                <span className="text-sm font-medium text-foreground/80">{t('emailLabel')}</span>
+                <span className="text-sm font-medium text-foreground/80">{t('phoneLabel')}</span>
                 <div className="flex flex-col sm:flex-row gap-3">
+                  <select
+                    value={selectedCountryIso2}
+                    onChange={(event) => handleCountryChange(event.target.value)}
+                    disabled={isBusy || hasVerifiedSession}
+                    aria-label={t('countryLabel')}
+                    className="min-h-12 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-75 sm:w-48"
+                  >
+                    {phoneCountryOptions.map((country) => (
+                      <option key={country.iso2} value={country.iso2}>
+                        {country.label}
+                      </option>
+                    ))}
+                  </select>
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder={t('emailPlaceholder')}
+                    type="tel"
+                    value={phone}
+                    onChange={(event) => handlePhoneChange(event.target.value)}
+                    placeholder={t('phonePlaceholder')}
+                    disabled={isBusy || hasVerifiedSession}
                     className="min-h-12 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
                   />
                   <button
                     type="button"
-                    disabled
-                    className="min-h-12 rounded-2xl bg-primary/35 px-5 text-sm font-semibold text-white opacity-75 cursor-not-allowed"
+                    onClick={handleSendSms}
+                    disabled={!sdkHasLoaded || isBusy || hasVerifiedSession}
+                    className="min-h-12 rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
                   >
-                    {t('sendCodeCta')}
+                    {status === "sending" ? (
+                      <span className="inline-flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        {t('sendingCta')}
+                      </span>
+                    ) : otpRequested ? (
+                      t('resendCodeCta')
+                    ) : (
+                      t('sendCodeCta')
+                    )}
                   </button>
                 </div>
               </label>
@@ -348,8 +461,11 @@ export function ImBetaSection() {
                   <KeyRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70" />
                   <input
                     type="text"
-                    disabled
+                    value={otp}
+                    onChange={(event) => handleOtpChange(event.target.value)}
+                    disabled={!otpRequested || isBusy || hasVerifiedSession}
                     inputMode="numeric"
+                    autoComplete="one-time-code"
                     placeholder={t('codePlaceholder')}
                     className="min-h-12 w-full rounded-2xl border border-primary/20 bg-background/45 pl-11 pr-4 text-foreground outline-none placeholder:text-foreground/35 disabled:cursor-not-allowed disabled:opacity-75"
                   />
@@ -357,18 +473,30 @@ export function ImBetaSection() {
               </label>
 
               <button
-                type="submit"
-                disabled
-                className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white opacity-70 cursor-not-allowed"
+                type="button"
+                onClick={handleVerifyOtp}
+                disabled={!sdkHasLoaded || !otpRequested || !normalizedOtp || isBusy || hasVerifiedSession}
+                className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
               >
-                {t('submitCta')}
+                {status === "verifying" ? (
+                  <span className="inline-flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {t('verifyingCta')}
+                  </span>
+                ) : hasVerifiedSession ? (
+                  t('verifiedCta')
+                ) : (
+                  t('submitCta')
+                )}
               </button>
             </form>
 
             <div className="mt-6 grid gap-3">
               <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                <p className="text-sm text-foreground/68">{t('serviceNote')}</p>
+                <p className="text-sm text-foreground/68">
+                  {statusMessage || (hasVerifiedSession ? t('verifiedStatus') : t('serviceNote'))}
+                </p>
               </div>
               <p className="text-xs text-foreground/45">{t('privacyNote')}</p>
             </div>
