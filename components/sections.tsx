@@ -272,7 +272,7 @@ export function ResourcesSection() {
   const t = useTranslations('resources')
 
   return (
-    <section id="resources" className="py-24 px-4 relative bg-background">
+    <section id="resources" className="resources-section-bg py-24 px-4 relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-30" />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -286,25 +286,27 @@ export function ResourcesSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-6 mb-10">
-          <div className="glass-card rounded-2xl p-6 md:p-8">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center">
-                <Globe className="w-6 h-6 text-primary" />
+        <div className="space-y-8 mb-10">
+          <div className="resources-feature-card rounded-3xl p-6 md:p-8">
+            <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center">
+                  <Globe className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-primary font-medium">{t('announcementKicker')}</p>
+                  <h3 className="text-2xl font-bold text-foreground">{t('announcementTitle')}</h3>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-primary font-medium">{t('announcementKicker')}</p>
-                <h3 className="text-2xl font-bold text-foreground">{t('announcementTitle')}</h3>
-              </div>
+              <p className="max-w-2xl text-foreground/70 leading-relaxed md:text-right">
+                {t('announcementCopy')}
+              </p>
             </div>
-            <p className="text-foreground/70 leading-relaxed mb-6">
-              {t('announcementCopy')}
-            </p>
-            <ul className="grid sm:grid-cols-3 gap-3">
+            <ul className="mt-6 grid sm:grid-cols-3 gap-3">
               {(t.raw('announcementPoints') as string[]).map((point, index) => (
                 <li
                   key={index}
-                  className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-foreground/75"
+                  className="rounded-xl border border-primary/25 bg-primary/10 px-4 py-3 text-sm text-foreground/80"
                 >
                   {point}
                 </li>
@@ -312,17 +314,21 @@ export function ResourcesSection() {
             </ul>
           </div>
 
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <Video className="w-6 h-6 text-secondary" />
-              <h3 className="text-2xl font-bold text-foreground">{t('videoTitle')}</h3>
+          <div className="resources-video-panel rounded-3xl p-5 md:p-6">
+            <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <Video className="w-6 h-6 text-secondary" />
+                  <h3 className="text-2xl font-bold text-foreground">{t('videoTitle')}</h3>
+                </div>
+                <p className="max-w-3xl text-sm text-foreground/65">{t('videoDescription')}</p>
+              </div>
             </div>
-            <p className="text-sm text-foreground/60 mb-5">{t('videoDescription')}</p>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
               {videoResources.map((video) => (
                 <article
                   key={video.src}
-                  className="glass-card glass-card-hover rounded-2xl overflow-hidden"
+                  className="resources-video-card rounded-2xl overflow-hidden"
                 >
                   <video
                     className="aspect-video w-full bg-black object-cover"

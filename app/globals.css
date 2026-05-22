@@ -183,6 +183,65 @@
   box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
 }
 
+.resources-section-bg {
+  background:
+    linear-gradient(180deg, rgba(76, 29, 149, 0.20) 0%, rgba(147, 51, 234, 0.12) 46%, rgba(88, 28, 135, 0.18) 100%),
+    radial-gradient(110% 78% at 50% 0%, rgba(124, 58, 237, 0.26) 0%, rgba(124, 58, 237, 0.10) 48%, transparent 78%),
+    var(--background);
+}
+
+.dark .resources-section-bg {
+  background:
+    linear-gradient(180deg, rgba(15, 10, 26, 1) 0%, rgba(48, 21, 82, 0.96) 48%, rgba(15, 10, 26, 1) 100%),
+    radial-gradient(110% 78% at 50% 0%, rgba(147, 51, 234, 0.36) 0%, rgba(88, 28, 135, 0.22) 48%, transparent 78%),
+    var(--background);
+}
+
+.resources-feature-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.90), rgba(245, 240, 255, 0.82) 48%, rgba(233, 213, 255, 0.74));
+  border: 1px solid rgba(147, 51, 234, 0.26);
+  box-shadow: 0 20px 60px rgba(88, 28, 135, 0.12);
+  backdrop-filter: blur(20px);
+}
+
+.dark .resources-feature-card {
+  background: linear-gradient(135deg, rgba(36, 19, 62, 0.92), rgba(63, 24, 105, 0.76) 48%, rgba(21, 12, 35, 0.92));
+  border-color: rgba(168, 85, 247, 0.38);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+}
+
+.resources-video-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(250, 245, 255, 0.68));
+  border: 1px solid rgba(147, 51, 234, 0.22);
+  box-shadow: 0 24px 70px rgba(88, 28, 135, 0.14);
+  backdrop-filter: blur(18px);
+}
+
+.dark .resources-video-panel {
+  background: linear-gradient(135deg, rgba(24, 13, 40, 0.86), rgba(50, 22, 84, 0.68));
+  border-color: rgba(168, 85, 247, 0.32);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.resources-video-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(147, 51, 234, 0.18);
+  box-shadow: 0 18px 44px rgba(88, 28, 135, 0.10);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.resources-video-card:hover {
+  border-color: rgba(124, 58, 237, 0.55);
+  box-shadow: 0 22px 56px rgba(124, 58, 237, 0.18);
+  transform: translateY(-2px);
+}
+
+.dark .resources-video-card {
+  background: rgba(18, 10, 31, 0.82);
+  border-color: rgba(168, 85, 247, 0.28);
+  box-shadow: none;
+}
+
 .gradient-text {
   background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
   -webkit-background-clip: text;
