@@ -15,8 +15,8 @@ import {
   Instagram,
   KeyRound,
   Loader2,
+  Mail,
   MessageCircle,
-  Phone,
   Scale,
   Send,
   Shield,
@@ -102,15 +102,6 @@ const videoResources = [
     poster: "/gana-assets/website-video/gallery/gana-video-05.jpg",
     src: "/gana-assets/website-video/gallery/gana-video-05.mp4",
   },
-]
-
-const phoneCountryOptions = [
-  { label: "China +86", iso2: "CN", dialCode: "86" },
-  { label: "Hong Kong +852", iso2: "HK", dialCode: "852" },
-  { label: "Taiwan +886", iso2: "TW", dialCode: "886" },
-  { label: "Singapore +65", iso2: "SG", dialCode: "65" },
-  { label: "Thailand +66", iso2: "TH", dialCode: "66" },
-  { label: "United States +1", iso2: "US", dialCode: "1" },
 ]
 
 function HeroBackgroundVideo() {
@@ -283,35 +274,27 @@ export function ProductDefinition() {
   )
 }
 
-type SmsVerificationStatus = "idle" | "sending" | "codeSent" | "verifying" | "verified" | "error"
+type EmailVerificationStatus = "idle" | "sending" | "codeSent" | "verifying" | "verified" | "error"
 
 export function ImBetaSection() {
   const t = useTranslations('imBeta')
-  const { connectWithSms, verifyOneTimePassword } = useConnectWithOtp()
+  const { connectWithEmail, verifyOneTimePassword } = useConnectWithOtp()
   const { sdkHasLoaded, user } = useDynamicContext()
-  const [selectedCountryIso2, setSelectedCountryIso2] = useState(phoneCountryOptions[0].iso2)
-  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
   const [otp, setOtp] = useState("")
   const [otpRequested, setOtpRequested] = useState(false)
-  const [status, setStatus] = useState<SmsVerificationStatus>("idle")
+  const [status, setStatus] = useState<EmailVerificationStatus>("idle")
   const [statusMessage, setStatusMessage] = useState("")
   const points = t.raw('points') as string[]
-  const selectedCountry =
-    phoneCountryOptions.find((country) => country.iso2 === selectedCountryIso2) || phoneCountryOptions[0]
-  const normalizedPhone = phone.replace(/\D/g, "")
+  const trimmedEmail = email.trim()
+  const hasValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)
   const normalizedOtp = otp.replace(/\D/g, "")
   const isBusy = status === "sending" || status === "verifying"
   const hasVerifiedSession = Boolean(user) || status === "verified"
 
-  const handleCountryChange = (iso2: string) => {
-    setSelectedCountryIso2(iso2)
-    setOtpRequested(false)
-    setStatus("idle")
-    setStatusMessage("")
-  }
-
-  const handlePhoneChange = (value: string) => {
-    setPhone(value)
+  const handleEmailChange = (value: string) => {
+    setEmail(value)
+    setOtp("")
     setOtpRequested(false)
     setStatus("idle")
     setStatusMessage("")
@@ -321,10 +304,10 @@ export function ImBetaSection() {
     setOtp(value.replace(/\D/g, "").slice(0, 8))
   }
 
-  const handleSendSms = async () => {
-    if (!normalizedPhone) {
+  const handleSendEmail = async () => {
+    if (!hasValidEmail) {
       setStatus("error")
-      setStatusMessage(t('missingPhoneStatus'))
+      setStatusMessage(t('missingEmailStatus'))
       return
     }
 
@@ -332,11 +315,7 @@ export function ImBetaSection() {
     setStatusMessage("")
 
     try {
-      await connectWithSms({
-        phone: normalizedPhone,
-        iso2: selectedCountry.iso2,
-        dialCode: selectedCountry.dialCode,
-      })
+      await connectWithEmail(trimmedEmail)
       setOtpRequested(true)
       setStatus("codeSent")
       setStatusMessage(t('codeSentStatus'))
@@ -402,7 +381,7 @@ export function ImBetaSection() {
           <div className="im-beta-form-panel rounded-3xl p-6 md:p-8">
             <div className="flex items-start gap-4 mb-7">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">
-                <Phone className="w-6 h-6" />
+                <Mail className="w-6 h-6" />
               </div>
               <div>
                 <p className="text-sm font-medium text-primary mb-1">{t('formKicker')}</p>
@@ -412,32 +391,20 @@ export function ImBetaSection() {
 
             <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
               <label className="grid gap-2">
-                <span className="text-sm font-medium text-foreground/80">{t('phoneLabel')}</span>
+                <span className="text-sm font-medium text-foreground/80">{t('emailLabel')}</span>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <select
-                    value={selectedCountryIso2}
-                    onChange={(event) => handleCountryChange(event.target.value)}
-                    disabled={isBusy || hasVerifiedSession}
-                    aria-label={t('countryLabel')}
-                    className="min-h-12 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-75 sm:w-48"
-                  >
-                    {phoneCountryOptions.map((country) => (
-                      <option key={country.iso2} value={country.iso2}>
-                        {country.label}
-                      </option>
-                    ))}
-                  </select>
                   <input
-                    type="tel"
-                    value={phone}
-                    onChange={(event) => handlePhoneChange(event.target.value)}
-                    placeholder={t('phonePlaceholder')}
+                    type="email"
+                    value={email}
+                    onChange={(event) => handleEmailChange(event.target.value)}
+                    placeholder={t('emailPlaceholder')}
+                    autoComplete="email"
                     disabled={isBusy || hasVerifiedSession}
                     className="min-h-12 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
                   />
                   <button
                     type="button"
-                    onClick={handleSendSms}
+                    onClick={handleSendEmail}
                     disabled={!sdkHasLoaded || isBusy || hasVerifiedSession}
                     className="min-h-12 rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
                   >
