@@ -24,15 +24,23 @@ const notoSansKR = Noto_Sans_KR({
 export const metadata: Metadata = {
   title: 'GANA · PayFi - Web3.0 Payment Infrastructure',
   description: 'GANA uses stablecoins as the accounting unit and LP liquidity pools to support clearing, connecting Web2 merchants, Web3 wallets and on-chain assets.',
-  generator: 'v0.app',
+  generator: 'GANA',
   icons: {
     icon: [
       {
+        url: '/favicon.ico',
+        sizes: 'any',
+      },
+      {
         url: '/icon-light-32x32.png',
+        sizes: '32x32',
+        type: 'image/png',
         media: '(prefers-color-scheme: light)',
       },
       {
         url: '/icon-dark-32x32.png',
+        sizes: '32x32',
+        type: 'image/png',
         media: '(prefers-color-scheme: dark)',
       },
       {
@@ -40,7 +48,13 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: [
+      {
+        url: '/apple-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
   },
 }
 
