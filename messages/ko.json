@@ -202,11 +202,11 @@
     "downloadPdf": "PDF 다운로드"
   },
   "imBeta": {
-    "eyebrow": "IM 도구 베타 예약",
-    "title": "GANA IM 베타가 곧 시작됩니다",
-    "subtitle": "글로벌 커뮤니티, 생태계 파트너, 초기 사용자를 위한 암호화폐 결제 협업 도구를 준비 중입니다. 지금 이메일 인증을 완료하면 IM 출시 시 베타 링크를 해당 이메일로 보내드립니다.",
-    "formKicker": "Dynamic 이메일 인증",
-    "formTitle": "이메일 코드 예약 흐름",
+    "eyebrow": "IM 출시 예정",
+    "title": "GANA IM 출시 예정",
+    "subtitle": "베타 예약 기능을 준비 중입니다. 잠시만 기다려 주세요. 예약이 열리면 이메일 인증 후 해당 이메일로 IM 베타 링크를 보내드립니다.",
+    "formKicker": "IM 베타 예약",
+    "formTitle": "곧 공개됩니다",
     "emailLabel": "예약 이메일",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "이메일 인증 코드",
@@ -225,9 +225,13 @@
     "missingCodeStatus": "이메일 인증 코드를 먼저 입력하세요.",
     "errorStatus": "인증에 실패했습니다. 이메일 주소, 코드 또는 Dynamic 이메일 설정을 확인한 뒤 다시 시도하세요.",
     "points": [
-      "이메일로 코드 받기",
-      "Dynamic으로 코드 인증",
-      "접근이 열리면 이메일로 IM 베타 링크 받기"
-    ]
+      "베타 예약 기능 곧 공개",
+      "오픈 후 이메일 인증 가능",
+      "IM 베타 링크는 인증된 이메일로 발송"
+    ],
+    "comingSoonKicker": "예약 기능 곧 공개",
+    "comingSoonTitle": "IM 출시 예정",
+    "comingSoonDescription": "GANA IM 베타 예약 기능은 마지막 준비 중입니다. 준비가 완료되면 이곳에서 이메일 인증 예약 입구를 열 예정입니다.",
+    "comingSoonNote": "이메일 OTP 기능은 유지되어 있으며, 베타 예약이 열릴 때 활성화해 인증된 이메일로 초대 링크를 보낼 수 있습니다."
   }
 }

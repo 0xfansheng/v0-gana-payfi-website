@@ -276,6 +276,8 @@ export function ProductDefinition() {
 
 type EmailVerificationStatus = "idle" | "sending" | "codeSent" | "verifying" | "verified" | "error"
 
+const imBetaReservationOpen = false
+
 export function ImBetaSection() {
   const t = useTranslations('imBeta')
   const { connectWithEmail, verifyOneTimePassword } = useConnectWithOtp()
@@ -389,84 +391,107 @@ export function ImBetaSection() {
               </div>
             </div>
 
-            <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
-              <label className="grid gap-2">
-                <span className="text-sm font-medium text-foreground/80">{t('emailLabel')}</span>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(event) => handleEmailChange(event.target.value)}
-                    placeholder={t('emailPlaceholder')}
-                    autoComplete="email"
-                    disabled={isBusy || hasVerifiedSession}
-                    className="min-h-12 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
-                  />
+            {imBetaReservationOpen ? (
+              <>
+                <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
+                  <label className="grid gap-2">
+                    <span className="text-sm font-medium text-foreground/80">{t('emailLabel')}</span>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(event) => handleEmailChange(event.target.value)}
+                        placeholder={t('emailPlaceholder')}
+                        autoComplete="email"
+                        disabled={isBusy || hasVerifiedSession}
+                        className="min-h-12 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleSendEmail}
+                        disabled={!sdkHasLoaded || isBusy || hasVerifiedSession}
+                        className="min-h-12 rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
+                      >
+                        {status === "sending" ? (
+                          <span className="inline-flex items-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            {t('sendingCta')}
+                          </span>
+                        ) : otpRequested ? (
+                          t('resendCodeCta')
+                        ) : (
+                          t('sendCodeCta')
+                        )}
+                      </button>
+                    </div>
+                  </label>
+
+                  <label className="grid gap-2">
+                    <span className="text-sm font-medium text-foreground/80">{t('codeLabel')}</span>
+                    <div className="relative">
+                      <KeyRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70" />
+                      <input
+                        type="text"
+                        value={otp}
+                        onChange={(event) => handleOtpChange(event.target.value)}
+                        disabled={!otpRequested || isBusy || hasVerifiedSession}
+                        inputMode="numeric"
+                        autoComplete="one-time-code"
+                        placeholder={t('codePlaceholder')}
+                        className="min-h-12 w-full rounded-2xl border border-primary/20 bg-background/45 pl-11 pr-4 text-foreground outline-none placeholder:text-foreground/35 disabled:cursor-not-allowed disabled:opacity-75"
+                      />
+                    </div>
+                  </label>
+
                   <button
                     type="button"
-                    onClick={handleSendEmail}
-                    disabled={!sdkHasLoaded || isBusy || hasVerifiedSession}
-                    className="min-h-12 rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
+                    onClick={handleVerifyOtp}
+                    disabled={!sdkHasLoaded || !otpRequested || !normalizedOtp || isBusy || hasVerifiedSession}
+                    className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
                   >
-                    {status === "sending" ? (
+                    {status === "verifying" ? (
                       <span className="inline-flex items-center gap-2">
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        {t('sendingCta')}
+                        {t('verifyingCta')}
                       </span>
-                    ) : otpRequested ? (
-                      t('resendCodeCta')
+                    ) : hasVerifiedSession ? (
+                      t('verifiedCta')
                     ) : (
-                      t('sendCodeCta')
+                      t('submitCta')
                     )}
                   </button>
+                </form>
+
+                <div className="mt-6 grid gap-3">
+                  <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    <p className="text-sm text-foreground/68">
+                      {statusMessage || (hasVerifiedSession ? t('verifiedStatus') : t('serviceNote'))}
+                    </p>
+                  </div>
+                  <p className="text-xs text-foreground/45">{t('privacyNote')}</p>
                 </div>
-              </label>
-
-              <label className="grid gap-2">
-                <span className="text-sm font-medium text-foreground/80">{t('codeLabel')}</span>
-                <div className="relative">
-                  <KeyRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70" />
-                  <input
-                    type="text"
-                    value={otp}
-                    onChange={(event) => handleOtpChange(event.target.value)}
-                    disabled={!otpRequested || isBusy || hasVerifiedSession}
-                    inputMode="numeric"
-                    autoComplete="one-time-code"
-                    placeholder={t('codePlaceholder')}
-                    className="min-h-12 w-full rounded-2xl border border-primary/20 bg-background/45 pl-11 pr-4 text-foreground outline-none placeholder:text-foreground/35 disabled:cursor-not-allowed disabled:opacity-75"
-                  />
+              </>
+            ) : (
+              <div className="grid min-h-[300px] content-center gap-6">
+                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+                  <Clock className="h-4 w-4" />
+                  {t('comingSoonKicker')}
                 </div>
-              </label>
-
-              <button
-                type="button"
-                onClick={handleVerifyOtp}
-                disabled={!sdkHasLoaded || !otpRequested || !normalizedOtp || isBusy || hasVerifiedSession}
-                className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
-              >
-                {status === "verifying" ? (
-                  <span className="inline-flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    {t('verifyingCta')}
-                  </span>
-                ) : hasVerifiedSession ? (
-                  t('verifiedCta')
-                ) : (
-                  t('submitCta')
-                )}
-              </button>
-            </form>
-
-            <div className="mt-6 grid gap-3">
-              <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                <p className="text-sm text-foreground/68">
-                  {statusMessage || (hasVerifiedSession ? t('verifiedStatus') : t('serviceNote'))}
-                </p>
+                <div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                    {t('comingSoonTitle')}
+                  </h3>
+                  <p className="text-base md:text-lg leading-relaxed text-foreground/70">
+                    {t('comingSoonDescription')}
+                  </p>
+                </div>
+                <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                  <p className="text-sm text-foreground/68">{t('comingSoonNote')}</p>
+                </div>
               </div>
-              <p className="text-xs text-foreground/45">{t('privacyNote')}</p>
-            </div>
+            )}
           </div>
         </div>
       </div>

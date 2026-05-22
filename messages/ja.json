@@ -202,11 +202,11 @@
     "downloadPdf": "PDF をダウンロード"
   },
   "imBeta": {
-    "eyebrow": "IM ツール ベータ予約",
-    "title": "GANA IM ベータを近日公開",
-    "subtitle": "グローバルコミュニティ、エコシステムパートナー、初期ユーザー向けの暗号資産決済コラボレーションツールを準備中です。今すぐメール認証を完了すると、IM公開時にベータリンクをそのメールアドレスへ送信します。",
-    "formKicker": "Dynamic メール認証",
-    "formTitle": "メールコード予約フロー",
+    "eyebrow": "IM 近日公開",
+    "title": "GANA IM 近日公開",
+    "subtitle": "ベータ予約機能を準備中です。しばらくお待ちください。予約開始後、メール認証を完了したユーザーへ IM ベータリンクを送信します。",
+    "formKicker": "IM ベータ予約",
+    "formTitle": "近日公開",
     "emailLabel": "予約メールアドレス",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "メール認証コード",
@@ -225,9 +225,13 @@
     "missingCodeStatus": "メール認証コードを入力してください。",
     "errorStatus": "認証に失敗しました。メールアドレス、コード、または Dynamic のメール設定を確認して再試行してください。",
     "points": [
-      "メールでコードを受信",
-      "Dynamicでコードを認証",
-      "アクセス開始時にIMベータリンクをメールで受信"
-    ]
+      "ベータ予約機能を近日公開",
+      "開始後はメール認証が利用可能",
+      "IMベータリンクは認証済みメールへ送信"
+    ],
+    "comingSoonKicker": "予約機能を近日公開",
+    "comingSoonTitle": "IM 近日公開",
+    "comingSoonDescription": "GANA IM ベータ予約機能は最終準備中です。予約開始後、この場所でメール認証予約入口を公開します。",
+    "comingSoonNote": "メールOTP機能は保持されています。ベータ予約開始時に有効化し、認証済みメールへ招待リンクを送信できます。"
   }
 }

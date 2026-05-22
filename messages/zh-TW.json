@@ -202,11 +202,11 @@
     "downloadPdf": "下載 PDF"
   },
   "imBeta": {
-    "eyebrow": "IM 工具內測預約",
-    "title": "GANA IM 即將開放內測",
-    "subtitle": "面向全球社群、生態夥伴與早期用戶的加密支付協作工具正在準備中。現在先完成信箱驗證碼驗證，IM 上線後我們會把內測連結發送到該信箱。",
-    "formKicker": "Dynamic 信箱驗證",
-    "formTitle": "信箱驗證碼預約流程",
+    "eyebrow": "IM 即將上線",
+    "title": "GANA IM 即將上線",
+    "subtitle": "測試版預約功能正在準備中，敬請期待。預約開放後，可透過信箱完成驗證並接收 IM 測試版連結。",
+    "formKicker": "IM 測試版預約",
+    "formTitle": "敬請期待",
     "emailLabel": "預約信箱",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "信箱驗證碼",
@@ -225,9 +225,13 @@
     "missingCodeStatus": "請先輸入信箱驗證碼。",
     "errorStatus": "驗證失敗，請檢查信箱、驗證碼或 Dynamic 信箱設定後重試。",
     "points": [
-      "透過信箱接收驗證碼",
-      "使用 Dynamic 驗證驗證碼",
-      "內測開放時透過信箱接收 IM 內測連結"
-    ]
+      "測試版預約功能即將開放",
+      "開放後可透過信箱完成驗證",
+      "IM 測試版連結將發送至驗證信箱"
+    ],
+    "comingSoonKicker": "預約功能即將開放",
+    "comingSoonTitle": "IM 即將上線",
+    "comingSoonDescription": "GANA IM 測試版預約功能正在最後準備中，敬請期待。開放後我們會在這裡啟用信箱驗證預約入口。",
+    "comingSoonNote": "信箱驗證碼功能已保留，測試版預約開放時即可啟用，並透過驗證信箱發送內測連結。"
   }
 }

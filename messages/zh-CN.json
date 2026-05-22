@@ -202,11 +202,11 @@
     "downloadPdf": "下载 PDF"
   },
   "imBeta": {
-    "eyebrow": "IM 工具内测预约",
-    "title": "GANA IM 即将开放内测",
-    "subtitle": "面向全球社区、生态伙伴与早期用户的加密支付协作工具正在准备中。现在先完成邮箱验证码验证，IM 上线后我们会把内测链接发送到该邮箱。",
-    "formKicker": "Dynamic 邮箱验证",
-    "formTitle": "邮箱验证码预约流程",
+    "eyebrow": "IM 即将上线",
+    "title": "GANA IM 即将上线",
+    "subtitle": "测试版预约功能正在准备中，敬请期待。预约开放后，可通过邮箱完成验证并接收 IM 测试版链接。",
+    "formKicker": "IM 测试版预约",
+    "formTitle": "敬请期待",
     "emailLabel": "预约邮箱",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "邮箱验证码",
@@ -225,9 +225,13 @@
     "missingCodeStatus": "请先输入邮箱验证码。",
     "errorStatus": "验证失败，请检查邮箱、验证码或 Dynamic 邮箱配置后重试。",
     "points": [
-      "通过邮箱接收验证码",
-      "使用 Dynamic 验证验证码",
-      "内测开放时通过邮箱接收 IM 内测链接"
-    ]
+      "测试版预约功能即将开放",
+      "开放后可通过邮箱完成验证",
+      "IM 测试版链接将发送至验证邮箱"
+    ],
+    "comingSoonKicker": "预约功能即将开放",
+    "comingSoonTitle": "IM 即将上线",
+    "comingSoonDescription": "GANA IM 测试版预约功能正在最后准备中，敬请期待。开放后我们会在这里开启邮箱验证预约入口。",
+    "comingSoonNote": "邮箱验证码功能已保留，测试版预约开放时即可启用，并通过验证邮箱发送内测链接。"
   }
 }

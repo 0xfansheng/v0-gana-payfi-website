@@ -202,11 +202,11 @@
     "downloadPdf": "Download PDF"
   },
   "imBeta": {
-    "eyebrow": "IM Tool Beta Reservation",
-    "title": "GANA IM Beta Is Coming Soon",
-    "subtitle": "A crypto payment collaboration tool for global communities, ecosystem partners, and early users is being prepared. Verify your email now, and we will send the beta access link to that inbox when IM goes live.",
-    "formKicker": "Dynamic Email Verification",
-    "formTitle": "Email Code Reservation Flow",
+    "eyebrow": "IM Coming Soon",
+    "title": "GANA IM Is Coming Soon",
+    "subtitle": "The beta reservation feature is being prepared. Stay tuned. Once reservations open, users will verify by email and receive the IM beta link in that inbox.",
+    "formKicker": "IM Beta Reservation",
+    "formTitle": "Coming Soon",
     "emailLabel": "Reservation email",
     "emailPlaceholder": "name@example.com",
     "codeLabel": "Email verification code",
@@ -225,9 +225,13 @@
     "missingCodeStatus": "Enter the email verification code first.",
     "errorStatus": "Verification failed. Check the email address, code, or Dynamic email settings and try again.",
     "points": [
-      "Receive a code by email",
-      "Verify the code through Dynamic",
-      "Get the IM beta link in your inbox when access opens"
-    ]
+      "Beta reservation is opening soon",
+      "Email verification will be available when open",
+      "IM beta links will be sent to verified inboxes"
+    ],
+    "comingSoonKicker": "Reservation Opening Soon",
+    "comingSoonTitle": "IM Is Coming Soon",
+    "comingSoonDescription": "The GANA IM beta reservation feature is in final preparation. Stay tuned. The email verification reservation entry will open here when ready.",
+    "comingSoonNote": "The email OTP flow is preserved and can be enabled when beta reservations open, with invite links sent to verified inboxes."
   }
 }
