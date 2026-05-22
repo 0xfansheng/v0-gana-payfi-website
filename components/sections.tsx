@@ -578,13 +578,13 @@ export function ResourcesSection() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 mb-10">
-          <div>
+        <div className="space-y-6 mb-10">
+          <div className="resources-video-panel rounded-3xl p-5 md:p-6">
             <div className="flex items-center gap-3 mb-5">
               <BookOpen className="w-6 h-6 text-primary" />
               <h3 className="text-2xl font-bold text-foreground">{t('docsTitle')}</h3>
             </div>
-            <div className="grid gap-3">
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
               {documentationLinks.map((doc) => (
                 <a
                   key={doc.href}
@@ -603,12 +603,12 @@ export function ResourcesSection() {
             </div>
           </div>
 
-          <div>
+          <div className="resources-video-panel rounded-3xl p-5 md:p-6">
             <div className="flex items-center gap-3 mb-5">
               <Users className="w-6 h-6 text-primary" />
               <h3 className="text-2xl font-bold text-foreground">{t('socialTitle')}</h3>
             </div>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {socialLinks.map((item) => (
                 <a
                   key={item.href}
