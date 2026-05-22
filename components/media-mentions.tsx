@@ -106,12 +106,6 @@ const mediaMentions = [
     labelKey: "gate_post",
     url: "https://www.gate.com/zh/news/detail/gana-launches-conflux-payfi-withdrawal-feature-supporting-usd-cny-krw-jpy-21002703",
   },
-  {
-    categoryKey: "exchange",
-    name: "OKX",
-    labelKey: "okx_post",
-    url: "https://tr.okx.com/convert/cfx-to-ghs",
-  },
 ]
 
 // Label translations (kept separate as they're specific to media items)
@@ -134,7 +128,6 @@ const labelTranslations: Record<string, Record<string, string>> = {
     kucoin_post: "KuCoin 官方发文",
     phemex_post: "Phemex 官方发文",
     gate_post: "Gate.com 官方发文",
-    okx_post: "OKX 官方发文",
   },
   "zh-TW": {
     ave_announcement: "AVE 官宣",
@@ -154,7 +147,6 @@ const labelTranslations: Record<string, Record<string, string>> = {
     kucoin_post: "KuCoin 官方發文",
     phemex_post: "Phemex 官方發文",
     gate_post: "Gate.com 官方發文",
-    okx_post: "OKX 官方發文",
   },
   en: {
     ave_announcement: "AVE Announcement",
@@ -174,7 +166,6 @@ const labelTranslations: Record<string, Record<string, string>> = {
     kucoin_post: "KuCoin Official Post",
     phemex_post: "Phemex Official Post",
     gate_post: "Gate.com Official Post",
-    okx_post: "OKX Official Post",
   },
   ja: {
     ave_announcement: "AVE 公式発表",
@@ -194,7 +185,6 @@ const labelTranslations: Record<string, Record<string, string>> = {
     kucoin_post: "KuCoin 公式投稿",
     phemex_post: "Phemex 公式投稿",
     gate_post: "Gate.com 公式投稿",
-    okx_post: "OKX 公式投稿",
   },
   ko: {
     ave_announcement: "AVE 공식 발표",
@@ -214,7 +204,6 @@ const labelTranslations: Record<string, Record<string, string>> = {
     kucoin_post: "KuCoin 공식 게시물",
     phemex_post: "Phemex 공식 게시물",
     gate_post: "Gate.com 공식 게시물",
-    okx_post: "OKX 공식 게시물",
   },
 }
 
