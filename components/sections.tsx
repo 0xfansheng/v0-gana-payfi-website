@@ -70,6 +70,34 @@ const deckResources = [
   },
 ]
 
+const videoResources = [
+  {
+    title: "GANA Video 01",
+    poster: "/gana-assets/website-video/gallery/gana-video-01.jpg",
+    src: "/gana-assets/website-video/gallery/gana-video-01.mp4",
+  },
+  {
+    title: "GANA Video 02",
+    poster: "/gana-assets/website-video/gallery/gana-video-02.jpg",
+    src: "/gana-assets/website-video/gallery/gana-video-02.mp4",
+  },
+  {
+    title: "GANA Video 03",
+    poster: "/gana-assets/website-video/gallery/gana-video-03.jpg",
+    src: "/gana-assets/website-video/gallery/gana-video-03.mp4",
+  },
+  {
+    title: "GANA Video 04",
+    poster: "/gana-assets/website-video/gallery/gana-video-04.jpg",
+    src: "/gana-assets/website-video/gallery/gana-video-04.mp4",
+  },
+  {
+    title: "GANA Video 05",
+    poster: "/gana-assets/website-video/gallery/gana-video-05.jpg",
+    src: "/gana-assets/website-video/gallery/gana-video-05.mp4",
+  },
+]
+
 function HeroBackgroundVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [soundEnabled, setSoundEnabled] = useState(false)
@@ -258,7 +286,7 @@ export function ResourcesSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6 mb-10">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-6 mb-10">
           <div className="glass-card rounded-2xl p-6 md:p-8">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center">
@@ -284,21 +312,31 @@ export function ResourcesSection() {
             </ul>
           </div>
 
-          <div className="glass-card rounded-2xl overflow-hidden">
-            <video
-              className="aspect-video w-full bg-black object-cover"
-              controls
-              preload="metadata"
-              poster="/gana-assets/website-video/hero-cyberpunk-poster.jpg"
-            >
-              <source src="/gana-assets/website-video/hero-cyberpunk.mp4" type="video/mp4" />
-            </video>
-            <div className="p-6">
-              <div className="flex items-center gap-3 mb-2">
-                <Video className="w-5 h-5 text-secondary" />
-                <h3 className="text-lg font-semibold text-foreground">{t('videoTitle')}</h3>
-              </div>
-              <p className="text-sm text-foreground/60">{t('videoDescription')}</p>
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <Video className="w-6 h-6 text-secondary" />
+              <h3 className="text-2xl font-bold text-foreground">{t('videoTitle')}</h3>
+            </div>
+            <p className="text-sm text-foreground/60 mb-5">{t('videoDescription')}</p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {videoResources.map((video) => (
+                <article
+                  key={video.src}
+                  className="glass-card glass-card-hover rounded-2xl overflow-hidden"
+                >
+                  <video
+                    className="aspect-video w-full bg-black object-cover"
+                    controls
+                    preload="metadata"
+                    poster={video.poster}
+                  >
+                    <source src={video.src} type="video/mp4" />
+                  </video>
+                  <div className="p-4">
+                    <h4 className="text-base font-semibold text-foreground">{video.title}</h4>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </div>
