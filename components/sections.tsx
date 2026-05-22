@@ -97,7 +97,7 @@ function HeroBackgroundVideo() {
     <>
       <video
         ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover opacity-45"
+        className="absolute inset-0 h-full w-full object-cover opacity-90"
         autoPlay
         muted
         loop
@@ -135,8 +135,8 @@ export function HeroSection() {
       {/* Background */}
       <div className="absolute inset-0 bg-background">
         <HeroBackgroundVideo />
-        <div className="absolute inset-0 bg-background/70" />
-        <div className="absolute inset-0 grid-bg star-bg opacity-60" />
+        <div className="absolute inset-0 bg-background/25" />
+        <div className="absolute inset-0 grid-bg star-bg opacity-35" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
