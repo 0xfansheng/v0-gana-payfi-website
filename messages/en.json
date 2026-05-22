@@ -10,7 +10,8 @@
     "media": "Media",
     "roadmap": "Roadmap",
     "enterDapp": "Enter DAPP",
-    "resources": "Resources"
+    "resources": "Resources",
+    "imBeta": "IM Beta"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -199,5 +200,25 @@
     "deckTitle": "Website resource pack",
     "pagesLabel": "pages",
     "downloadPdf": "Download PDF"
+  },
+  "imBeta": {
+    "eyebrow": "IM Tool Beta Reservation",
+    "title": "GANA IM Beta Is Coming Soon",
+    "subtitle": "A crypto payment collaboration tool for global communities, ecosystem partners, and early users is being prepared. The reservation entry is ready; real signups can open once an email verification service is connected.",
+    "formKicker": "Email Verification",
+    "formTitle": "Email Code Reservation Flow",
+    "emailLabel": "Reservation email",
+    "emailPlaceholder": "name@example.com",
+    "codeLabel": "Email verification code",
+    "codePlaceholder": "6-digit code",
+    "sendCodeCta": "Send code",
+    "submitCta": "Reserve beta access",
+    "serviceNote": "Email delivery is not connected yet. This section now shows the complete reservation entry and verification flow; it can be enabled after connecting Resend, SendGrid, or SMTP.",
+    "privacyNote": "When enabled, only your email will be collected for beta notices and access confirmation.",
+    "points": [
+      "Receive a code by email",
+      "Verify the code to reserve access",
+      "Get priority notice when beta seats open"
+    ]
   }
 }

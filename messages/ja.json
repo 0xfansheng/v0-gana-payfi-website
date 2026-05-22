@@ -10,7 +10,8 @@
     "media": "メディア",
     "roadmap": "ロードマップ",
     "enterDapp": "DAPP を開く",
-    "resources": "資料"
+    "resources": "資料",
+    "imBeta": "IM ベータ"
   },
   "hero": {
     "badge": "BNB Smart Chain · Live",
@@ -199,5 +200,25 @@
     "deckTitle": "ウェブサイト資料パック",
     "pagesLabel": "ページ",
     "downloadPdf": "PDF をダウンロード"
+  },
+  "imBeta": {
+    "eyebrow": "IM ツール ベータ予約",
+    "title": "GANA IM ベータを近日公開",
+    "subtitle": "グローバルコミュニティ、エコシステムパートナー、初期ユーザー向けの暗号資産決済コラボレーションツールを準備中です。予約入口は完成しており、メール認証サービス接続後に正式予約を開始できます。",
+    "formKicker": "Email Verification",
+    "formTitle": "メール認証コード予約フロー",
+    "emailLabel": "予約メールアドレス",
+    "emailPlaceholder": "name@example.com",
+    "codeLabel": "メール認証コード",
+    "codePlaceholder": "6 桁コード",
+    "sendCodeCta": "コードを送信",
+    "submitCta": "ベータを予約",
+    "serviceNote": "メール送信サービスはまだ接続されていません。現在は予約入口と認証フローを先に表示し、Resend、SendGrid、SMTP 接続後に有効化できます。",
+    "privacyNote": "正式有効化後は、ベータ通知と資格確認のためのメールアドレスのみを収集します。",
+    "points": [
+      "メールで認証コードを受信",
+      "コード確認後に予約資格を確保",
+      "ベータ枠公開時に優先通知"
+    ]
   }
 }

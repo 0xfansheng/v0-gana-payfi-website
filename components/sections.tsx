@@ -3,7 +3,9 @@
 import { useRef, useState } from "react"
 import {
   ArrowRight,
+  Bell,
   BookOpen,
+  CheckCircle2,
   CreditCard,
   Download,
   ExternalLink,
@@ -11,6 +13,8 @@ import {
   FileText,
   Globe,
   Instagram,
+  KeyRound,
+  Mail,
   MessageCircle,
   Scale,
   Send,
@@ -262,6 +266,113 @@ export function ProductDefinition() {
               {tag}
             </span>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function ImBetaSection() {
+  const t = useTranslations('imBeta')
+  const [email, setEmail] = useState("")
+  const points = t.raw('points') as string[]
+
+  return (
+    <section id="im-beta" className="im-beta-section-bg py-24 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 grid-bg star-bg opacity-50" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-stretch">
+          <div className="im-beta-copy-panel rounded-3xl p-6 md:p-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-secondary/35 bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary mb-6">
+              <Bell className="w-4 h-4" />
+              {t('eyebrow')}
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-5 leading-tight">
+              {t('title')}
+            </h2>
+            <p className="text-lg text-foreground/70 leading-relaxed mb-8">
+              {t('subtitle')}
+            </p>
+
+            <div className="grid gap-3">
+              {points.map((point, index) => (
+                <div
+                  key={point}
+                  className="im-beta-point flex items-center gap-3 rounded-2xl px-4 py-3"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary font-semibold">
+                    {index + 1}
+                  </span>
+                  <span className="text-sm md:text-base text-foreground/78">{point}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="im-beta-form-panel rounded-3xl p-6 md:p-8">
+            <div className="flex items-start gap-4 mb-7">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-sm font-medium text-primary mb-1">{t('formKicker')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('formTitle')}</h3>
+              </div>
+            </div>
+
+            <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
+              <label className="grid gap-2">
+                <span className="text-sm font-medium text-foreground/80">{t('emailLabel')}</span>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder={t('emailPlaceholder')}
+                    className="min-h-12 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
+                  />
+                  <button
+                    type="button"
+                    disabled
+                    className="min-h-12 rounded-2xl bg-primary/35 px-5 text-sm font-semibold text-white opacity-75 cursor-not-allowed"
+                  >
+                    {t('sendCodeCta')}
+                  </button>
+                </div>
+              </label>
+
+              <label className="grid gap-2">
+                <span className="text-sm font-medium text-foreground/80">{t('codeLabel')}</span>
+                <div className="relative">
+                  <KeyRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70" />
+                  <input
+                    type="text"
+                    disabled
+                    inputMode="numeric"
+                    placeholder={t('codePlaceholder')}
+                    className="min-h-12 w-full rounded-2xl border border-primary/20 bg-background/45 pl-11 pr-4 text-foreground outline-none placeholder:text-foreground/35 disabled:cursor-not-allowed disabled:opacity-75"
+                  />
+                </div>
+              </label>
+
+              <button
+                type="submit"
+                disabled
+                className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white opacity-70 cursor-not-allowed"
+              >
+                {t('submitCta')}
+              </button>
+            </form>
+
+            <div className="mt-6 grid gap-3">
+              <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                <p className="text-sm text-foreground/68">{t('serviceNote')}</p>
+              </div>
+              <p className="text-xs text-foreground/45">{t('privacyNote')}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

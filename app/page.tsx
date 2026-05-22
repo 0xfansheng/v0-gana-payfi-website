@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { 
   HeroSection, 
   ProductDefinition, 
+  ImBetaSection,
   ResourcesSection,
   MechanismSection, 
   PainPointsSection, 
@@ -19,6 +20,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <ProductDefinition />
+      <ImBetaSection />
       <ResourcesSection />
       <MechanismSection />
       <PainPointsSection />

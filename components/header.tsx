@@ -13,6 +13,7 @@ export function Header() {
 
   const navItems = [
     { label: t('product'), href: "#product" },
+    { label: t('imBeta'), href: "#im-beta" },
     { label: t('resources'), href: "#resources" },
     { label: t('mechanism'), href: "#mechanism" },
     { label: t('scenarios'), href: "#scenarios" },
