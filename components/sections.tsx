@@ -289,6 +289,7 @@ type TokenBalance = {
 type TokenGateResult = {
   address: string
   signature: string
+  signatureMessage: string
   balances: TokenBalance[]
 }
 
@@ -314,10 +315,6 @@ const bscRpcEndpoints = [
 ]
 
 const tokenGateContracts = [
-  {
-    symbol: "GANA",
-    address: "0x8773af45b12e8125ed86ffa07cdc875824815989",
-  },
   {
     symbol: "GANA LP",
     address: "0xa2f464a2462aed49b9b31eb8861bc6b0bbb0483f",
@@ -451,7 +448,7 @@ function buildWalletSignatureMessage(walletAddress: string) {
   return [
     "GANA Community Privilege Reservation",
     `Wallet: ${walletAddress}`,
-    "Action: Verify GANA and GANA LP token balances for first-wave eligibility.",
+    "Action: Verify GANA LP token balance for first-wave eligibility.",
     "Chain: BNB Smart Chain",
     `Timestamp: ${new Date().toISOString()}`,
   ].join("\n")
@@ -496,7 +493,39 @@ export function ImBetaSection() {
     setOtp(value.replace(/\D/g, "").slice(0, 8))
   }
 
+  const saveReservationRecord = async () => {
+    const lpBalance = tokenGateResult?.balances[0]
+
+    if (!walletGateApproved || !lpBalance) {
+      throw new Error("Wallet gate is not approved")
+    }
+
+    const response = await fetch("/api/reservations", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        email: trimmedEmail,
+        walletAddress,
+        lpBalance: lpBalance.formatted,
+        lpBalanceRaw: lpBalance.raw.toString(),
+        lpTokenAddress: lpBalance.address,
+        signature: tokenGateResult.signature,
+        signatureMessage: tokenGateResult.signatureMessage,
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Reservation record could not be saved")
+    }
+  }
+
   const handleSendEmail = async () => {
+    if (!walletGateApproved) {
+      setStatus("error")
+      setStatusMessage(t('walletFirstStatus'))
+      return
+    }
+
     if (!hasValidEmail) {
       setStatus("error")
       setStatusMessage(t('missingEmailStatus'))
@@ -518,6 +547,12 @@ export function ImBetaSection() {
   }
 
   const handleVerifyOtp = async () => {
+    if (!walletGateApproved) {
+      setStatus("error")
+      setStatusMessage(t('walletFirstStatus'))
+      return
+    }
+
     if (!normalizedOtp) {
       setStatus("error")
       setStatusMessage(t('missingCodeStatus'))
@@ -530,10 +565,17 @@ export function ImBetaSection() {
     try {
       await verifyOneTimePassword(normalizedOtp)
       setStatus("verified")
-      setStatusMessage(t('verifiedStatus'))
     } catch {
       setStatus("error")
       setStatusMessage(t('errorStatus'))
+      return
+    }
+
+    try {
+      await saveReservationRecord()
+      setStatusMessage(t('registrationSavedStatus'))
+    } catch {
+      setStatusMessage(t('registrationSaveErrorStatus'))
     }
   }
 
@@ -560,10 +602,11 @@ export function ImBetaSection() {
 
       setWalletAddress(selectedAddress)
       setWalletStatus("signing")
+      const signatureMessage = buildWalletSignatureMessage(selectedAddress)
 
       const signature = (await provider.request({
         method: "personal_sign",
-        params: [buildWalletSignatureMessage(selectedAddress), selectedAddress],
+        params: [signatureMessage, selectedAddress],
       })) as string
 
       if (!signature) throw new Error("Signature missing")
@@ -575,6 +618,7 @@ export function ImBetaSection() {
       setTokenGateResult({
         address: selectedAddress,
         signature,
+        signatureMessage,
         balances,
       })
       setWalletStatus(hasRequiredBalances ? "eligible" : "ineligible")
@@ -632,73 +676,6 @@ export function ImBetaSection() {
             {imBetaReservationOpen ? (
               <>
                 <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
-                  <label className="grid gap-2">
-                    <span className="text-sm font-medium text-foreground/80">{t('emailLabel')}</span>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(event) => handleEmailChange(event.target.value)}
-                        placeholder={t('emailPlaceholder')}
-                        autoComplete="email"
-                        disabled={isBusy || hasVerifiedEmail}
-                        className="min-h-12 min-w-0 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
-                      />
-                      <button
-                        type="button"
-                        onClick={handleSendEmail}
-                        disabled={!sdkHasLoaded || isBusy || hasVerifiedEmail}
-                        className="min-h-12 w-full rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
-                      >
-                        {status === "sending" ? (
-                          <span className="inline-flex items-center gap-2">
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            {t('sendingCta')}
-                          </span>
-                        ) : otpRequested ? (
-                          t('resendCodeCta')
-                        ) : (
-                          t('sendCodeCta')
-                        )}
-                      </button>
-                    </div>
-                  </label>
-
-                  <label className="grid gap-2">
-                    <span className="text-sm font-medium text-foreground/80">{t('codeLabel')}</span>
-                    <div className="relative">
-                      <KeyRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70" />
-                      <input
-                        type="text"
-                        value={otp}
-                        onChange={(event) => handleOtpChange(event.target.value)}
-                        disabled={!otpRequested || isBusy || hasVerifiedEmail}
-                        inputMode="numeric"
-                        autoComplete="one-time-code"
-                        placeholder={t('codePlaceholder')}
-                        className="min-h-12 w-full rounded-2xl border border-primary/20 bg-background/45 pl-11 pr-4 text-foreground outline-none placeholder:text-foreground/35 disabled:cursor-not-allowed disabled:opacity-75"
-                      />
-                    </div>
-                  </label>
-
-                  <button
-                    type="button"
-                    onClick={handleVerifyOtp}
-                    disabled={!sdkHasLoaded || !otpRequested || !normalizedOtp || isBusy || hasVerifiedEmail}
-                    className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
-                  >
-                    {status === "verifying" ? (
-                      <span className="inline-flex items-center gap-2">
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        {t('verifyingCta')}
-                      </span>
-                    ) : hasVerifiedEmail ? (
-                      t('verifiedCta')
-                    ) : (
-                      t('submitCta')
-                    )}
-                  </button>
-
                   <div className="grid gap-4 rounded-2xl border border-primary/20 bg-background/45 p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex min-w-0 items-center gap-3">
@@ -717,7 +694,7 @@ export function ImBetaSection() {
                       </span>
                     </div>
 
-                    <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="grid gap-3">
                       {tokenGateContracts.map((token) => {
                         const balance = tokenGateResult?.balances.find((item) => item.symbol === token.symbol)
                         return (
@@ -764,6 +741,74 @@ export function ImBetaSection() {
                     </button>
                     <p className="text-xs leading-relaxed text-foreground/45">{t('walletSignatureNote')}</p>
                   </div>
+
+                  <label className="grid gap-2">
+                    <span className="text-sm font-medium text-foreground/80">{t('emailLabel')}</span>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(event) => handleEmailChange(event.target.value)}
+                        placeholder={t('emailPlaceholder')}
+                        autoComplete="email"
+                        disabled={!walletGateApproved || isBusy || hasVerifiedEmail}
+                        className="min-h-12 min-w-0 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleSendEmail}
+                        disabled={!sdkHasLoaded || !walletGateApproved || isBusy || hasVerifiedEmail}
+                        className="min-h-12 w-full rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
+                      >
+                        {status === "sending" ? (
+                          <span className="inline-flex items-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            {t('sendingCta')}
+                          </span>
+                        ) : otpRequested ? (
+                          t('resendCodeCta')
+                        ) : (
+                          t('sendCodeCta')
+                        )}
+                      </button>
+                    </div>
+                  </label>
+
+                  <label className="grid gap-2">
+                    <span className="text-sm font-medium text-foreground/80">{t('codeLabel')}</span>
+                    <div className="relative">
+                      <KeyRound className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-primary/70" />
+                      <input
+                        type="text"
+                        value={otp}
+                        onChange={(event) => handleOtpChange(event.target.value)}
+                        disabled={!walletGateApproved || !otpRequested || isBusy || hasVerifiedEmail}
+                        inputMode="numeric"
+                        autoComplete="one-time-code"
+                        placeholder={t('codePlaceholder')}
+                        className="min-h-12 w-full rounded-2xl border border-primary/20 bg-background/45 pl-11 pr-4 text-foreground outline-none placeholder:text-foreground/35 disabled:cursor-not-allowed disabled:opacity-75"
+                      />
+                    </div>
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={handleVerifyOtp}
+                    disabled={!sdkHasLoaded || !walletGateApproved || !otpRequested || !normalizedOtp || isBusy || hasVerifiedEmail}
+                    className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
+                  >
+                    {status === "verifying" ? (
+                      <span className="inline-flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        {t('verifyingCta')}
+                      </span>
+                    ) : hasVerifiedEmail ? (
+                      t('verifiedCta')
+                    ) : (
+                      t('submitCta')
+                    )}
+                  </button>
+
                 </form>
 
                 <div className="mt-6 grid gap-3">
