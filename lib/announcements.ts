@@ -106,6 +106,67 @@ export const announcements: Announcement[] = [
       },
     ],
   },
+  {
+    slug: "first-wave-dapp-reservation-benefits",
+    category: "activities",
+    title: "首批DAPP预约福利公布",
+    date: "2026-05-23",
+    excerpt:
+      "GANA生态DAPP首批预约福利正式公布，首批开放后的100小时内完成DAPP预约的用户将在神秘生态正式开启后获得专属预约权益。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的GANA全球社区用户、生态伙伴及关注者：",
+      },
+      {
+        type: "paragraph",
+        text: "GANA生态DAPP首批预约福利正式公布。为感谢全球用户对GANA生态建设的关注与支持，凡在首批开放后的100小时内完成DAPP预约的用户，将在神秘生态正式开启后获得专属预约权益。",
+      },
+      {
+        type: "paragraph",
+        text: "本次首批预约用户可获得以下福利：",
+      },
+      {
+        type: "list",
+        items: [
+          "免费3个月会员权益",
+          "可开启300人会议室",
+          "单场会议最长2小时",
+          "首批创世预约专属身份标识",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "同时，活动期间将随机抽取幸运用户，赠送AVE官方周边礼。该福利仅限AVE钱包用户参与，具体发放规则请以后续官方公告为准。",
+      },
+      {
+        type: "paragraph",
+        text: "首批创世预约身份标识后续将拥有特殊纪念意义与优先权益。GANA将持续围绕Web3社交、支付、钱包、安全生态等核心方向，推动全球生态应用场景落地，为全球用户带来更丰富的生态体验。",
+      },
+      {
+        type: "paragraph",
+        text: "请广大用户认准GANA官方官网、官方X账号及官方渠道发布的信息，及时关注活动板块后续动态。感谢全球社区成员长期以来对GANA的支持与信任。",
+      },
+      {
+        type: "link",
+        label: "官网",
+        href: "https://web.goldgana.com/",
+      },
+      {
+        type: "link",
+        label: "GANA官方X",
+        href: "https://x.com/GANA_Insight",
+      },
+      {
+        type: "paragraph",
+        text: "特此公告。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA团队", "2026年5月23日"],
+      },
+    ],
+  },
 ]
 
 export function getAnnouncementBySlug(slug: string) {
