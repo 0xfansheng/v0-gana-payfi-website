@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic"
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const evmAddressPattern = /^0x[a-fA-F0-9]{40}$/
-const ganaLpTokenAddress = "0xa2f464a2462aed49b9b31eb8861bc6b0bbb0483f"
+const ganaLpTokenAddress = "0x72212f35ac448fe7763aa1bfdb360193fa098e52"
 const erc20BalanceOfSelector = "0x70a08231"
 const erc20DecimalsSelector = "0x313ce567"
 const bscRpcEndpoints = [

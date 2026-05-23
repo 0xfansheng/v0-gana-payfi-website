@@ -317,7 +317,7 @@ const bscRpcEndpoints = [
 const tokenGateContracts = [
   {
     symbol: "GANA LP",
-    address: "0xa2f464a2462aed49b9b31eb8861bc6b0bbb0483f",
+    address: "0x72212F35aC448FE7763aA1BFdb360193Fa098E52",
   },
 ]
 
