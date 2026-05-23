@@ -15,6 +15,14 @@ export const metadata: Metadata = {
 }
 
 export default function AnnouncementsPage() {
+  const visibleCategorySections = announcementCategoryOrder
+    .map((category) => ({
+      category,
+      meta: announcementCategories[category],
+      announcements: getAnnouncementsByCategory(category),
+    }))
+    .filter((section) => section.announcements.length > 0)
+
   return (
     <main className="min-h-screen bg-background">
       <Header />
@@ -38,58 +46,47 @@ export default function AnnouncementsPage() {
           </div>
 
           <div className="grid gap-8">
-            {announcementCategoryOrder.map((category) => {
-              const meta = announcementCategories[category]
-              const categoryAnnouncements = getAnnouncementsByCategory(category)
-
-              return (
-                <section key={category} className="rounded-3xl border border-primary/18 bg-white/58 p-5 shadow-[0_20px_70px_rgba(88,28,135,0.10)] backdrop-blur-xl dark:bg-background-soft/55 md:p-6">
-                  <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-                    <div>
-                      <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/12 text-primary">
-                        <Megaphone className="h-5 w-5" />
-                      </div>
-                      <h2 className="text-2xl font-bold text-foreground">{meta.label}</h2>
-                      <p className="mt-2 text-sm text-foreground/58">{meta.description}</p>
+            {visibleCategorySections.map((section) => (
+              <section key={section.category} className="rounded-3xl border border-primary/18 bg-white/58 p-5 shadow-[0_20px_70px_rgba(88,28,135,0.10)] backdrop-blur-xl dark:bg-background-soft/55 md:p-6">
+                <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/12 text-primary">
+                      <Megaphone className="h-5 w-5" />
                     </div>
-                    <span className="w-fit rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                      {categoryAnnouncements.length} 条公告
-                    </span>
+                    <h2 className="text-2xl font-bold text-foreground">{section.meta.label}</h2>
+                    <p className="mt-2 text-sm text-foreground/58">{section.meta.description}</p>
                   </div>
+                  <span className="w-fit rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                    {section.announcements.length} 条公告
+                  </span>
+                </div>
 
-                  {categoryAnnouncements.length > 0 ? (
-                    <div className="grid gap-4 lg:grid-cols-2">
-                      {categoryAnnouncements.map((announcement) => (
-                        <Link
-                          key={announcement.slug}
-                          href={`/announcements/${announcement.slug}`}
-                          className="group glass-card glass-card-hover flex min-h-[220px] flex-col rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1"
-                        >
-                          <div className="mb-4 flex items-center gap-2 text-xs text-foreground/45">
-                            <CalendarDays className="h-3.5 w-3.5" />
-                            {announcement.date}
-                          </div>
-                          <h3 className="text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
-                            {announcement.title}
-                          </h3>
-                          <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/62">
-                            {announcement.excerpt}
-                          </p>
-                          <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary">
-                            打开公告详情
-                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="rounded-2xl border border-dashed border-primary/20 bg-primary/5 px-5 py-8 text-sm text-foreground/55">
-                      暂无公告。后续可在公告数据文件中新增该分类内容。
-                    </div>
-                  )}
-                </section>
-              )
-            })}
+                <div className="grid gap-4 lg:grid-cols-2">
+                  {section.announcements.map((announcement) => (
+                    <Link
+                      key={announcement.slug}
+                      href={`/announcements/${announcement.slug}`}
+                      className="group glass-card glass-card-hover flex min-h-[220px] flex-col rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1"
+                    >
+                      <div className="mb-4 flex items-center gap-2 text-xs text-foreground/45">
+                        <CalendarDays className="h-3.5 w-3.5" />
+                        {announcement.date}
+                      </div>
+                      <h3 className="text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
+                        {announcement.title}
+                      </h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/62">
+                        {announcement.excerpt}
+                      </p>
+                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary">
+                        打开公告详情
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
         </div>
       </section>
