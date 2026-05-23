@@ -275,8 +275,187 @@ export function ProductDefinition() {
 }
 
 type EmailVerificationStatus = "idle" | "sending" | "codeSent" | "verifying" | "verified" | "error"
+type WalletEligibilityStatus = "idle" | "connecting" | "signing" | "checking" | "eligible" | "ineligible" | "error"
 
-const imBetaReservationOpen = false
+type TokenBalance = {
+  symbol: string
+  address: string
+  raw: bigint
+  decimals: number
+  formatted: string
+  meetsRequirement: boolean
+}
+
+type TokenGateResult = {
+  address: string
+  signature: string
+  balances: TokenBalance[]
+}
+
+type Eip1193Provider = {
+  isMetaMask?: boolean
+  isOkxWallet?: boolean
+  isRabby?: boolean
+  isTrustWallet?: boolean
+  providers?: Eip1193Provider[]
+  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
+}
+
+declare global {
+  interface Window {
+    ethereum?: Eip1193Provider
+  }
+}
+
+const bscRpcEndpoints = [
+  "https://bsc-dataseed.binance.org",
+  "https://bsc-dataseed1.defibit.io",
+  "https://bsc.publicnode.com",
+]
+
+const tokenGateContracts = [
+  {
+    symbol: "GANA",
+    address: "0x8773af45b12e8125ed86ffa07cdc875824815989",
+  },
+  {
+    symbol: "GANA LP",
+    address: "0xa2f464a2462aed49b9b31eb8861bc6b0bbb0483f",
+  },
+]
+
+const erc20BalanceOfSelector = "0x70a08231"
+const erc20DecimalsSelector = "0x313ce567"
+
+const imBetaReservationOpen = true
+
+function isEvmAddress(address?: string): address is string {
+  return Boolean(address && /^0x[a-fA-F0-9]{40}$/.test(address))
+}
+
+function truncateAddress(address?: string) {
+  if (!address) return ""
+  return `${address.slice(0, 6)}...${address.slice(-4)}`
+}
+
+function getInjectedEvmProvider() {
+  if (typeof window === "undefined") return null
+
+  const provider = window.ethereum
+  if (!provider) return null
+
+  return (
+    provider.providers?.find(
+      (item) => item.isMetaMask || item.isOkxWallet || item.isRabby || item.isTrustWallet,
+    ) || provider
+  )
+}
+
+function encodeBalanceOfCall(walletAddress: string) {
+  return `${erc20BalanceOfSelector}${walletAddress.slice(2).padStart(64, "0")}`
+}
+
+async function callBscRpc(method: string, params: unknown[]): Promise<string> {
+  let lastError: unknown
+
+  for (const endpoint of bscRpcEndpoints) {
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: Date.now(),
+          method,
+          params,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`RPC ${response.status}`)
+      }
+
+      const data = (await response.json()) as { result?: unknown; error?: { message?: string } }
+      if (data.error) {
+        throw new Error(data.error.message || "RPC error")
+      }
+      if (typeof data.result !== "string") {
+        throw new Error("RPC result missing")
+      }
+
+      return data.result
+    } catch (error) {
+      lastError = error
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("BSC RPC request failed")
+}
+
+async function readErc20Decimals(tokenAddress: string) {
+  try {
+    const hex = await callBscRpc("eth_call", [{ to: tokenAddress, data: erc20DecimalsSelector }, "latest"])
+    return Number(BigInt(hex))
+  } catch {
+    return 18
+  }
+}
+
+function formatUnits(raw: bigint, decimals: number) {
+  if (decimals <= 0) return raw.toString()
+
+  const base = 10n ** BigInt(decimals)
+  const whole = raw / base
+  const fraction = raw % base
+
+  if (fraction === 0n) return whole.toString()
+
+  const fractionText = fraction.toString().padStart(decimals, "0").slice(0, 4).replace(/0+$/, "")
+  return fractionText ? `${whole}.${fractionText}` : whole.toString()
+}
+
+async function readTokenBalance(token: (typeof tokenGateContracts)[number], walletAddress: string): Promise<TokenBalance> {
+  const [balanceHex, decimals] = await Promise.all([
+    callBscRpc("eth_call", [{ to: token.address, data: encodeBalanceOfCall(walletAddress) }, "latest"]),
+    readErc20Decimals(token.address),
+  ])
+  const raw = BigInt(balanceHex)
+  const minimumRaw = 10n ** BigInt(decimals)
+
+  return {
+    symbol: token.symbol,
+    address: token.address,
+    raw,
+    decimals,
+    formatted: formatUnits(raw, decimals),
+    meetsRequirement: raw >= minimumRaw,
+  }
+}
+
+function getVerifiedEmailFromUser(user: unknown) {
+  const userRecord = user as
+    | {
+        email?: string
+        verifiedCredentials?: Array<{ email?: string; format?: string }>
+      }
+    | undefined
+
+  return (
+    userRecord?.email ||
+    userRecord?.verifiedCredentials?.find((credential) => credential.format === "email" && credential.email)?.email ||
+    ""
+  )
+}
+
+function buildWalletSignatureMessage(walletAddress: string) {
+  return [
+    "GANA Community Privilege Reservation",
+    `Wallet: ${walletAddress}`,
+    "Action: Verify GANA and GANA LP token balances for first-wave eligibility.",
+    "Chain: BNB Smart Chain",
+    `Timestamp: ${new Date().toISOString()}`,
+  ].join("\n")
+}
 
 export function ImBetaSection() {
   const t = useTranslations('imBeta')
@@ -287,12 +466,23 @@ export function ImBetaSection() {
   const [otpRequested, setOtpRequested] = useState(false)
   const [status, setStatus] = useState<EmailVerificationStatus>("idle")
   const [statusMessage, setStatusMessage] = useState("")
+  const [walletStatus, setWalletStatus] = useState<WalletEligibilityStatus>("idle")
+  const [walletStatusMessage, setWalletStatusMessage] = useState("")
+  const [walletAddress, setWalletAddress] = useState("")
+  const [tokenGateResult, setTokenGateResult] = useState<TokenGateResult | null>(null)
   const points = t.raw('points') as string[]
   const trimmedEmail = email.trim()
   const hasValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)
   const normalizedOtp = otp.replace(/\D/g, "")
   const isBusy = status === "sending" || status === "verifying"
-  const hasVerifiedSession = Boolean(user) || status === "verified"
+  const verifiedEmailFromSession = getVerifiedEmailFromUser(user)
+  const hasVerifiedEmail = status === "verified" || Boolean(verifiedEmailFromSession)
+  const walletGateApproved =
+    walletStatus === "eligible" &&
+    Boolean(walletAddress) &&
+    tokenGateResult?.address.toLowerCase() === walletAddress.toLowerCase()
+  const hasCompletedReservation = hasVerifiedEmail && walletGateApproved
+  const isWalletBusy = walletStatus === "connecting" || walletStatus === "signing" || walletStatus === "checking"
 
   const handleEmailChange = (value: string) => {
     setEmail(value)
@@ -344,6 +534,54 @@ export function ImBetaSection() {
     } catch {
       setStatus("error")
       setStatusMessage(t('errorStatus'))
+    }
+  }
+
+  const handleWalletAuthorize = async () => {
+    const provider = getInjectedEvmProvider()
+    if (!provider) {
+      setWalletStatus("error")
+      setWalletStatusMessage(t('walletUnavailableStatus'))
+      return
+    }
+
+    setWalletStatus(walletAddress ? "signing" : "connecting")
+    setWalletStatusMessage("")
+
+    try {
+      const accounts = (await provider.request({ method: "eth_requestAccounts" })) as string[]
+      const selectedAddress = accounts[0]
+
+      if (!isEvmAddress(selectedAddress)) {
+        setWalletStatus("error")
+        setWalletStatusMessage(t('walletInvalidStatus'))
+        return
+      }
+
+      setWalletAddress(selectedAddress)
+      setWalletStatus("signing")
+
+      const signature = (await provider.request({
+        method: "personal_sign",
+        params: [buildWalletSignatureMessage(selectedAddress), selectedAddress],
+      })) as string
+
+      if (!signature) throw new Error("Signature missing")
+
+      setWalletStatus("checking")
+      const balances = await Promise.all(tokenGateContracts.map((token) => readTokenBalance(token, selectedAddress)))
+      const hasRequiredBalances = balances.every((balance) => balance.meetsRequirement)
+
+      setTokenGateResult({
+        address: selectedAddress,
+        signature,
+        balances,
+      })
+      setWalletStatus(hasRequiredBalances ? "eligible" : "ineligible")
+      setWalletStatusMessage(hasRequiredBalances ? t('walletEligibleStatus') : t('walletIneligibleStatus'))
+    } catch {
+      setWalletStatus("error")
+      setWalletStatusMessage(t('walletErrorStatus'))
     }
   }
 
@@ -403,13 +641,13 @@ export function ImBetaSection() {
                         onChange={(event) => handleEmailChange(event.target.value)}
                         placeholder={t('emailPlaceholder')}
                         autoComplete="email"
-                        disabled={isBusy || hasVerifiedSession}
+                        disabled={isBusy || hasVerifiedEmail}
                         className="min-h-12 min-w-0 flex-1 rounded-2xl border border-primary/20 bg-background/70 px-4 text-foreground outline-none transition-colors placeholder:text-foreground/35 focus:border-primary/60"
                       />
                       <button
                         type="button"
                         onClick={handleSendEmail}
-                        disabled={!sdkHasLoaded || isBusy || hasVerifiedSession}
+                        disabled={!sdkHasLoaded || isBusy || hasVerifiedEmail}
                         className="min-h-12 w-full rounded-2xl bg-primary px-5 text-sm font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
                       >
                         {status === "sending" ? (
@@ -434,7 +672,7 @@ export function ImBetaSection() {
                         type="text"
                         value={otp}
                         onChange={(event) => handleOtpChange(event.target.value)}
-                        disabled={!otpRequested || isBusy || hasVerifiedSession}
+                        disabled={!otpRequested || isBusy || hasVerifiedEmail}
                         inputMode="numeric"
                         autoComplete="one-time-code"
                         placeholder={t('codePlaceholder')}
@@ -446,7 +684,7 @@ export function ImBetaSection() {
                   <button
                     type="button"
                     onClick={handleVerifyOtp}
-                    disabled={!sdkHasLoaded || !otpRequested || !normalizedOtp || isBusy || hasVerifiedSession}
+                    disabled={!sdkHasLoaded || !otpRequested || !normalizedOtp || isBusy || hasVerifiedEmail}
                     className="gradient-btn min-h-12 rounded-2xl px-5 text-base font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-55"
                   >
                     {status === "verifying" ? (
@@ -454,21 +692,99 @@ export function ImBetaSection() {
                         <Loader2 className="h-4 w-4 animate-spin" />
                         {t('verifyingCta')}
                       </span>
-                    ) : hasVerifiedSession ? (
+                    ) : hasVerifiedEmail ? (
                       t('verifiedCta')
                     ) : (
                       t('submitCta')
                     )}
                   </button>
+
+                  <div className="grid gap-4 rounded-2xl border border-primary/20 bg-background/45 p-4">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/15 text-primary">
+                          <Wallet className="h-5 w-5" />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-foreground">{t('walletLabel')}</p>
+                          <p className="truncate text-xs text-foreground/55">
+                            {walletAddress ? truncateAddress(walletAddress) : t('walletDisconnectedLabel')}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="w-fit rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                        BNB Smart Chain
+                      </span>
+                    </div>
+
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {tokenGateContracts.map((token) => {
+                        const balance = tokenGateResult?.balances.find((item) => item.symbol === token.symbol)
+                        return (
+                          <div key={token.symbol} className="rounded-2xl border border-primary/15 bg-white/35 p-4 dark:bg-background/35">
+                            <div className="mb-2 flex items-center justify-between gap-2">
+                              <p className="text-sm font-semibold text-foreground">{token.symbol}</p>
+                              <span
+                                className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
+                                  balance?.meetsRequirement
+                                    ? "bg-emerald-500/12 text-emerald-600 dark:text-emerald-300"
+                                    : "bg-primary/10 text-primary"
+                                }`}
+                              >
+                                {balance?.meetsRequirement ? t('walletQualifiedLabel') : t('walletRequirementLabel')}
+                              </span>
+                            </div>
+                            <p className="text-2xl font-bold text-foreground">
+                              {balance ? balance.formatted : "--"}
+                            </p>
+                            <p className="mt-1 truncate text-[11px] text-foreground/40">{token.address}</p>
+                          </div>
+                        )
+                      })}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleWalletAuthorize}
+                      disabled={!sdkHasLoaded || isWalletBusy}
+                      className="min-h-12 rounded-2xl border border-primary/30 bg-primary/10 px-5 text-base font-semibold text-primary transition-colors hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:opacity-55"
+                    >
+                      {walletStatus === "signing" || walletStatus === "checking" ? (
+                        <span className="inline-flex items-center justify-center gap-2">
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          {walletStatus === "signing" ? t('walletSigningCta') : t('walletCheckingCta')}
+                        </span>
+                      ) : walletGateApproved ? (
+                        t('walletVerifiedCta')
+                      ) : walletAddress ? (
+                        t('checkWalletCta')
+                      ) : (
+                        t('connectWalletCta')
+                      )}
+                    </button>
+                    <p className="text-xs leading-relaxed text-foreground/45">{t('walletSignatureNote')}</p>
+                  </div>
                 </form>
 
                 <div className="mt-6 grid gap-3">
                   <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                     <p className="text-sm text-foreground/68">
-                      {statusMessage || (hasVerifiedSession ? t('verifiedStatus') : t('serviceNote'))}
+                      {statusMessage || (hasVerifiedEmail ? t('verifiedStatus') : t('serviceNote'))}
                     </p>
                   </div>
+                  <div className="flex items-start gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
+                    <Shield className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                    <p className="text-sm text-foreground/68">
+                      {walletStatusMessage || (walletGateApproved ? t('walletEligibleStatus') : t('walletServiceNote'))}
+                    </p>
+                  </div>
+                  {hasCompletedReservation && (
+                    <div className="flex items-start gap-3 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-3">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
+                      <p className="text-sm font-medium text-foreground/78">{t('reservationReadyStatus')}</p>
+                    </div>
+                  )}
                   <p className="text-xs text-foreground/45">{t('privacyNote')}</p>
                 </div>
               </>
