@@ -9,13 +9,11 @@ import {
 
 export function AnnouncementsSection() {
   const latestAnnouncements = getLatestAnnouncements(3)
-  const visibleCategories = announcementCategoryOrder
-    .map((category) => ({
-      category,
-      meta: announcementCategories[category],
-      count: getAnnouncementsByCategory(category).length,
-    }))
-    .filter((item) => item.count > 0)
+  const categoryCards = announcementCategoryOrder.map((category) => ({
+    category,
+    meta: announcementCategories[category],
+    count: getAnnouncementsByCategory(category).length,
+  }))
 
   return (
     <section id="announcements" className="py-20 px-4 relative bg-background">
@@ -39,14 +37,14 @@ export function AnnouncementsSection() {
         </div>
 
         <div className="mb-6 grid gap-4 md:grid-cols-3">
-          {visibleCategories.map((item) => (
+          {categoryCards.map((item) => (
             <div key={item.category} className="glass-card rounded-2xl p-5">
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/12 text-primary">
                 <Megaphone className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-semibold text-foreground">{item.meta.label}</h3>
               <p className="mt-2 text-sm leading-relaxed text-foreground/58">{item.meta.description}</p>
-              <p className="mt-4 text-xs font-medium text-primary">{item.count} 条公告</p>
+              {item.count > 0 && <p className="mt-4 text-xs font-medium text-primary">{item.count} 条公告</p>}
             </div>
           ))}
         </div>
