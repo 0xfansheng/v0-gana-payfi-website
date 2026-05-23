@@ -12,13 +12,14 @@ export function Header() {
   const t = useTranslations('nav')
 
   const navItems = [
-    { label: t('product'), href: "#product" },
-    { label: t('imBeta'), href: "#im-beta" },
-    { label: t('resources'), href: "#resources" },
-    { label: t('mechanism'), href: "#mechanism" },
-    { label: t('scenarios'), href: "#scenarios" },
-    { label: t('media'), href: "#media" },
-    { label: t('roadmap'), href: "#roadmap" },
+    { label: t('product'), href: "/#product" },
+    { label: t('imBeta'), href: "/#im-beta" },
+    { label: t('announcements'), href: "/announcements" },
+    { label: t('resources'), href: "/#resources" },
+    { label: t('mechanism'), href: "/#mechanism" },
+    { label: t('scenarios'), href: "/#scenarios" },
+    { label: t('media'), href: "/#media" },
+    { label: t('roadmap'), href: "/#roadmap" },
   ]
 
   return (
@@ -39,12 +40,12 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-foreground/70 hover:text-foreground text-sm font-medium transition-colors"
+              className="whitespace-nowrap text-foreground/70 hover:text-foreground text-sm font-medium transition-colors"
             >
               {item.label}
             </a>

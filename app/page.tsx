@@ -12,6 +12,7 @@ import {
   CTASection 
 } from "@/components/sections"
 import { MediaMentions } from "@/components/media-mentions"
+import { AnnouncementsSection } from "@/components/announcements-section"
 import { Footer } from "@/components/footer"
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <HeroSection />
       <ProductDefinition />
       <ImBetaSection />
+      <AnnouncementsSection />
       <ResourcesSection />
       <MechanismSection />
       <PainPointsSection />

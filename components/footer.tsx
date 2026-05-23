@@ -34,7 +34,7 @@ export function Footer() {
           </Link>
 
           {/* Links */}
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-6">
             <a
               href="https://www.goldgana.com/"
               target="_blank"
@@ -43,12 +43,18 @@ export function Footer() {
             >
               DAPP
             </a>
-            <a
-              href="#resources"
+            <Link
+              href="/announcements"
+              className="text-foreground/60 hover:text-foreground text-sm transition-colors"
+            >
+              {tNav('announcements')}
+            </Link>
+            <Link
+              href="/#resources"
               className="text-foreground/60 hover:text-foreground text-sm transition-colors"
             >
               {tNav('resources')}
-            </a>
+            </Link>
           </div>
         </div>
 
