@@ -5,99 +5,13 @@ import {
   reservationRecordsToCsv,
   saveReservationRecord,
 } from "@/lib/reservations-store"
+import { GANA_LP_TOKEN_ADDRESS, readGanaLpBalance } from "@/lib/bsc-token-gate"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const evmAddressPattern = /^0x[a-fA-F0-9]{40}$/
-const ganaLpTokenAddress = "0x72212f35ac448fe7763aa1bfdb360193fa098e52"
-const erc20BalanceOfSelector = "0x70a08231"
-const erc20DecimalsSelector = "0x313ce567"
-const bscRpcEndpoints = [
-  "https://bsc-dataseed.binance.org",
-  "https://bsc-dataseed1.defibit.io",
-  "https://bsc.publicnode.com",
-]
-
-function encodeBalanceOfCall(walletAddress: string) {
-  return `${erc20BalanceOfSelector}${walletAddress.slice(2).padStart(64, "0")}`
-}
-
-async function callBscRpc(method: string, params: unknown[]): Promise<string> {
-  let lastError: unknown
-
-  for (const endpoint of bscRpcEndpoints) {
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          jsonrpc: "2.0",
-          id: Date.now(),
-          method,
-          params,
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error(`RPC ${response.status}`)
-      }
-
-      const data = (await response.json()) as { result?: unknown; error?: { message?: string } }
-      if (data.error) {
-        throw new Error(data.error.message || "RPC error")
-      }
-      if (typeof data.result !== "string") {
-        throw new Error("RPC result missing")
-      }
-
-      return data.result
-    } catch (error) {
-      lastError = error
-    }
-  }
-
-  throw lastError instanceof Error ? lastError : new Error("BSC RPC request failed")
-}
-
-async function readErc20Decimals(tokenAddress: string) {
-  try {
-    const hex = await callBscRpc("eth_call", [{ to: tokenAddress, data: erc20DecimalsSelector }, "latest"])
-    return Number(BigInt(hex))
-  } catch {
-    return 18
-  }
-}
-
-function formatUnits(raw: bigint, decimals: number) {
-  if (decimals <= 0) return raw.toString()
-
-  const base = 10n ** BigInt(decimals)
-  const whole = raw / base
-  const fraction = raw % base
-
-  if (fraction === 0n) return whole.toString()
-
-  const fractionText = fraction.toString().padStart(decimals, "0").slice(0, 4).replace(/0+$/, "")
-  return fractionText ? `${whole}.${fractionText}` : whole.toString()
-}
-
-async function readGanaLpBalance(walletAddress: string) {
-  const [balanceHex, decimals] = await Promise.all([
-    callBscRpc("eth_call", [{ to: ganaLpTokenAddress, data: encodeBalanceOfCall(walletAddress) }, "latest"]),
-    readErc20Decimals(ganaLpTokenAddress),
-  ])
-  const raw = BigInt(balanceHex)
-  const minimumRaw = 10n ** BigInt(decimals)
-
-  return {
-    raw,
-    decimals,
-    formatted: formatUnits(raw, decimals),
-    meetsRequirement: raw >= minimumRaw,
-  }
-}
 
 function isAuthorized(request: Request) {
   const adminToken = process.env.GANA_RESERVATIONS_ADMIN_TOKEN
@@ -134,7 +48,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "A valid EVM wallet address is required." }, { status: 400 })
     }
 
-    if (lpTokenAddress.toLowerCase() !== ganaLpTokenAddress) {
+    if (lpTokenAddress.toLowerCase() !== GANA_LP_TOKEN_ADDRESS) {
       return NextResponse.json({ error: "Invalid GANA LP token address." }, { status: 400 })
     }
 
@@ -170,7 +84,7 @@ export async function POST(request: Request) {
       walletAddress,
       lpBalance: lpBalance.formatted,
       lpBalanceRaw: lpBalance.raw.toString(),
-      lpTokenAddress: ganaLpTokenAddress,
+      lpTokenAddress: GANA_LP_TOKEN_ADDRESS,
       signature,
       signatureMessage,
       userAgent: request.headers.get("user-agent") || undefined,

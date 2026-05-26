@@ -280,7 +280,7 @@ type WalletEligibilityStatus = "idle" | "connecting" | "signing" | "checking" | 
 type TokenBalance = {
   symbol: string
   address: string
-  raw: bigint
+  raw: string
   decimals: number
   formatted: string
   meetsRequirement: boolean
@@ -298,6 +298,9 @@ type Eip1193Provider = {
   isOkxWallet?: boolean
   isRabby?: boolean
   isTrustWallet?: boolean
+  isAve?: boolean
+  isAveWallet?: boolean
+  isAveAI?: boolean
   providers?: Eip1193Provider[]
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
 }
@@ -308,21 +311,12 @@ declare global {
   }
 }
 
-const bscRpcEndpoints = [
-  "https://bsc-dataseed.binance.org",
-  "https://bsc-dataseed1.defibit.io",
-  "https://bsc.publicnode.com",
-]
-
 const tokenGateContracts = [
   {
     symbol: "GANA LP",
     address: "0x72212F35aC448FE7763aA1BFdb360193Fa098E52",
   },
 ]
-
-const erc20BalanceOfSelector = "0x70a08231"
-const erc20DecimalsSelector = "0x313ce567"
 
 const imBetaReservationOpen = true
 
@@ -343,89 +337,59 @@ function getInjectedEvmProvider() {
 
   return (
     provider.providers?.find(
-      (item) => item.isMetaMask || item.isOkxWallet || item.isRabby || item.isTrustWallet,
+      (item) =>
+        item.isAve ||
+        item.isAveWallet ||
+        item.isAveAI ||
+        item.isMetaMask ||
+        item.isOkxWallet ||
+        item.isRabby ||
+        item.isTrustWallet,
     ) || provider
   )
 }
 
-function encodeBalanceOfCall(walletAddress: string) {
-  return `${erc20BalanceOfSelector}${walletAddress.slice(2).padStart(64, "0")}`
-}
-
-async function callBscRpc(method: string, params: unknown[]): Promise<string> {
+async function readTokenBalance(token: (typeof tokenGateContracts)[number], walletAddress: string): Promise<TokenBalance> {
   let lastError: unknown
 
-  for (const endpoint of bscRpcEndpoints) {
+  for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch("/api/token-gate/balance", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          jsonrpc: "2.0",
-          id: Date.now(),
-          method,
-          params,
-        }),
+        body: JSON.stringify({ walletAddress, tokenAddress: token.address }),
       })
 
-      if (!response.ok) {
-        throw new Error(`RPC ${response.status}`)
+      const data = (await response.json()) as { balance?: TokenBalance; error?: string }
+      if (!response.ok || !data.balance) {
+        throw new Error(data.error || "Token balance could not be loaded")
       }
 
-      const data = (await response.json()) as { result?: unknown; error?: { message?: string } }
-      if (data.error) {
-        throw new Error(data.error.message || "RPC error")
-      }
-      if (typeof data.result !== "string") {
-        throw new Error("RPC result missing")
-      }
-
-      return data.result
+      return data.balance
     } catch (error) {
       lastError = error
+      await new Promise((resolve) => setTimeout(resolve, 700 * (attempt + 1)))
     }
   }
 
-  throw lastError instanceof Error ? lastError : new Error("BSC RPC request failed")
+  throw lastError instanceof Error ? lastError : new Error("Token balance could not be loaded")
 }
 
-async function readErc20Decimals(tokenAddress: string) {
+async function requestWalletSignature(provider: Eip1193Provider, message: string, walletAddress: string) {
   try {
-    const hex = await callBscRpc("eth_call", [{ to: tokenAddress, data: erc20DecimalsSelector }, "latest"])
-    return Number(BigInt(hex))
-  } catch {
-    return 18
-  }
-}
-
-function formatUnits(raw: bigint, decimals: number) {
-  if (decimals <= 0) return raw.toString()
-
-  const base = 10n ** BigInt(decimals)
-  const whole = raw / base
-  const fraction = raw % base
-
-  if (fraction === 0n) return whole.toString()
-
-  const fractionText = fraction.toString().padStart(decimals, "0").slice(0, 4).replace(/0+$/, "")
-  return fractionText ? `${whole}.${fractionText}` : whole.toString()
-}
-
-async function readTokenBalance(token: (typeof tokenGateContracts)[number], walletAddress: string): Promise<TokenBalance> {
-  const [balanceHex, decimals] = await Promise.all([
-    callBscRpc("eth_call", [{ to: token.address, data: encodeBalanceOfCall(walletAddress) }, "latest"]),
-    readErc20Decimals(token.address),
-  ])
-  const raw = BigInt(balanceHex)
-  const minimumRaw = 10n ** BigInt(decimals)
-
-  return {
-    symbol: token.symbol,
-    address: token.address,
-    raw,
-    decimals,
-    formatted: formatUnits(raw, decimals),
-    meetsRequirement: raw >= minimumRaw,
+    return (await provider.request({
+      method: "personal_sign",
+      params: [message, walletAddress],
+    })) as string
+  } catch (firstError) {
+    try {
+      return (await provider.request({
+        method: "personal_sign",
+        params: [walletAddress, message],
+      })) as string
+    } catch {
+      throw firstError
+    }
   }
 }
 
@@ -604,10 +568,7 @@ export function ImBetaSection() {
       setWalletStatus("signing")
       const signatureMessage = buildWalletSignatureMessage(selectedAddress)
 
-      const signature = (await provider.request({
-        method: "personal_sign",
-        params: [signatureMessage, selectedAddress],
-      })) as string
+      const signature = await requestWalletSignature(provider, signatureMessage, selectedAddress)
 
       if (!signature) throw new Error("Signature missing")
 
