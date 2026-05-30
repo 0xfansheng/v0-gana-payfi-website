@@ -45,6 +45,50 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
+    slug: "gana-payment-community-language-compliance-guidelines",
+    category: "dynamics",
+    title: "重要通知｜GANA Payment社区用语合规规范",
+    date: "2026-05-30",
+    excerpt:
+      "为树立加密支付行业合规品牌形象，规避敏感用语风险，统一社区会议、日常交流、对外宣讲用语，即日起执行社区用词规范。",
+    content: [
+      {
+        type: "paragraph",
+        text: "为树立加密支付行业合规品牌形象，规避敏感用语风险，统一社区会议、日常交流、对外宣讲用语，即日起执行以下用词规范，请全体共建者严格遵守：",
+      },
+      {
+        type: "paragraph",
+        text: "一、身份类禁用&替换",
+      },
+      {
+        type: "list",
+        items: [
+          "禁用：领导人、团队长、上线、下线",
+          "替换：生态大使、生态共建者、引荐人、生态伙伴",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "二、奖励类禁用&替换",
+      },
+      {
+        type: "list",
+        items: [
+          "禁用：直推奖、平级奖、静态奖、动态奖(团队奖)",
+          "替换：引荐奖、协同奖、持有奖、活跃奖",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "要求：所有会议发言、社群聊天、海报文案一律禁用敏感词汇，突出平等共建、合规健康的加密支付生态。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA Payment生态运营中心", "2026年5月30日"],
+      },
+    ],
+  },
+  {
     slug: "gana-official-website-launch",
     category: "maintenance",
     title: "关于GANA官网正式上线的公告",
