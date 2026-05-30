@@ -30,6 +30,7 @@ import {
 } from "lucide-react"
 import { useConnectWithOtp, useDynamicContext } from "@dynamic-labs/sdk-react-core"
 import { useTranslations } from "@/i18n/client"
+import { RESERVATION_CHANNEL_OPEN } from "@/lib/reservation-status"
 
 const socialLinks = [
   { name: "X", handle: "@GANA_PayFi", href: "https://x.com/GANA_PayFi", icon: ExternalLink },
@@ -318,7 +319,7 @@ const tokenGateContracts = [
   },
 ]
 
-const imBetaReservationOpen = true
+const imBetaReservationOpen = RESERVATION_CHANNEL_OPEN
 
 function isEvmAddress(address?: string): address is string {
   return Boolean(address && /^0x[a-fA-F0-9]{40}$/.test(address))

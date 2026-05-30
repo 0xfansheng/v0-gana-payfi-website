@@ -6,6 +6,7 @@ import {
   saveReservationRecord,
 } from "@/lib/reservations-store"
 import { GANA_LP_TOKEN_ADDRESS, readGanaLpBalance } from "@/lib/bsc-token-gate"
+import { RESERVATION_CHANNEL_OPEN } from "@/lib/reservation-status"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -32,6 +33,10 @@ function storageErrorResponse() {
 }
 
 export async function POST(request: Request) {
+  if (!RESERVATION_CHANNEL_OPEN) {
+    return NextResponse.json({ error: "Reservation channel is closed." }, { status: 403 })
+  }
+
   try {
     const body = (await request.json()) as Record<string, unknown>
     const email = typeof body.email === "string" ? body.email.trim() : ""
