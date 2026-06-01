@@ -45,6 +45,49 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
+    slug: "gana-new-main-site-official-launch",
+    category: "maintenance",
+    title: "技术更新公告｜GANA 全新主站正式上线通知",
+    date: "2026-06-01",
+    excerpt:
+      "为进一步提升官网访问稳定性、信息发布效率及全球用户访问体验，GANA 全新主站现已正式上线。请用户优先通过全新官方主站访问。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的 GANA 用户：",
+      },
+      {
+        type: "paragraph",
+        text: "为进一步提升官网访问稳定性、信息发布效率及全球用户访问体验，GANA 全新主站现已正式上线。",
+      },
+      {
+        type: "paragraph",
+        text: "即日起，请广大用户优先通过以下全新官方主站访问 GANA 相关服务与生态信息：",
+      },
+      {
+        type: "link",
+        label: "GANA 全新官方主站",
+        href: "https://www.goldgana.net/",
+      },
+      {
+        type: "paragraph",
+        text: "全新主站将作为 GANA 官方核心访问入口，持续承载平台服务、生态动态、官方公告、技术更新及后续重要功能入口。请用户认准官方公布域名，避免通过非官方链接访问，以保障账户与资产安全。",
+      },
+      {
+        type: "paragraph",
+        text: "此前部分用户在访问原主站时可能受到网络环境或访问限制影响，技术团队已同步完成主站访问入口优化。后续如有更多访问地址或服务更新，我们将通过官方公告渠道及时同步。",
+      },
+      {
+        type: "paragraph",
+        text: "感谢各位用户长期以来对 GANA 的支持与信任。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA 技术团队", "2026年6月1日"],
+      },
+    ],
+  },
+  {
     slug: "goldgana-main-domain-access-temporary-adjustment",
     category: "maintenance",
     title: "技术更新公告｜主站访问临时调整通知",
