@@ -45,6 +45,65 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
+    slug: "goldgana-main-domain-access-temporary-adjustment",
+    category: "maintenance",
+    title: "技术更新公告｜主站访问临时调整通知",
+    date: "2026-06-01",
+    excerpt:
+      "近期由于主站 goldgana.com 遭受大量不明来源举报，导致部分地区访问暂时受限。请用户临时通过官方备用域名访问平台服务。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的 GANA 用户：",
+      },
+      {
+        type: "paragraph",
+        text: "近期由于主站 goldgana.com 遭受大量不明来源举报，导致部分地区访问暂时受限。为保障用户正常使用平台服务，请用户临时通过以下官方备用域名访问：",
+      },
+      {
+        type: "link",
+        label: "备用访问域名 1",
+        href: "https://www.ganapay.info",
+      },
+      {
+        type: "link",
+        label: "备用访问域名 2",
+        href: "https://ganawebx.com",
+      },
+      {
+        type: "link",
+        label: "备用访问域名 3",
+        href: "https://www.ganawebx.com",
+      },
+      {
+        type: "link",
+        label: "大陆用户建议优先使用 1",
+        href: "https://gana.nc537.com/",
+      },
+      {
+        type: "link",
+        label: "大陆用户建议优先使用 2",
+        href: "https://gana.ihlo61.com/",
+      },
+      {
+        type: "paragraph",
+        text: "其中，中国大陆地区用户建议优先使用 https://gana.nc537.com/ 或 https://gana.ihlo61.com/ 访问，以获得更稳定的访问体验。",
+      },
+      {
+        type: "paragraph",
+        text: "目前技术团队正在持续处理主站访问问题，恢复进展将通过官方渠道同步通知。请用户认准以上官方公布域名，避免通过非官方链接访问，以保障账户与资产安全。",
+      },
+      {
+        type: "paragraph",
+        text: "感谢各位用户的理解与支持。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA 技术团队", "2026年6月1日"],
+      },
+    ],
+  },
+  {
     slug: "gana-payment-community-language-compliance-guidelines",
     category: "dynamics",
     title: "重要通知｜GANA Payment社区用语合规规范",
