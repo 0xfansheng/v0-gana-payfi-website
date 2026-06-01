@@ -45,6 +45,66 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
+    slug: "gana-foundation-statement-non-official-projects",
+    category: "dynamics",
+    title: "官方声明｜关于防范冒用 GANA 名义推广非官方项目的声明",
+    date: "2026-06-01",
+    excerpt:
+      "为维护 GANA 生态品牌形象，保障所有生态伙伴及用户的合法权益，避免市场误导、信息混淆及不实宣传，GANA 基金会发布本官方声明。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的 GANA 用户、生态伙伴及社区成员：",
+      },
+      {
+        type: "paragraph",
+        text: "为维护 GANA 生态品牌形象，保障所有生态伙伴及用户的合法权益，避免市场误导、信息混淆及不实宣传，GANA 基金会现正式声明如下：",
+      },
+      {
+        type: "paragraph",
+        text: "GANA 基金会目前仅围绕 GANA 生态进行建设、运营、推广与长期发展，不参与、不背书、不授权任何与 GANA 无关的项目、平台、代币、理财产品、投资计划或第三方商业活动。",
+      },
+      {
+        type: "paragraph",
+        text: "任何个人、团队或机构，如以“GANA 基金会”“GANA 官方”“GANA 社区”“GANA 生态共建者”等名义，对外宣传、推广、引导参与其他非 GANA 项目，均不代表 GANA 基金会官方立场，也不构成 GANA 基金会的任何授权、推荐或背书。",
+      },
+      {
+        type: "paragraph",
+        text: "请所有 GANA 用户及生态伙伴务必提高警惕，谨慎识别以下行为：",
+      },
+      {
+        type: "list",
+        items: [
+          "打着 GANA 名义推广其他项目；",
+          "冒充 GANA 官方引导用户参与其他平台；",
+          "以 GANA 关系为第三方项目进行背书；",
+          "声称“官方推荐”“内部通道”“合作项目”等不实信息；",
+          "通过私信、陌生群聊或非官方渠道诱导用户参与非 GANA 项目。",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "GANA 基金会不会通过私信、陌生群聊或非官方渠道，要求用户参与任何 GANA 以外的项目，也不会为任何非 GANA 项目的收益、风险、资金安全或后续结果承担责任。",
+      },
+      {
+        type: "paragraph",
+        text: "如发现任何个人、团队或机构冒用 GANA 名义进行虚假宣传、拉群推广、引导参与其他项目或诱导操作，请第一时间截图保留证据，并向所在社区负责人反馈核实。",
+      },
+      {
+        type: "paragraph",
+        text: "GANA 基金会将持续专注于 GANA 生态长期建设，坚定维护生态秩序，保护所有参与者的合法权益。请广大用户认准 GANA 官方渠道发布的信息，谨慎辨别非官方宣传内容，避免造成不必要的损失。",
+      },
+      {
+        type: "paragraph",
+        text: "特此声明。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA 基金会", "2026年6月1日"],
+      },
+    ],
+  },
+  {
     slug: "gana-new-main-site-official-launch",
     category: "maintenance",
     title: "技术更新公告｜GANA 全新主站正式上线通知",
