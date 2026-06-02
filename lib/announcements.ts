@@ -45,6 +45,67 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
+    slug: "gh-android-community-beta-official-launch",
+    category: "maintenance",
+    title: "官方公告｜GH 安卓安装包社区内测版正式上线",
+    date: "2026-06-03",
+    excerpt:
+      "GH 安卓安装包社区内测版现已正式上线。本次上线版本为测试环境 APP，用户产生的测试数据后续可能根据正式版本安排进行清理或删档。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的 GANA 用户、生态伙伴及社区成员：",
+      },
+      {
+        type: "paragraph",
+        text: "为进一步推进 GH 应用生态体验优化，方便社区用户提前参与产品测试与反馈，GH 安卓安装包社区内测版现已正式上线。",
+      },
+      {
+        type: "paragraph",
+        text: "本次上线版本为测试环境 APP，主要面向社区内测用户开放体验。安卓用户可通过以下官方链接下载安装测试包：",
+      },
+      {
+        type: "link",
+        label: "GH 安卓测试包下载链接",
+        href: "https://www.goldhouse.cc",
+      },
+      {
+        type: "paragraph",
+        text: "请参与内测的用户注意：",
+      },
+      {
+        type: "list",
+        items: [
+          "当前版本为测试环境版本，部分功能、页面、数据及交互体验仍处于持续优化阶段；",
+          "内测期间产生的注册、登录、操作记录、账户数据、测试资产或其他相关数据，后续可能根据正式版本上线安排进行清理或删档；",
+          "请勿将测试环境中的数据视为正式环境数据；",
+          "如在使用过程中遇到异常、卡顿、闪退、数据展示错误或其他问题，请及时向所在社区反馈；",
+          "请务必通过官方发布链接下载安装，避免使用非官方来源安装包，以保障设备与账户安全。",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "同时，GH iOS TestFlight 内测版本预计将于 2026年6月4日 正式开放。届时，iOS 用户可根据官方后续通知参与 TestFlight 测试体验。",
+      },
+      {
+        type: "paragraph",
+        text: "GH 团队将持续根据社区反馈优化产品功能、系统稳定性和用户体验，为后续正式版本上线做好准备。",
+      },
+      {
+        type: "paragraph",
+        text: "感谢所有社区成员对 GH 应用内测工作的支持与配合。",
+      },
+      {
+        type: "paragraph",
+        text: "特此公告。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA 技术团队", "2026年6月3日"],
+      },
+    ],
+  },
+  {
     slug: "gana-foundation-statement-non-official-projects",
     category: "dynamics",
     title: "官方声明｜关于防范冒用 GANA 名义推广非官方项目的声明",
