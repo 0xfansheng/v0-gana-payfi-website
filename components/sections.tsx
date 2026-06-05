@@ -156,14 +156,6 @@ function HeroBackgroundVideo() {
 
 export function HeroSection() {
   const t = useTranslations('hero')
-  const tProduct = useTranslations('product')
-
-  const metrics = [
-    { value: "0.1%-0.5%", label: tProduct('tags.0') },
-    { value: "24/7", label: "LP Pool" },
-    { value: "30%-50%", label: "LP Revenue" },
-    { value: "USDT", label: "Stablecoin" },
-  ]
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
@@ -196,7 +188,7 @@ export function HeroSection() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="https://www.goldgana.com/"
             target="_blank"
@@ -217,22 +209,6 @@ export function HeroSection() {
           </a>
         </div>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
-          {metrics.map((metric, index) => (
-            <div
-              key={index}
-              className="glass-card rounded-xl p-4 md:p-6 text-center"
-            >
-              <div className="text-2xl md:text-3xl font-bold gradient-text mb-2">
-                {metric.value}
-              </div>
-              <div className="text-xs md:text-sm text-foreground/60">
-                {metric.label}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   )
