@@ -50,7 +50,7 @@ export const announcements: Announcement[] = [
     title: "官方公告｜GoldHouse 测试服腾讯会议功能升级完成",
     date: "2026-06-05",
     excerpt:
-      "GoldHouse 测试服腾讯会议功能已完成升级，现已支持会议发起次数不限次、单场会议时长不限时。后续会议人数容量将提升至 500 人，敬请期待。",
+      "GoldHouse 测试服腾讯会议功能已完成升级，现已支持会议发起次数不限次、单场会议时长不限时。今日晚些时候，会议人数容量将提升至 500 人。",
     content: [
       {
         type: "paragraph",
@@ -78,7 +78,7 @@ export const announcements: Announcement[] = [
       },
       {
         type: "paragraph",
-        text: "同时，GoldHouse 团队正在持续推进腾讯会议参会人数容量升级。后续腾讯会议人数上限将进一步提升至 500 人，相关功能开放进展将通过官方公告同步通知，敬请期待。",
+        text: "同时，GoldHouse 团队将于今日晚些时候（2026年6月5日）完成腾讯会议参会人数容量升级，届时会议人数上限将提升至 500 人。相关功能开放进展将通过官方公告同步通知，敬请期待。",
       },
       {
         type: "paragraph",
