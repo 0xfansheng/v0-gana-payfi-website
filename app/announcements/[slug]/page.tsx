@@ -73,7 +73,9 @@ export default async function AnnouncementDetailPage({ params }: AnnouncementDet
               </span>
               <span className="inline-flex items-center gap-2 text-sm text-foreground/50">
                 <CalendarDays className="h-4 w-4" />
-                <time dateTime={announcement.date}>UTC+8 发布时间：{announcement.date}</time>
+                <time dateTime={`${announcement.publishedAt.replace(" ", "T")}:00+08:00`}>
+                  UTC+8 发布时间：{announcement.publishedAt}
+                </time>
               </span>
               <AnnouncementViewCount
                 slug={announcement.slug}

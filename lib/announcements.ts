@@ -12,6 +12,7 @@ export type Announcement = {
   category: AnnouncementCategory
   title: string
   date: string
+  publishedAt: string
   excerpt: string
   content: AnnouncementContentBlock[]
 }
@@ -50,6 +51,7 @@ export const announcements: Announcement[] = [
     category: "dynamics",
     title: "官方公告｜GANA集团（官方社区）官方群聊入口开放",
     date: "2026-06-05",
+    publishedAt: "2026-06-05 22:55",
     excerpt:
       "GANA集团（官方社区）官方群聊入口现已开放。用户可使用浏览器打开公告页面后扫描二维码，或直接点击官方链接加入群聊。",
     content: [
@@ -109,6 +111,7 @@ export const announcements: Announcement[] = [
     category: "maintenance",
     title: "官方公告｜GoldHouse 测试服在线会议 500 人容量已免费开通",
     date: "2026-06-05",
+    publishedAt: "2026-06-05 22:03",
     excerpt:
       "GoldHouse 测试服在线会议 500 人容量已免费开通，当前支持不限时、不限人数畅快体验。请注意测试服数据与正式服数据不互通。",
     content: [
@@ -168,6 +171,7 @@ export const announcements: Announcement[] = [
     category: "maintenance",
     title: "官方公告｜GoldHouse 测试服在线会议功能升级完成",
     date: "2026-06-05",
+    publishedAt: "2026-06-05 18:56",
     excerpt:
       "GoldHouse 测试服在线会议功能已完成升级，现已支持会议发起次数不限次、单场会议时长不限时。今日晚些时候，会议人数容量将提升至 500 人。",
     content: [
@@ -222,6 +226,7 @@ export const announcements: Announcement[] = [
     category: "maintenance",
     title: "官方公告｜GH 社区内测版双端下载入口正式上线",
     date: "2026-06-03",
+    publishedAt: "2026-06-03 14:25",
     excerpt:
       "GH 社区内测版现已同步开放安卓与 iOS TestFlight 测试入口。本次上线版本为测试环境 APP，用户产生的测试数据后续可能清理或删档。",
     content: [
@@ -284,6 +289,7 @@ export const announcements: Announcement[] = [
     category: "maintenance",
     title: "官方公告｜GH 安卓安装包社区内测版正式上线",
     date: "2026-06-03",
+    publishedAt: "2026-06-03 02:53",
     excerpt:
       "GH 安卓安装包社区内测版现已正式上线。本次上线版本为测试环境 APP，用户产生的测试数据后续可能根据正式版本安排进行清理或删档。",
     content: [
@@ -345,6 +351,7 @@ export const announcements: Announcement[] = [
     category: "dynamics",
     title: "官方声明｜关于防范冒用 GANA 名义推广非官方项目的声明",
     date: "2026-06-01",
+    publishedAt: "2026-06-01 21:20",
     excerpt:
       "为维护 GANA 生态品牌形象，保障所有生态伙伴及用户的合法权益，避免市场误导、信息混淆及不实宣传，GANA 基金会发布本官方声明。",
     content: [
@@ -405,6 +412,7 @@ export const announcements: Announcement[] = [
     category: "maintenance",
     title: "技术更新公告｜GANA 全新主站正式上线通知",
     date: "2026-06-01",
+    publishedAt: "2026-06-01 15:18",
     excerpt:
       "为进一步提升官网访问稳定性、信息发布效率及全球用户访问体验，GANA 全新主站现已正式上线。请用户优先通过全新官方主站访问。",
     content: [
@@ -448,6 +456,7 @@ export const announcements: Announcement[] = [
     category: "maintenance",
     title: "技术更新公告｜主站访问临时调整通知",
     date: "2026-06-01",
+    publishedAt: "2026-06-01 14:44",
     excerpt:
       "近期由于主站 goldgana.com 遭受大量不明来源举报，导致部分地区访问暂时受限。请用户临时通过官方备用域名访问平台服务。",
     content: [
@@ -507,6 +516,7 @@ export const announcements: Announcement[] = [
     category: "dynamics",
     title: "重要通知｜GANA Payment社区用语合规规范",
     date: "2026-05-30",
+    publishedAt: "2026-05-30 19:33",
     excerpt:
       "为树立加密支付行业合规品牌形象，规避敏感用语风险，统一社区会议、日常交流、对外宣讲用语，即日起执行社区用词规范。",
     content: [
@@ -551,6 +561,7 @@ export const announcements: Announcement[] = [
     category: "maintenance",
     title: "关于GANA官网正式上线的公告",
     date: "2026-05-23",
+    publishedAt: "2026-05-23 18:51",
     excerpt:
       "GANA官方全新生态门户网站已正式上线，将作为官方统一信息发布平台，承载生态资讯、项目动态、官方公告及重要生态入口。",
     content: [
@@ -613,6 +624,7 @@ export const announcements: Announcement[] = [
     category: "activities",
     title: "首批DAPP预约福利公布",
     date: "2026-05-23",
+    publishedAt: "2026-05-23 21:57",
     excerpt:
       "GANA生态DAPP首批预约福利正式公布，首批开放后的100小时内完成DAPP预约的用户将在神秘生态正式开启后获得专属预约权益。",
     content: [
@@ -681,6 +693,6 @@ export function getAnnouncementsByCategory(category: AnnouncementCategory) {
 
 export function getLatestAnnouncements(limit = 3) {
   return [...announcements]
-    .sort((a, b) => b.date.localeCompare(a.date))
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, limit)
 }
