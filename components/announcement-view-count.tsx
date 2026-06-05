@@ -3,43 +3,17 @@
 import { useEffect, useState } from "react"
 import { Eye } from "lucide-react"
 
-const COUNTS_STORAGE_KEY = "gana:announcement-view-counts"
-const VIEWED_SESSION_PREFIX = "gana:announcement-viewed:"
+const VIEWED_SESSION_PREFIX = "gana:announcement-server-viewed:"
 const COUNT_CHANGED_EVENT = "gana:announcement-view-count-changed"
 
-type StoredCounts = Record<string, number>
+const countCache = new Map<string, number>()
+const pendingCountRequests = new Map<string, Promise<number>>()
 
 type AnnouncementViewCountProps = {
   slug: string
   track?: boolean
   className?: string
   iconClassName?: string
-}
-
-function readCounts(): StoredCounts {
-  try {
-    const rawCounts = window.localStorage.getItem(COUNTS_STORAGE_KEY)
-    if (!rawCounts) {
-      return {}
-    }
-
-    const parsedCounts = JSON.parse(rawCounts)
-    if (!parsedCounts || typeof parsedCounts !== "object" || Array.isArray(parsedCounts)) {
-      return {}
-    }
-
-    return Object.fromEntries(
-      Object.entries(parsedCounts)
-        .filter(([, value]) => typeof value === "number" && Number.isFinite(value) && value >= 0)
-        .map(([key, value]) => [key, Math.floor(value as number)]),
-    )
-  } catch {
-    return {}
-  }
-}
-
-function writeCounts(counts: StoredCounts) {
-  window.localStorage.setItem(COUNTS_STORAGE_KEY, JSON.stringify(counts))
 }
 
 function formatViewCount(count: number) {
@@ -51,46 +25,126 @@ function formatViewCount(count: number) {
   return count.toLocaleString("zh-CN")
 }
 
+function readCountFromResponse(data: unknown, slug: string) {
+  if (!data || typeof data !== "object") {
+    return 0
+  }
+
+  const count = (data as { count?: unknown }).count
+  if (typeof count === "number" && Number.isFinite(count) && count >= 0) {
+    return Math.floor(count)
+  }
+
+  const counts = (data as { counts?: unknown }).counts
+  if (!counts || typeof counts !== "object") {
+    return 0
+  }
+
+  const slugCount = (counts as Record<string, unknown>)[slug]
+  return typeof slugCount === "number" && Number.isFinite(slugCount) && slugCount >= 0
+    ? Math.floor(slugCount)
+    : 0
+}
+
+async function fetchCount(slug: string) {
+  const cachedCount = countCache.get(slug)
+  if (typeof cachedCount === "number") {
+    return cachedCount
+  }
+
+  const pendingRequest = pendingCountRequests.get(slug)
+  if (pendingRequest) {
+    return pendingRequest
+  }
+
+  const request = fetch(`/api/announcements/views?slug=${encodeURIComponent(slug)}`, {
+    cache: "no-store",
+  })
+    .then(async (response) => {
+      if (!response.ok) {
+        throw new Error("Announcement view count could not be loaded.")
+      }
+
+      const nextCount = readCountFromResponse(await response.json(), slug)
+      countCache.set(slug, nextCount)
+      return nextCount
+    })
+    .finally(() => {
+      pendingCountRequests.delete(slug)
+    })
+
+  pendingCountRequests.set(slug, request)
+  return request
+}
+
+async function recordView(slug: string) {
+  const response = await fetch("/api/announcements/views", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ slug }),
+    cache: "no-store",
+  })
+
+  if (!response.ok) {
+    throw new Error("Announcement view count could not be recorded.")
+  }
+
+  const nextCount = readCountFromResponse(await response.json(), slug)
+  countCache.set(slug, nextCount)
+  return nextCount
+}
+
+function emitCountChanged(slug: string, count: number) {
+  window.dispatchEvent(
+    new CustomEvent(COUNT_CHANGED_EVENT, {
+      detail: {
+        slug,
+        count,
+      },
+    }),
+  )
+}
+
 export function AnnouncementViewCount({
   slug,
   track = false,
   className = "inline-flex items-center gap-1.5 text-xs text-foreground/45",
   iconClassName = "h-3.5 w-3.5",
 }: AnnouncementViewCountProps) {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(() => countCache.get(slug) ?? 0)
 
   useEffect(() => {
-    const counts = readCounts()
-    let nextCount = counts[slug] ?? 0
+    let isMounted = true
 
-    if (track) {
+    async function syncCount() {
       const viewedSessionKey = `${VIEWED_SESSION_PREFIX}${slug}`
       const hasTrackedInSession = window.sessionStorage.getItem(viewedSessionKey) === "1"
+      const isTrackingPending = window.sessionStorage.getItem(viewedSessionKey) === "pending"
 
-      if (!hasTrackedInSession) {
-        nextCount += 1
-        counts[slug] = nextCount
-        writeCounts(counts)
-        window.sessionStorage.setItem(viewedSessionKey, "1")
-        window.dispatchEvent(
-          new CustomEvent(COUNT_CHANGED_EVENT, {
-            detail: {
-              slug,
-              count: nextCount,
-            },
-          }),
-        )
+      try {
+        const nextCount =
+          track && !hasTrackedInSession && !isTrackingPending
+            ? await (async () => {
+                window.sessionStorage.setItem(viewedSessionKey, "pending")
+                const recordedCount = await recordView(slug)
+                window.sessionStorage.setItem(viewedSessionKey, "1")
+                emitCountChanged(slug, recordedCount)
+                return recordedCount
+              })()
+            : await fetchCount(slug)
+
+        if (isMounted) {
+          setCount(nextCount)
+        }
+      } catch {
+        window.sessionStorage.removeItem(viewedSessionKey)
+
+        if (isMounted) {
+          setCount(countCache.get(slug) ?? 0)
+        }
       }
-    }
-
-    setCount(nextCount)
-
-    const handleStorage = (event: StorageEvent) => {
-      if (event.key !== COUNTS_STORAGE_KEY) {
-        return
-      }
-
-      setCount(readCounts()[slug] ?? 0)
     }
 
     const handleCountChanged = (event: Event) => {
@@ -100,11 +154,11 @@ export function AnnouncementViewCount({
       }
     }
 
-    window.addEventListener("storage", handleStorage)
+    void syncCount()
     window.addEventListener(COUNT_CHANGED_EVENT, handleCountChanged)
 
     return () => {
-      window.removeEventListener("storage", handleStorage)
+      isMounted = false
       window.removeEventListener(COUNT_CHANGED_EVENT, handleCountChanged)
     }
   }, [slug, track])
