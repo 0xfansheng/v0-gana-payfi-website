@@ -45,6 +45,60 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
+    slug: "goldhouse-test-server-tencent-meeting-upgrade",
+    category: "maintenance",
+    title: "官方公告｜Goldhouse 测试服腾讯会议功能升级完成",
+    date: "2026-06-05",
+    excerpt:
+      "Goldhouse 测试服腾讯会议功能已完成升级，现已支持会议发起次数不限次、单场会议时长不限时。后续会议人数容量将提升至 500 人，敬请期待。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的 Goldhouse 用户、生态伙伴及社区成员：",
+      },
+      {
+        type: "paragraph",
+        text: "为进一步提升社区用户的会议体验与产品使用效率，Goldhouse 测试服腾讯会议功能现已完成升级。",
+      },
+      {
+        type: "paragraph",
+        text: "本次升级后，Goldhouse 测试服中的腾讯会议功能已支持：",
+      },
+      {
+        type: "list",
+        items: [
+          "会议发起次数不限次；",
+          "单场会议时长不限时；",
+          "测试服用户可更自由地进行会议创建、功能体验与反馈。",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "本次功能升级主要面向测试服环境开放，旨在帮助社区成员更充分地体验 Goldhouse 会议功能，并为后续正式版本优化提供真实反馈。",
+      },
+      {
+        type: "paragraph",
+        text: "同时，Goldhouse 团队正在持续推进腾讯会议参会人数容量升级。后续腾讯会议人数上限将进一步提升至 500 人，相关功能开放进展将通过官方公告同步通知，敬请期待。",
+      },
+      {
+        type: "paragraph",
+        text: "请参与测试的用户注意，当前版本仍属于测试环境，部分功能、数据及体验可能会根据后续版本规划进行调整。",
+      },
+      {
+        type: "paragraph",
+        text: "感谢所有社区成员对 Goldhouse 测试工作的支持与反馈。",
+      },
+      {
+        type: "paragraph",
+        text: "特此公告。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA 技术团队", "2026年6月5日"],
+      },
+    ],
+  },
+  {
     slug: "gh-community-beta-dual-platform-download-launch",
     category: "maintenance",
     title: "官方公告｜GH 社区内测版双端下载入口正式上线",
