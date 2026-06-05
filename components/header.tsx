@@ -45,10 +45,9 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="group relative overflow-hidden whitespace-nowrap rounded-full border border-primary/18 bg-white/62 px-2.5 py-1.5 text-[13px] font-semibold text-foreground/76 shadow-[inset_0_1px_0_rgba(255,255,255,0.80),0_8px_22px_rgba(15,23,42,0.07)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-primary/12 hover:text-primary hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.95),0_12px_28px_rgba(36,99,235,0.16)] dark:bg-white/8 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_8px_22px_rgba(0,0,0,0.22)] xl:px-3"
+              className="gradient-btn whitespace-nowrap rounded-full border border-white/25 px-3 py-1.5 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(168,85,247,0.28)] xl:px-3.5"
             >
-              <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-80" />
-              <span className="relative z-10">{item.label}</span>
+              {item.label}
             </a>
           ))}
         </nav>
@@ -85,7 +84,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-2xl border border-primary/16 bg-white/60 px-4 py-3 text-sm font-semibold text-foreground/76 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_20px_rgba(15,23,42,0.06)] transition-all hover:border-primary/40 hover:bg-primary/12 hover:text-primary dark:bg-white/8"
+                className="gradient-btn rounded-2xl border border-white/25 px-4 py-3 text-sm font-semibold text-white shadow-[0_8px_22px_rgba(168,85,247,0.28)]"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
