@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP, Noto_Sans_KR } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Providers } from '@/components/providers'
+import { SiteEffects } from '@/components/site-effects'
 import './globals.css'
 
 const inter = Inter({ 
@@ -71,6 +72,7 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased bg-background text-foreground">
         <Providers>
+          <SiteEffects />
           {children}
         </Providers>
         {process.env.NODE_ENV === 'production' && <Analytics />}

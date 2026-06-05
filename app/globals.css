@@ -156,7 +156,82 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
+}
+
+.site-effects {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+.site-effects > * {
+  position: absolute;
+  inset: 0;
+}
+
+.site-effects__grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.055) 1px, transparent 1px);
+  background-size: 88px 88px;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 78%, transparent 100%);
+  opacity: 0.62;
+  transform: perspective(900px) rotateX(58deg) translateY(-14vh);
+  transform-origin: center top;
+  animation: effect-grid-drift 16s linear infinite;
+}
+
+.site-effects__stars {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, 0.72), transparent),
+    radial-gradient(1px 1px at 32% 64%, rgba(34, 211, 238, 0.72), transparent),
+    radial-gradient(1px 1px at 48% 28%, rgba(251, 191, 36, 0.65), transparent),
+    radial-gradient(1px 1px at 67% 78%, rgba(192, 132, 252, 0.68), transparent),
+    radial-gradient(1px 1px at 84% 42%, rgba(255, 255, 255, 0.58), transparent);
+  background-size: 280px 280px;
+  opacity: 0.5;
+  animation: effect-star-drift 28s linear infinite, effect-star-pulse 5.2s ease-in-out infinite;
+}
+
+.site-effects__beam {
+  inset: auto;
+  width: 82vw;
+  height: 2px;
+  filter: blur(0.3px);
+  opacity: 0;
+  transform-origin: center;
+}
+
+.site-effects__beam--primary {
+  top: 18vh;
+  left: -22vw;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.95), rgba(168, 85, 247, 0.82), transparent);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.45), 0 0 42px rgba(168, 85, 247, 0.28);
+  transform: rotate(-12deg);
+  animation: effect-beam-primary 7.8s ease-in-out infinite;
+}
+
+.site-effects__beam--secondary {
+  right: -28vw;
+  bottom: 24vh;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.74), rgba(192, 132, 252, 0.68), transparent);
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.32), 0 0 42px rgba(192, 132, 252, 0.24);
+  transform: rotate(16deg);
+  animation: effect-beam-secondary 9.6s ease-in-out infinite;
+}
+
+.site-effects__scanline {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.08) 49%, rgba(34, 211, 238, 0.16) 50%, transparent 52%);
+  height: 28vh;
+  opacity: 0.42;
+  transform: translateY(-32vh);
+  animation: effect-scanline 8.8s cubic-bezier(0.45, 0, 0.22, 1) infinite;
 }
 
 /* GANA Custom Styles - Light Theme */
@@ -302,12 +377,45 @@
 
 .gradient-btn {
   background: linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #C084FC 100%);
-  transition: all 0.3s ease;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-size: 190% 190%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    inset 0 -10px 22px rgba(88, 28, 135, 0.28),
+    0 14px 32px rgba(124, 58, 237, 0.26);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  animation: gradient-flow 7s ease-in-out infinite;
+}
+
+.gradient-btn::before {
+  content: "";
+  position: absolute;
+  inset: -30% -70%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(105deg, transparent 34%, rgba(255, 255, 255, 0.56) 48%, transparent 62%),
+    linear-gradient(135deg, rgba(34, 211, 238, 0.32), transparent 44%, rgba(251, 191, 36, 0.22));
+  transform: translateX(-55%) skewX(-18deg);
+  opacity: 0;
+  transition: transform 0.55s ease, opacity 0.35s ease;
 }
 
 .gradient-btn:hover {
-  box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.48),
+    inset 0 -10px 24px rgba(88, 28, 135, 0.34),
+    0 0 26px rgba(168, 85, 247, 0.46),
+    0 18px 44px rgba(34, 211, 238, 0.18);
+  filter: saturate(1.12);
   transform: translateY(-2px);
+}
+
+.gradient-btn:hover::before {
+  transform: translateX(55%) skewX(-18deg);
+  opacity: 1;
 }
 
 /* Grid/Star backgrounds only visible in dark mode */
@@ -320,6 +428,7 @@
     linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
+  animation: local-grid-drift 18s linear infinite;
 }
 
 .star-bg {
@@ -333,4 +442,215 @@
     radial-gradient(2px 2px at 130px 80px, rgba(168, 85, 247, 0.3), transparent),
     radial-gradient(1px 1px at 160px 120px, rgba(192, 132, 252, 0.4), transparent);
   background-size: 200px 200px;
+  animation: local-star-twinkle 6s ease-in-out infinite;
+}
+
+.hero-energy-field {
+  background:
+    linear-gradient(112deg, transparent 0%, transparent 38%, rgba(34, 211, 238, 0.18) 46%, transparent 54%, transparent 100%),
+    linear-gradient(68deg, transparent 0%, transparent 42%, rgba(251, 191, 36, 0.13) 49%, transparent 58%, transparent 100%),
+    repeating-linear-gradient(90deg, transparent 0 96px, rgba(168, 85, 247, 0.055) 97px 98px, transparent 99px 172px);
+  opacity: 0.78;
+  mix-blend-mode: screen;
+  animation: hero-energy-shift 11s linear infinite;
+}
+
+.hero-horizon {
+  background:
+    linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.11) 42%, rgba(168, 85, 247, 0.17) 100%),
+    repeating-linear-gradient(90deg, transparent 0 76px, rgba(34, 211, 238, 0.22) 77px 78px, transparent 79px 150px);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
+  transform: perspective(700px) rotateX(64deg);
+  transform-origin: bottom center;
+  opacity: 0.68;
+  animation: hero-horizon-pulse 4.8s ease-in-out infinite;
+}
+
+.hero-title {
+  text-shadow:
+    0 0 22px rgba(168, 85, 247, 0.24),
+    0 0 46px rgba(34, 211, 238, 0.12);
+}
+
+.hero-signal-badge {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 26px rgba(168, 85, 247, 0.18);
+}
+
+.hero-signal-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent, rgba(34, 211, 238, 0.22), transparent);
+  transform: translateX(-110%);
+  animation: badge-sweep 4.6s ease-in-out infinite;
+}
+
+.hero-signal-badge > * {
+  position: relative;
+}
+
+.glass-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(34, 211, 238, 0.12) 18%, transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 42%);
+  opacity: 0;
+  transform: translateX(-28%);
+  transition: opacity 0.35s ease, transform 0.55s ease;
+}
+
+.glass-card-hover:hover::after {
+  opacity: 1;
+  transform: translateX(28%);
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes effect-grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 88px 88px;
+  }
+}
+
+@keyframes effect-star-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 280px 180px;
+  }
+}
+
+@keyframes effect-star-pulse {
+  0%, 100% {
+    opacity: 0.38;
+  }
+  50% {
+    opacity: 0.68;
+  }
+}
+
+@keyframes effect-beam-primary {
+  0%, 22%, 100% {
+    opacity: 0;
+    transform: translateX(-10vw) rotate(-12deg);
+  }
+  38%, 56% {
+    opacity: 0.72;
+  }
+  78% {
+    opacity: 0;
+    transform: translateX(138vw) rotate(-12deg);
+  }
+}
+
+@keyframes effect-beam-secondary {
+  0%, 30%, 100% {
+    opacity: 0;
+    transform: translateX(12vw) rotate(16deg);
+  }
+  48%, 66% {
+    opacity: 0.58;
+  }
+  86% {
+    opacity: 0;
+    transform: translateX(-136vw) rotate(16deg);
+  }
+}
+
+@keyframes effect-scanline {
+  0%, 18% {
+    transform: translateY(-32vh);
+    opacity: 0;
+  }
+  34%, 58% {
+    opacity: 0.42;
+  }
+  82%, 100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+@keyframes local-grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 60px 60px;
+  }
+}
+
+@keyframes local-star-twinkle {
+  0%, 100% {
+    opacity: 0.82;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-energy-shift {
+  from {
+    background-position: -40vw 0, 42vw 0, 0 0;
+  }
+  to {
+    background-position: 90vw 0, -70vw 0, 172px 0;
+  }
+}
+
+@keyframes hero-horizon-pulse {
+  0%, 100% {
+    opacity: 0.48;
+  }
+  50% {
+    opacity: 0.82;
+  }
+}
+
+@keyframes badge-sweep {
+  0%, 38%, 100% {
+    transform: translateX(-110%);
+  }
+  68% {
+    transform: translateX(110%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-effects__grid,
+  .site-effects__stars,
+  .site-effects__beam,
+  .site-effects__scanline,
+  .gradient-btn,
+  .dark .grid-bg,
+  .dark .star-bg,
+  .hero-energy-field,
+  .hero-horizon,
+  .hero-signal-badge::before {
+    animation: none;
+  }
 }

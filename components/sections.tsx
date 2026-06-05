@@ -176,23 +176,25 @@ export function HeroSection() {
   const t = useTranslations('hero')
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+    <section className="hero-stage relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-background">
         <HeroBackgroundVideo />
         <div className="absolute inset-0 bg-background/25" />
         <div className="absolute inset-0 grid-bg star-bg opacity-35" />
+        <div className="hero-energy-field absolute inset-0" />
+        <div className="hero-horizon absolute inset-x-0 bottom-0 h-44" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
         {/* Eyebrow */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-8">
+        <div className="hero-signal-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-8">
           <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
           <span className="text-sm text-foreground/80">{t('badge')}</span>
         </div>
 
         {/* H1 */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+        <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
           <span className="text-foreground">{t('title')}</span>
           <br />
           <span className="gradient-text">{t('titleHighlight')}</span>
