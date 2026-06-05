@@ -5,6 +5,7 @@ import { ArrowLeft, CalendarDays } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { AnnouncementContent } from "@/components/announcement-content"
+import { AnnouncementViewCount } from "@/components/announcement-view-count"
 import {
   announcementCategories,
   announcements,
@@ -74,6 +75,12 @@ export default async function AnnouncementDetailPage({ params }: AnnouncementDet
                 <CalendarDays className="h-4 w-4" />
                 {announcement.date}
               </span>
+              <AnnouncementViewCount
+                slug={announcement.slug}
+                track
+                className="inline-flex items-center gap-2 text-sm text-foreground/50"
+                iconClassName="h-4 w-4"
+              />
             </div>
 
             <header className="mb-8 border-b border-primary/15 pb-8">

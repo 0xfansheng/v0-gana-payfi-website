@@ -6,6 +6,7 @@ import {
   getAnnouncementsByCategory,
   getLatestAnnouncements,
 } from "@/lib/announcements"
+import { AnnouncementViewCount } from "@/components/announcement-view-count"
 
 export function AnnouncementsSection() {
   const latestAnnouncements = getLatestAnnouncements(3)
@@ -69,9 +70,12 @@ export function AnnouncementsSection() {
                 {announcement.title}
               </h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/62">{announcement.excerpt}</p>
-              <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary">
-                查看公告详情
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary">
+                  查看公告详情
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+                <AnnouncementViewCount slug={announcement.slug} />
               </div>
             </Link>
           ))}

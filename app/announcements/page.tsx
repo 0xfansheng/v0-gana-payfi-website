@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, CalendarDays, Megaphone } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { AnnouncementViewCount } from "@/components/announcement-view-count"
 import {
   announcementCategories,
   announcementCategoryOrder,
@@ -79,9 +80,12 @@ export default function AnnouncementsPage() {
                         <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/62">
                           {announcement.excerpt}
                         </p>
-                        <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary">
-                          打开公告详情
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+                          <span className="inline-flex items-center gap-2 text-sm font-semibold text-secondary group-hover:text-primary">
+                            打开公告详情
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </span>
+                          <AnnouncementViewCount slug={announcement.slug} />
                         </div>
                       </Link>
                     ))}
