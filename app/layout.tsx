@@ -66,7 +66,7 @@ export default function RootLayout({
   return (
     <html 
       lang="zh-Hans" 
-      className={`${inter.variable} ${notoSansJP.variable} ${notoSansKR.variable}`}
+      className={`dark ${inter.variable} ${notoSansJP.variable} ${notoSansKR.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans antialiased bg-background text-foreground">

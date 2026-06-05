@@ -1,10 +1,9 @@
 "use client"
 
-import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
-import { useLocale, useTranslations, useI18n } from "@/i18n/client"
+import { useState } from "react"
+import { useLocale, useI18n } from "@/i18n/client"
 import { locales, type Locale } from "@/i18n/config"
-import { Sun, Moon, ChevronDown, Globe } from "lucide-react"
+import { ChevronDown, Globe } from "lucide-react"
 
 const languageNames: Record<Locale, string> = {
   'zh-CN': '简体中文',
@@ -12,54 +11,6 @@ const languageNames: Record<Locale, string> = {
   'en': 'English',
   'ja': '日本語',
   'ko': '한국어',
-}
-
-export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  const t = useTranslations('theme')
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return (
-      <div className="flex items-center gap-1 p-1 rounded-full bg-muted/50">
-        <div className="w-8 h-8" />
-        <div className="w-8 h-8" />
-      </div>
-    )
-  }
-
-  return (
-    <div className="flex items-center gap-1 p-1 rounded-full bg-muted/50 border border-border/50">
-      <button
-        onClick={() => setTheme("light")}
-        className={`p-2 rounded-full transition-colors ${
-          theme === "light"
-            ? "bg-primary text-primary-foreground"
-            : "text-foreground/60 hover:text-foreground"
-        }`}
-        title={t('light')}
-        aria-label={t('light')}
-      >
-        <Sun className="w-4 h-4" />
-      </button>
-      <button
-        onClick={() => setTheme("dark")}
-        className={`p-2 rounded-full transition-colors ${
-          theme === "dark"
-            ? "bg-primary text-primary-foreground"
-            : "text-foreground/60 hover:text-foreground"
-        }`}
-        title={t('dark')}
-        aria-label={t('dark')}
-      >
-        <Moon className="w-4 h-4" />
-      </button>
-    </div>
-  )
 }
 
 export function LanguageSwitcher() {

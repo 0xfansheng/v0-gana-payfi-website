@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { useTranslations } from "@/i18n/client"
-import { ThemeSwitcher, LanguageSwitcher } from "./theme-language-switcher"
+import { LanguageSwitcher } from "./theme-language-switcher"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -52,9 +52,8 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Right side: Theme + Language + CTA */}
+        {/* Right side: Language + CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <ThemeSwitcher />
           <LanguageSwitcher />
           <a
             href="https://www.goldgana.com/"
@@ -91,7 +90,6 @@ export function Header() {
               </a>
             ))}
             <div className="flex items-center gap-3 pt-4 border-t border-border">
-              <ThemeSwitcher />
               <LanguageSwitcher />
             </div>
             <a
