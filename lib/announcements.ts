@@ -45,6 +45,65 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
+    slug: "goldhouse-test-server-500-person-meeting-launch",
+    category: "maintenance",
+    title: "官方公告｜GoldHouse 测试服在线会议 500 人容量已免费开通",
+    date: "2026-06-05",
+    excerpt:
+      "GoldHouse 测试服在线会议 500 人容量已免费开通，当前支持不限时、不限人数畅快体验。请注意测试服数据与正式服数据不互通。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的 GoldHouse 用户、生态伙伴及社区成员：",
+      },
+      {
+        type: "paragraph",
+        text: "为进一步提升社区用户的在线会议体验，满足更多测试用户在沟通、协作、社群交流及产品体验过程中的会议需求，GoldHouse 测试服在线会议功能现已完成新一轮升级。",
+      },
+      {
+        type: "paragraph",
+        text: "目前，GoldHouse 测试服在线会议已正式免费开通 500 人会议容量。用户可在测试服中畅快体验在线会议功能，当前支持：",
+      },
+      {
+        type: "list",
+        items: [
+          "会议发起次数不限；",
+          "单场会议时长不限；",
+          "在线会议不限人数，当前单场最高支持 500 人会议容量；",
+          "社区用户可自由创建会议、参与会议并进行功能体验反馈。",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "本次升级主要面向 GoldHouse 测试服环境开放，旨在让社区成员更充分地体验在线会议能力，并帮助团队持续优化系统稳定性、会议体验与后续正式版本功能。",
+      },
+      {
+        type: "paragraph",
+        text: "请所有参与测试的用户特别注意：GoldHouse 测试服数据与正式服数据不互通。",
+      },
+      {
+        type: "paragraph",
+        text: "测试服中的注册信息、登录记录、会议记录、账户数据、测试资产、操作数据及其他相关体验数据，均仅用于测试环境体验，不代表正式服数据，也不会与正式服数据共同使用或自动同步。",
+      },
+      {
+        type: "paragraph",
+        text: "后续根据正式版本上线安排，测试服数据可能进行调整、清理或删档。请用户勿将测试服数据视为正式环境数据。",
+      },
+      {
+        type: "paragraph",
+        text: "感谢所有社区成员对 GoldHouse 测试工作的支持与反馈。GoldHouse 团队将持续根据测试体验优化产品功能，为正式版本上线做好准备。",
+      },
+      {
+        type: "paragraph",
+        text: "特此公告。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA 技术团队", "2026年6月5日"],
+      },
+    ],
+  },
+  {
     slug: "goldhouse-test-server-online-meeting-upgrade",
     category: "maintenance",
     title: "官方公告｜GoldHouse 测试服在线会议功能升级完成",
