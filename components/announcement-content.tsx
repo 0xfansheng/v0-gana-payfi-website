@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 import type { AnnouncementContentBlock } from "@/lib/announcements"
 
@@ -36,6 +37,21 @@ export function AnnouncementContent({ content }: { content: AnnouncementContentB
                 <ExternalLink className="ml-2 mt-0.5 h-4 w-4 shrink-0" />
               </a>
             </div>
+          )
+        }
+
+        if (block.type === "image") {
+          return (
+            <figure key={index} className="rounded-2xl border border-primary/15 bg-white/70 p-4 text-center shadow-sm dark:bg-background-soft/55">
+              <Image
+                src={block.src}
+                alt={block.alt}
+                width={block.width ?? 512}
+                height={block.height ?? 512}
+                className="mx-auto h-auto w-full max-w-xs rounded-xl bg-white p-3"
+              />
+              {block.caption && <figcaption className="mt-3 text-sm font-medium text-foreground/58">{block.caption}</figcaption>}
+            </figure>
           )
         }
 

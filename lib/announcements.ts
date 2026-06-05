@@ -4,6 +4,7 @@ export type AnnouncementContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
   | { type: "link"; label: string; href: string }
+  | { type: "image"; src: string; alt: string; caption?: string; width?: number; height?: number }
   | { type: "signature"; lines: string[] }
 
 export type Announcement = {
@@ -44,6 +45,65 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
+  {
+    slug: "gana-official-community-group-launch",
+    category: "dynamics",
+    title: "官方公告｜GANA集团（官方社区）官方群聊入口开放",
+    date: "2026-06-05",
+    excerpt:
+      "GANA集团（官方社区）官方群聊入口现已开放。用户可使用浏览器打开公告页面后扫描二维码，或直接点击官方链接加入群聊。",
+    content: [
+      {
+        type: "paragraph",
+        text: "尊敬的 GANA 用户、生态伙伴及社区成员：",
+      },
+      {
+        type: "paragraph",
+        text: "为方便社区成员获取官方信息、参与生态交流、及时了解项目进展，GANA集团（官方社区）官方群聊入口现已开放。",
+      },
+      {
+        type: "paragraph",
+        text: "用户可使用浏览器打开本公告页面后扫描下方二维码加入官方群聊，也可直接点击公告中的官方群链接进入。",
+      },
+      {
+        type: "image",
+        src: "/gana-assets/announcements/gana-official-community-qr.png",
+        alt: "GANA集团（官方社区）官方群聊二维码",
+        caption: "GANA集团（官方社区）官方群聊二维码",
+        width: 512,
+        height: 512,
+      },
+      {
+        type: "link",
+        label: "GANA集团（官方社区）官方群聊链接",
+        href: "https://imweb.dev.goldhouse.cc/group?gid=%40TGS%232MLDL4L5CC&inviter=9vKawT1s&groupname=GANA%E9%9B%86%E5%9B%A2%EF%BC%88%E5%AE%98%E6%96%B9%E7%A4%BE%E5%8C%BA%EF%BC%89%F0%9F%8F%86",
+      },
+      {
+        type: "paragraph",
+        text: "请广大用户认准本公告所公布的二维码与官方链接，避免通过非官方来源加入不明群聊，以保障账户与信息安全。",
+      },
+      {
+        type: "list",
+        items: [
+          "推荐使用浏览器打开公告页面后，通过手机扫描二维码加入群聊；",
+          "也可直接点击官方群链接加入 GANA集团（官方社区）；",
+          "如遇到无法打开或加入异常，请及时向所在社区负责人反馈核实。",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "欢迎所有 GANA 用户与生态伙伴加入官方群聊，共同关注官方动态、参与社区交流、见证 GANA 生态持续发展。",
+      },
+      {
+        type: "paragraph",
+        text: "特此公告。",
+      },
+      {
+        type: "signature",
+        lines: ["GANA 技术团队", "2026年6月5日"],
+      },
+    ],
+  },
   {
     slug: "goldhouse-test-server-500-person-meeting-launch",
     category: "maintenance",
