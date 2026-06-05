@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   ArrowRight,
   Bell,
@@ -107,7 +107,25 @@ const videoResources = [
 
 function HeroBackgroundVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [soundEnabled, setSoundEnabled] = useState(false)
+  const [soundEnabled, setSoundEnabled] = useState(true)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.muted = false
+    video.volume = 0.75
+    void video
+      .play()
+      .then(() => {
+        setSoundEnabled(true)
+      })
+      .catch(() => {
+        video.muted = true
+        setSoundEnabled(false)
+        void video.play().catch(() => undefined)
+      })
+  }, [])
 
   const toggleSound = () => {
     const video = videoRef.current
@@ -125,6 +143,7 @@ function HeroBackgroundVideo() {
     void video.play().catch(() => {
       video.muted = true
       setSoundEnabled(false)
+      void video.play().catch(() => undefined)
     })
   }
 
@@ -134,7 +153,6 @@ function HeroBackgroundVideo() {
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover opacity-90"
         autoPlay
-        muted
         loop
         playsInline
         preload="metadata"
