@@ -45,12 +45,12 @@ export const announcementCategoryOrder: AnnouncementCategory[] = [
 // 后期新增或删除公告，优先维护这里的 announcements 数组。
 export const announcements: Announcement[] = [
   {
-    slug: "goldhouse-test-server-tencent-meeting-upgrade",
+    slug: "goldhouse-test-server-online-meeting-upgrade",
     category: "maintenance",
-    title: "官方公告｜GoldHouse 测试服腾讯会议功能升级完成",
+    title: "官方公告｜GoldHouse 测试服在线会议功能升级完成",
     date: "2026-06-05",
     excerpt:
-      "GoldHouse 测试服腾讯会议功能已完成升级，现已支持会议发起次数不限次、单场会议时长不限时。今日晚些时候，会议人数容量将提升至 500 人。",
+      "GoldHouse 测试服在线会议功能已完成升级，现已支持会议发起次数不限次、单场会议时长不限时。今日晚些时候，会议人数容量将提升至 500 人。",
     content: [
       {
         type: "paragraph",
@@ -58,11 +58,11 @@ export const announcements: Announcement[] = [
       },
       {
         type: "paragraph",
-        text: "为进一步提升社区用户的会议体验与产品使用效率，GoldHouse 测试服腾讯会议功能现已完成升级。",
+        text: "为进一步提升社区用户的会议体验与产品使用效率，GoldHouse 测试服在线会议功能现已完成升级。",
       },
       {
         type: "paragraph",
-        text: "本次升级后，GoldHouse 测试服中的腾讯会议功能已支持：",
+        text: "本次升级后，GoldHouse 测试服中的在线会议功能已支持：",
       },
       {
         type: "list",
@@ -78,7 +78,7 @@ export const announcements: Announcement[] = [
       },
       {
         type: "paragraph",
-        text: "同时，GoldHouse 团队将于今日晚些时候（2026年6月5日）完成腾讯会议参会人数容量升级，届时会议人数上限将提升至 500 人。相关功能开放进展将通过官方公告同步通知，敬请期待。",
+        text: "同时，GoldHouse 团队将于今日晚些时候（2026年6月5日）完成在线会议参会人数容量升级，届时会议人数上限将提升至 500 人。相关功能开放进展将通过官方公告同步通知，敬请期待。",
       },
       {
         type: "paragraph",
