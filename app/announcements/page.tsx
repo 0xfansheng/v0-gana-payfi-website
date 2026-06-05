@@ -72,7 +72,7 @@ export default function AnnouncementsPage() {
                       >
                         <div className="mb-4 flex items-center gap-2 text-xs text-foreground/45">
                           <CalendarDays className="h-3.5 w-3.5" />
-                          {announcement.date}
+                          <time dateTime={announcement.date}>UTC+8 发布时间：{announcement.date}</time>
                         </div>
                         <h3 className="text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
                           {announcement.title}

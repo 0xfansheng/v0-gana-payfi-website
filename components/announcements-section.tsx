@@ -57,13 +57,13 @@ export function AnnouncementsSection() {
               href={`/announcements/${announcement.slug}`}
               className="group glass-card glass-card-hover flex min-h-[230px] flex-col rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="mb-4 flex items-center justify-between gap-3">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                   {announcementCategories[announcement.category].label}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs text-foreground/45">
                   <CalendarDays className="h-3.5 w-3.5" />
-                  {announcement.date}
+                  <time dateTime={announcement.date}>UTC+8 发布时间：{announcement.date}</time>
                 </span>
               </div>
               <h3 className="text-xl font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
